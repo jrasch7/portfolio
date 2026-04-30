@@ -29,27 +29,25 @@ def index():
         conn.close()
 
         # --- LÓGICA DE AGRUPAMENTO (Resolve o bug de duplicidade) ---
-        # Transformamos a lista "reta" do banco em um dicionário organizado
         habilidades_agrupadas = {}
-        
         for item in habilidades_brutas:
             cat = item['categoria_pai']
             nome = item['nome']
-            
-            # Se a categoria (ex: 'Banco de Dados') ainda não está no dicionário, criamos a lista
             if cat not in habilidades_agrupadas:
                 habilidades_agrupadas[cat] = []
-            
-            # Adicionamos o nome (ex: 'PostgreSQL') dentro daquela categoria
             habilidades_agrupadas[cat].append(nome)
-        
-        # Agora enviamos o dicionário organizado: {'Banco de Dados': ['PostgreSQL', 'SQLite'], ...}
-        return render_template('index.html', habilidades=habilidades_agrupadas)
-        
+
     except Exception as e:
-        # Caso o banco esteja desligado ou a senha esteja errada, ele avisa aqui
-        return f"Erro de Conexão ou Banco de Dados: {e}"
+        # Fallback de mock em caso de erro no banco (evita que a tela fique em branco no dev/testes)
+        print(f"Aviso: Usando dados simulados pois houve erro de conexao: {e}")
+        habilidades_agrupadas = {
+            'Linguagens': ['Python', 'TypeScript', 'JavaScript', 'PHP'],
+            'Banco de Dados': ['PostgreSQL', 'MySQL', 'SQLite'],
+            'Front-end': ['HTML5', 'CSS3', 'Tailwind CSS', 'React'],
+            'Back-end': ['Flask', 'Node.js', 'Express']
+        }
+
+    return render_template('index.html', habilidades=habilidades_agrupadas)
 
 if __name__ == '__main__':
-    # Roda em modo debug para você ver as alterações em tempo real no terminal
     app.run(debug=True, host='0.0.0.0', port=5000)
