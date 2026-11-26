@@ -14,7 +14,7 @@ body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.6 var(--sans);-w
 a{color:var(--acc2)}
 h1,h2,h3{line-height:1.1;margin:0;letter-spacing:-.02em}
 h1{font-size:clamp(2.3rem,6vw,4.4rem);font-weight:800}
-h1 em{font-style:normal;background:linear-gradient(90deg,var(--acc2),#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 em{font-style:normal;color:var(--acc2)}
 h2{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:700;max-width:24ch}
 kbd{font:600 .72rem var(--mono);padding:.12rem .4rem;border:1px solid var(--line2);border-bottom-width:2px;border-radius:6px;color:var(--txt2);background:var(--bg3)}
 :focus-visible{outline:2px solid var(--acc2);outline-offset:3px;border-radius:6px}
@@ -205,6 +205,49 @@ td.empty{color:var(--txt3);text-align:center;padding:26px}
   .msg .btn{width:auto}
   .ctrl select{width:100%}
 }
+
+/* ---------- idioma ---------- */
+.lang{display:inline-flex;padding:3px;border:1px solid var(--line2);border-radius:11px;background:var(--bg2)}
+.lang button{min-width:44px;min-height:38px;border:0;border-radius:8px;background:transparent;color:var(--txt2);font:700 .8rem var(--mono);letter-spacing:.06em;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--acc);color:#fff}
+.lang button:not([aria-pressed=true]):hover{color:var(--txt)}
+
+/* ---------- acabamento visual ---------- */
+.hero{position:relative;isolation:isolate;overflow-x:clip}
+.hero::before{content:"";position:absolute;inset:-10% -10% auto auto;width:min(760px,90vw);aspect-ratio:1;z-index:-1;background:radial-gradient(closest-side,rgba(139,92,246,.28),rgba(139,92,246,0) 70%);filter:blur(10px);pointer-events:none}
+.hero::after{content:"";position:absolute;inset:auto auto 0 -12%;width:min(520px,70vw);aspect-ratio:1;z-index:-1;background:radial-gradient(closest-side,rgba(56,189,248,.10),rgba(56,189,248,0) 70%);pointer-events:none}
+h1{letter-spacing:-.035em;font-weight:800;text-wrap:balance}
+h2,h3{text-wrap:balance}
+h1 em{color:var(--acc2)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--acc),transparent)}
+.btn.primary{background:linear-gradient(180deg,#9a6dfb,#7c3aed);border-color:#8b5cf6;box-shadow:0 8px 26px -8px rgba(139,92,246,.7),inset 0 1px 0 rgba(255,255,255,.22)}
+.btn.primary:hover{background:linear-gradient(180deg,#a67cfd,#8445f2);box-shadow:0 12px 32px -8px rgba(139,92,246,.85),inset 0 1px 0 rgba(255,255,255,.28)}
+.nav nav a.on{position:relative}
+.nav nav a.on::after{content:"";position:absolute;left:14px;right:14px;bottom:5px;height:2px;border-radius:2px;background:var(--acc2)}
+.term{position:relative;box-shadow:0 40px 90px -30px rgba(139,92,246,.45),0 0 0 1px rgba(255,255,255,.04) inset}
+.term::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.035),transparent 30%);pointer-events:none}
+.term-bar span:nth-child(1){background:#f87171}.term-bar span:nth-child(2){background:#fbbf24}.term-bar span:nth-child(3){background:#4ade80}
+.stats{background:linear-gradient(90deg,rgba(139,92,246,.25),var(--line) 40%,var(--line))}
+.stats li{background:linear-gradient(180deg,rgba(24,24,27,.95),rgba(16,16,19,.95));transition:background .25s}
+.stats li:hover{background:linear-gradient(180deg,#1d1633,rgba(16,16,19,.95))}
+.stats b{color:var(--txt)}
+.card{position:relative;background:linear-gradient(180deg,rgba(24,24,27,.9),rgba(16,16,19,.9));overflow:hidden;transition:transform .25s,border-color .2s,box-shadow .25s}
+.card::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent,var(--acc2),transparent);opacity:0;transition:opacity .3s}
+.card:hover{transform:translateY(-3px);box-shadow:0 24px 50px -28px rgba(139,92,246,.6)}
+.card:hover::before{opacity:1}
+.tag{border:1px solid rgba(167,139,250,.22)}
+.pipe button{background:linear-gradient(180deg,rgba(24,24,27,.9),rgba(16,16,19,.9))}
+.pipe button:hover{transform:translateY(-2px)}
+.sec.alt{background:linear-gradient(180deg,rgba(16,16,19,.9),rgba(13,13,16,.92))}
+.foot{background:rgba(9,9,11,.8)}
+
+/* entrada suave (só com JS e sem preferência por menos movimento) */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
+
+@media (max-width:960px){.nav{gap:10px}}
+@media (max-width:720px){.brand-name{display:none}.hero::before{inset:-6% -30% auto auto}}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }

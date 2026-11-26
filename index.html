@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>João Vargas · Engenharia de software</title>
-<meta name="description" content="Portfólio interativo de João Vargas: SaaS multi-tenant, IA com salvaguardas e engenharia por dentro do Nivela. Arquitetura, isolamento de dados e fluxo da IA para explorar.">
+<meta name="description" content="Portfólio interativo de João Vargas: SaaS multi-tenant, IA com salvaguardas e engenharia por dentro do Nivela.">
 <meta name="theme-color" content="#09090b">
 <meta property="og:title" content="João Vargas · Engenharia de software">
 <meta property="og:description" content="SaaS multi-tenant, IA com salvaguardas e a parte técnica por trás de cada projeto, para explorar.">
@@ -13,121 +13,119 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<a class="skip" href="#main">Pular para o conteúdo</a>
+<a class="skip" href="#main" data-i18n="skip">Pular para o conteúdo</a>
 <canvas id="bg" aria-hidden="true"></canvas>
 
 <header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="João Vargas, início"><span class="brand-mark">jv</span><span class="brand-name">João Vargas</span></a>
-  <nav aria-label="Seções">
-    <a href="#nivela">Nivela por dentro</a>
-    <a href="#projetos">Projetos</a>
-    <a href="#ia-dev">IA no desenvolvimento</a>
-    <a href="#stack">Stack</a>
-    <a href="#contato">Contato</a>
+  <a class="brand" href="#top" aria-label="João Vargas"><span class="brand-mark">jv</span><span class="brand-name">João Vargas</span></a>
+  <nav data-i18n-label="nav.aria" aria-label="Seções">
+    <a href="#nivela" data-i18n="nav.nivela">Nivela por dentro</a>
+    <a href="#projetos" data-i18n="nav.projects">Projetos</a>
+    <a href="#ia-dev" data-i18n="nav.iadev">IA no desenvolvimento</a>
+    <a href="#stack" data-i18n="nav.stack">Stack</a>
+    <a href="#contato" data-i18n="nav.contact">Contato</a>
   </nav>
-  <button class="kbd-btn" id="open-palette" type="button" aria-haspopup="dialog">Comandos <kbd>Ctrl K</kbd></button>
+  <button class="kbd-btn" id="open-palette" type="button" aria-haspopup="dialog"><span data-i18n="cmd">Comandos</span> <kbd>Ctrl K</kbd></button>
+  <div class="lang" role="group" aria-label="Idioma / Language">
+    <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </div>
 </header>
 
 <main id="main">
 <section class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">Novo Hamburgo · RS · Brasil</p>
-      <h1>Software que aguenta<br>o <em>dia a dia</em> de um negócio.</h1>
-      <p class="lead">Sou João Vargas, desenvolvedor full-stack. Construo o <strong>Nivela</strong>, um ERP SaaS multi-tenant para negócios de serviço, com financeiro, fiscal, agenda e uma IA que só age depois que a pessoa confirma.</p>
+      <p class="eyebrow" data-i18n="hero.eyebrow">Novo Hamburgo · RS · Brasil</p>
+      <h1 data-i18n="hero.h1">Software que aguenta<br>o <em>dia a dia</em> de um negócio.</h1>
+      <p class="lead" data-i18n="hero.lead">Sou João Vargas, desenvolvedor full-stack. Construo o <strong>Nivela</strong>, um ERP SaaS multi-tenant para negócios de serviço, com financeiro, fiscal, agenda e uma IA que só age depois que a pessoa confirma.</p>
       <div class="cta">
-        <a class="btn primary" href="#nivela">Explorar o Nivela por dentro</a>
-        <button class="btn" type="button" data-open-palette>Abrir comandos <kbd>Ctrl K</kbd></button>
+        <a class="btn primary" href="#nivela" data-i18n="hero.cta1">Explorar o Nivela por dentro</a>
+        <button class="btn" type="button" data-open-palette><span data-i18n="hero.cta2">Abrir comandos</span> <kbd>Ctrl K</kbd></button>
       </div>
     </div>
-    <div class="term" id="term" role="img" aria-label="Terminal simulado com um resumo do perfil">
+    <div class="term" id="term" role="img" data-i18n-label="term.aria" aria-label="Terminal simulado com um resumo do perfil">
       <div class="term-bar"><span></span><span></span><span></span><b>jv@nivela ~ </b></div>
       <pre id="term-out" aria-hidden="true"></pre>
     </div>
   </div>
 
   <div class="wrap">
-    <ul class="stats" id="stats" aria-label="Números do código do Nivela, arredondados para baixo">
-      <li><b data-count="290">0</b><span>services com a regra de negócio</span></li>
-      <li><b data-count="560">0</b><span>rotas HTTP</span></li>
-      <li><b data-count="200">0</b><span>migrations Alembic</span></li>
-      <li><b data-count="390">0</b><span>arquivos de teste</span></li>
+    <ul class="stats" id="stats" data-i18n-label="stats.aria" aria-label="Números do código do Nivela, arredondados para baixo">
+      <li><b data-count="290">0</b><span data-i18n="stats.1">services com a regra de negócio</span></li>
+      <li><b data-count="560">0</b><span data-i18n="stats.2">rotas HTTP</span></li>
+      <li><b data-count="200">0</b><span data-i18n="stats.3">migrations Alembic</span></li>
+      <li><b data-count="390">0</b><span data-i18n="stats.4">arquivos de teste</span></li>
     </ul>
-    <p class="fine">Contados no código do Nivela em novembro de 2026 e arredondados para baixo. Nada aqui é estimativa de marketing.</p>
+    <p class="fine" data-i18n="stats.fine">Contados no código do Nivela em novembro de 2026 e arredondados para baixo. Nada aqui é estimativa de marketing.</p>
   </div>
 </section>
 
 <section class="sec" id="nivela">
   <div class="wrap">
-    <p class="eyebrow">01 · Nivela por dentro</p>
-    <h2>Clique, teste, quebre. A parte técnica do Nivela, sem PDF.</h2>
-    <p class="sub">Três peças que definem o produto: como o sistema é dividido, como um cliente nunca enxerga o dado do outro e como a IA ajuda sem agir sozinha. As demos são didáticas e usam dados fictícios.</p>
+    <p class="eyebrow" data-i18n="s1.eyebrow">01 · Nivela por dentro</p>
+    <h2 data-i18n="s1.h2">Clique, teste, quebre. A parte técnica do Nivela, sem PDF.</h2>
+    <p class="sub" data-i18n="s1.sub">Três peças que definem o produto: como o sistema é dividido, como um cliente nunca enxerga o dado do outro e como a IA ajuda sem agir sozinha. As demos são didáticas e usam dados fictícios.</p>
 
-    <div class="tabs" role="tablist" aria-label="Demos técnicas">
-      <button role="tab" id="t-arq" aria-controls="p-arq" aria-selected="true">Arquitetura</button>
-      <button role="tab" id="t-ten" aria-controls="p-ten" aria-selected="false" tabindex="-1">Isolamento de tenant</button>
-      <button role="tab" id="t-ia" aria-controls="p-ia" aria-selected="false" tabindex="-1">Nivela IA</button>
+    <div class="tabs" role="tablist" data-i18n-label="tabs.aria" aria-label="Demos técnicas">
+      <button role="tab" id="t-arq" aria-controls="p-arq" aria-selected="true" data-i18n="tab.arq">Arquitetura</button>
+      <button role="tab" id="t-ten" aria-controls="p-ten" aria-selected="false" tabindex="-1" data-i18n="tab.ten">Isolamento de tenant</button>
+      <button role="tab" id="t-ia" aria-controls="p-ia" aria-selected="false" tabindex="-1" data-i18n="tab.ia">Nivela IA</button>
     </div>
 
     <div class="panel" id="p-arq" role="tabpanel" aria-labelledby="t-arq">
       <div class="arq">
-        <p class="arq-tip">Deslize o diagrama para os lados e toque em um bloco.</p>
+        <p class="arq-tip" data-i18n="arq.tip">Deslize o diagrama para os lados e toque em um bloco.</p>
         <div class="arq-svg"><svg id="arq" viewBox="0 0 920 470" role="group" aria-label="Diagrama de arquitetura do Nivela. Use Tab para percorrer os blocos."></svg></div>
-        <aside class="detail" id="arq-detail" aria-live="polite">
-          <p class="hint">Selecione um bloco do diagrama.</p>
-        </aside>
+        <aside class="detail" id="arq-detail" aria-live="polite"></aside>
       </div>
-      <p class="fine">Monólito modular de propósito: um deploy, uma base de código, fronteiras claras entre camadas. Microserviços só quando houver dor real que justifique.</p>
+      <p class="fine" data-i18n="arq.fine">Monólito modular de propósito: um deploy, uma base de código, fronteiras claras entre camadas. Microserviços só quando houver dor real que justifique.</p>
     </div>
 
     <div class="panel" id="p-ten" role="tabpanel" aria-labelledby="t-ten" hidden>
       <div class="demo">
         <div class="ctrl">
-          <label for="ten-sel">Sessão aberta como</label>
-          <select id="ten-sel">
-            <option value="1">Barbearia Alfa (tenant 1)</option>
-            <option value="2">Studio Beta (tenant 2)</option>
-            <option value="3">Pet Gama (tenant 3)</option>
-          </select>
-          <label class="switch"><input type="checkbox" id="ten-rls" checked> <span>Isolamento no banco (RLS) ligado</span></label>
-          <label class="switch"><input type="checkbox" id="ten-bug"> <span>Simular o bug: query sem filtro de tenant</span></label>
-          <button class="btn primary" id="ten-run" type="button">Rodar a consulta</button>
+          <label for="ten-sel" data-i18n="ten.session">Sessão aberta como</label>
+          <select id="ten-sel"></select>
+          <label class="switch"><input type="checkbox" id="ten-rls" checked> <span data-i18n="ten.rls">Isolamento no banco (RLS) ligado</span></label>
+          <label class="switch"><input type="checkbox" id="ten-bug"> <span data-i18n="ten.bug">Simular o bug: query sem filtro de tenant</span></label>
+          <button class="btn primary" id="ten-run" type="button" data-i18n="ten.run">Rodar a consulta</button>
         </div>
         <pre class="sql" id="ten-sql"></pre>
         <div class="table-wrap">
-          <table id="ten-table"><thead><tr><th>id</th><th>negócio</th><th>cliente</th><th>serviço</th><th>horário</th></tr></thead><tbody></tbody></table>
+          <table id="ten-table"><thead><tr><th>id</th><th data-i18n="ten.th2">negócio</th><th data-i18n="ten.th3">cliente</th><th data-i18n="ten.th4">serviço</th><th data-i18n="ten.th5">horário</th></tr></thead><tbody></tbody></table>
         </div>
         <p class="verdict" id="ten-verdict" aria-live="polite"></p>
       </div>
-      <p class="fine">Regra do projeto: toda query de negócio filtra o tenant. O banco reforça isso com RLS no PostgreSQL, para que um esquecimento no código não vire vazamento. Esta tela é uma simulação, não o banco real.</p>
+      <p class="fine" data-i18n="ten.fine">Regra do projeto: toda query de negócio filtra o tenant. O banco reforça isso com RLS no PostgreSQL, para que um esquecimento no código não vire vazamento. Esta tela é uma simulação, não o banco real.</p>
     </div>
 
     <div class="panel" id="p-ia" role="tabpanel" aria-labelledby="t-ia" hidden>
       <div class="demo">
         <div class="ctrl">
-          <span class="lbl">Escolha um pedido</span>
+          <span class="lbl" data-i18n="ia.pick">Escolha um pedido</span>
           <div class="chips" id="ia-scn"></div>
         </div>
         <div class="chat" id="ia-log" aria-live="polite"></div>
       </div>
-      <p class="fine">A IA nunca grava dado de negócio sozinha. Cada ação precisa de confirmação explícita, é validada de novo no servidor, vale para o tenant e o usuário certos e roda uma única vez.</p>
+      <p class="fine" data-i18n="ia.fine">A IA nunca grava dado de negócio sozinha. Cada ação precisa de confirmação explícita, é validada de novo no servidor, vale para o tenant e o usuário certos e roda uma única vez.</p>
     </div>
   </div>
 </section>
 
 <section class="sec alt" id="projetos">
   <div class="wrap">
-    <p class="eyebrow">02 · Projetos</p>
-    <h2>O que está no ar, o que está em construção e como cada um é feito.</h2>
+    <p class="eyebrow" data-i18n="s2.eyebrow">02 · Projetos</p>
+    <h2 data-i18n="s2.h2">O que está no ar, o que está em construção e como cada um é feito.</h2>
     <div class="cards" id="cards"></div>
   </div>
 </section>
 
 <section class="sec" id="ia-dev">
   <div class="wrap">
-    <p class="eyebrow">03 · IA no desenvolvimento</p>
-    <h2>Agentes de IA trabalham rápido. Quem decide sou eu.</h2>
-    <p class="sub">Uso agentes para investigar, planejar, implementar e revisar, dentro de um processo desenhado para que velocidade não vire risco. Clique em cada etapa.</p>
+    <p class="eyebrow" data-i18n="s3.eyebrow">03 · IA no desenvolvimento</p>
+    <h2 data-i18n="s3.h2">Agentes de IA trabalham rápido. Quem decide sou eu.</h2>
+    <p class="sub" data-i18n="s3.sub">Uso agentes para investigar, planejar, implementar e revisar, dentro de um processo desenhado para que velocidade não vire risco. Clique em cada etapa.</p>
     <ol class="pipe" id="pipe"></ol>
     <div class="detail wide" id="pipe-detail" aria-live="polite"></div>
   </div>
@@ -135,40 +133,42 @@
 
 <section class="sec alt" id="stack">
   <div class="wrap">
-    <p class="eyebrow">04 · Stack</p>
-    <h2>Ferramentas que uso de verdade, por área.</h2>
-    <div class="chips" id="stack-filter" role="group" aria-label="Filtrar por área"></div>
+    <p class="eyebrow" data-i18n="s4.eyebrow">04 · Stack</p>
+    <h2 data-i18n="s4.h2">Ferramentas que uso de verdade, por área.</h2>
+    <div class="chips" id="stack-filter" role="group" data-i18n-label="stack.aria" aria-label="Filtrar por área"></div>
     <ul class="stack" id="stack-list"></ul>
-    <p class="fine" id="stack-note">Passe o mouse ou foque em um item para ver onde ele é usado.</p>
+    <p class="fine" id="stack-note"></p>
   </div>
 </section>
 
 <section class="sec" id="contato">
   <div class="wrap contact">
-    <p class="eyebrow">05 · Contato</p>
-    <h2>Vamos conversar sobre o seu sistema?</h2>
-    <p class="sub">Trabalho com produto e engenharia de ponta a ponta: do problema operacional ao deploy.</p>
+    <p class="eyebrow" data-i18n="s5.eyebrow">05 · Contato</p>
+    <h2 data-i18n="s5.h2">Vamos conversar sobre o seu sistema?</h2>
+    <p class="sub" data-i18n="s5.sub">Trabalho com produto e engenharia de ponta a ponta: do problema operacional ao deploy.</p>
     <div class="cta">
       <a class="btn primary" href="mailto:joaovargas1108@gmail.com">joaovargas1108@gmail.com</a>
-      <a class="btn" href="https://github.com/jrasch7" rel="noopener">github.com/jrasch7</a>
-      <button class="btn" type="button" id="copy-mail">Copiar e-mail</button>
+      <a class="btn" href="https://www.linkedin.com/in/jo%C3%A3o-vargas/" rel="noopener" target="_blank">LinkedIn</a>
+      <a class="btn" href="https://github.com/jrasch7" rel="noopener" target="_blank">GitHub</a>
+      <button class="btn" type="button" id="copy-mail" data-i18n="s5.copy">Copiar e-mail</button>
     </div>
   </div>
 </section>
 </main>
 
-<footer class="foot"><div class="wrap">© 2026 João Vargas · Site estático, sem rastreadores e sem cookies. Código aberto neste repositório.</div></footer>
+<footer class="foot"><div class="wrap" data-i18n="foot">© 2026 João Vargas · Site estático, sem rastreadores e sem cookies. Código aberto neste repositório.</div></footer>
 
-<div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Paleta de comandos" hidden>
+<div class="palette" id="palette" role="dialog" aria-modal="true" data-i18n-label="pal.aria" aria-label="Paleta de comandos" hidden>
   <div class="pal-box">
-    <input id="pal-input" type="text" placeholder="Digite um comando ou uma seção…" autocomplete="off" aria-label="Comando">
+    <input id="pal-input" type="text" data-i18n-ph="pal.ph" placeholder="Digite um comando ou uma seção…" autocomplete="off" data-i18n-label="pal.input" aria-label="Comando">
     <ul id="pal-list" role="listbox"></ul>
-    <p class="pal-foot"><kbd>↑</kbd><kbd>↓</kbd> navegar · <kbd>Enter</kbd> executar · <kbd>Esc</kbd> fechar</p>
+    <p class="pal-foot" data-i18n="pal.foot"><kbd>↑</kbd><kbd>↓</kbd> navegar · <kbd>Enter</kbd> executar · <kbd>Esc</kbd> fechar</p>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<noscript><p class="noscript">Este portfólio é interativo e precisa de JavaScript. O resumo está no <a href="https://github.com/jrasch7">perfil do GitHub</a>.</p></noscript>
+<noscript><p class="noscript">Este portfólio é interativo e precisa de JavaScript. O resumo está no <a href="https://github.com/jrasch7">perfil do GitHub</a>. / This portfolio is interactive and needs JavaScript. A summary is on the GitHub profile.</p></noscript>
+<script src="assets/i18n.js" defer></script>
 <script src="assets/app.js" defer></script>
 </body>
 </html>
