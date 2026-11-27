@@ -76,50 +76,17 @@ function toast(msg) {
   toastT = setTimeout(() => t.classList.remove('on'), 2200);
 }
 
-/* ---------- fundo: grade de pontos que reage ao mouse ---------- */
-(function bg() {
-  const cv = $('#bg'), cx = cv.getContext('2d');
-  let w, h, dpr, pts = [], mx = -999, my = -999;
-  const gap = 46;
-  function size() {
-    dpr = Math.min(devicePixelRatio || 1, 2);
-    w = innerWidth; h = innerHeight;
-    cv.width = w * dpr; cv.height = h * dpr;
-    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    pts = [];
-    for (let y = gap / 2; y < h; y += gap) for (let x = gap / 2; x < w; x += gap) pts.push([x, y]);
-    draw();
-  }
-  function draw() {
-    cx.clearRect(0, 0, w, h);
-    for (const [x, y] of pts) {
-      const d = Math.hypot(x - mx, y - my);
-      const k = Math.max(0, 1 - d / 190);
-      cx.fillStyle = k > 0 ? `rgba(167,139,250,${0.12 + k * 0.45})` : 'rgba(255,255,255,0.07)';
-      cx.beginPath();
-      cx.arc(x, y, 1.1 + k * 2.2, 0, 6.283);
-      cx.fill();
-    }
-  }
-  addEventListener('resize', size);
-  if (!reduce) {
-    addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; requestAnimationFrame(draw); }, { passive: true });
-    addEventListener('pointerleave', () => { mx = my = -999; draw(); });
-  }
-  size();
-})();
-
 /* ---------- terminal do hero ---------- */
 (function terminal() {
   const out = $('#term-out');
   let token = 0;
   const lines = () => [
-    ['p', '$ whoami'], ['v', 'joao-vargas · full-stack · Novo Hamburgo/RS'],
-    ['p', '$ cat ' + tr('foco.txt', 'focus.txt')], ['k', tr('SaaS multi-tenant  ·  financeiro e fiscal  ·  IA com confirmação', 'multi-tenant SaaS  ·  finance and fiscal  ·  AI with confirmation')],
-    ['p', '$ nivela --stack'], ['v', 'Python 3.12 · Flask 3 · SQLAlchemy 2 · PostgreSQL (RLS)'],
-    ['v', 'Redis/RQ · Stripe · Asaas · NFS-e Nacional · Anthropic'],
-    ['p', '$ nivela ' + tr('--regra-numero-1', '--rule-number-1')], ['d', tr('toda query de negócio filtra tenant_id. Sem exceção.', 'every business query filters by tenant_id. No exceptions.')],
-    ['p', '$ _']
+    ['p', tr('Inspeção do sistema Nivela', 'Inspection of the Nivela system')],
+    ['v', tr('1. Isolamento entre clientes ..... conforme', '1. Isolation between customers ..... compliant')],
+    ['v', tr('2. IA só age após confirmação .... conforme', '2. AI acts only after confirmation .... compliant')],
+    ['v', tr('3. Dinheiro e fiscal sob teste ... conforme', '3. Money and fiscal under test ... compliant')],
+    ['d', tr('Regra nº 1: toda query de negócio filtra tenant_id. Sem exceção.', 'Rule no. 1: every business query filters by tenant_id. No exceptions.')],
+    ['k', tr('Liberado para serviço.', 'Released for service.')]
   ];
   const draw = (done, cur) => {
     out.innerHTML = done.map(l => `<span class="${l[0]}">${esc(l[1])}</span>`).join('\n') +
@@ -195,12 +162,12 @@ function toast(msg) {
   const NS = 'http://www.w3.org/2000/svg';
   const mk = (n, a = {}) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); return e; };
   const nodes = () => ({
-    web:  { x: 24,  y: 40,  w: 170, h: 62, t: tr('Navegador', 'Browser'), s: 'Jinja2 · Bootstrap · JS',
+    web:  { x: 24,  y: 40,  w: 200, h: 62, t: tr('Navegador', 'Browser'), s: 'Jinja2 · Bootstrap · JS',
       d: { h: tr('Core ERP no navegador', 'Core ERP in the browser'),
         p: tr('Interface do operador renderizada no servidor. JavaScript vanilla só onde precisa de interação.', 'Operator UI rendered on the server. Vanilla JavaScript only where interaction is needed.'),
         l: tr(['Sem framework SPA: carrega rápido e funciona bem em celular.', 'Padrão de UI documentado: ícones sempre Font Awesome, alvos de toque de 44 px, nenhuma rolagem lateral.', 'Telas passam por gate visual com captura real em desktop e celular.'],
               ['No SPA framework: loads fast and works well on phones.', 'Documented UI standard: icons always Font Awesome, 44 px touch targets, no sideways scrolling.', 'Screens go through a visual gate with real captures on desktop and phone.']) } },
-    ext:  { x: 24,  y: 170, w: 170, h: 62, t: tr('Apps parceiros', 'Partner apps'), s: tr('API de integração + webhooks', 'integration API + webhooks'),
+    ext:  { x: 24,  y: 170, w: 200, h: 62, t: tr('Apps parceiros', 'Partner apps'), s: 'API + webhooks',
       d: { h: tr('Ecossistema por API', 'API ecosystem'),
         p: tr('Outros produtos conversam com o ERP por uma API versionada e por webhooks.', 'Other products talk to the ERP through a versioned API and webhooks.'),
         l: tr(['Contrato versionado: o consumidor não quebra quando o ERP evolui.', 'Webhooks para eventos, em vez de polling.'],
@@ -220,7 +187,7 @@ function toast(msg) {
         p: tr('E-mail, lead da landing e rotinas pesadas saem da requisição.', 'Email, landing-page leads and heavy routines leave the request.'),
         l: tr(['Cada tarefa roda com app context, sessão de banco e tenant próprios.', 'Até 3 novas tentativas com espera crescente (30 s, 2 min, 10 min).', 'Sem Redis, cai para thread: simples em desenvolvimento, e a operação sabe o limite disso.'],
               ['Each task runs with its own app context, database session and tenant.', 'Up to 3 retries with growing waits (30 s, 2 min, 10 min).', 'Without Redis it falls back to a thread: simple in development, and operations know its limit.']) } },
-    orm:  { x: 520, y: 105, w: 170, h: 62, t: 'SQLAlchemy 2', s: 'Alembic · 200+ migrations',
+    orm:  { x: 520, y: 105, w: 200, h: 62, t: 'SQLAlchemy 2', s: 'Alembic · 200+ migrations',
       d: { h: tr('Acesso a dados e migrations', 'Data access and migrations'),
         p: tr('Todo schema muda por Alembic. Nunca ALTER TABLE manual em produção.', 'Every schema change goes through Alembic. Never a manual ALTER TABLE in production.'),
         l: tr(['200+ migrations versionadas, com upgrade e downgrade.', 'Migration que mexe em schema é validada em PostgreSQL descartável (upgrade, downgrade, upgrade).', 'Regra: tabela nova nasce com RLS na própria migration.'],
@@ -239,7 +206,7 @@ function toast(msg) {
     mail: { x: 750, y: 180, w: 150, h: 54, t: 'Resend', s: tr('e-mail transacional', 'transactional email'),
       d: { h: tr('E-mail transacional', 'Transactional email'), p: tr('Envio por API com domínio próprio. Os envios saem pela fila.', 'Sent through an API with a custom domain. Sending goes through the queue.'),
         l: tr(['Recuperação de senha com tempo de resposta que não revela se o e-mail existe.'], ['Password recovery with a response time that does not reveal whether the email exists.']) } },
-    ia:   { x: 750, y: 260, w: 150, h: 54, t: 'Anthropic (Claude)', s: tr('Nivela IA', 'Nivela AI'),
+    ia:   { x: 750, y: 260, w: 150, h: 54, t: 'Claude API', s: tr('Nivela IA', 'Nivela AI'),
       d: { h: tr('IA dentro do produto', 'AI inside the product'), p: tr('A Nivela IA consulta dados por ferramentas e propõe ações. Quem executa é o service, depois da confirmação.', 'Nivela AI reads data through tools and proposes actions. The service executes, after confirmation.'),
         l: tr(['Respostas com ferramentas, não "de cabeça".', 'Ver a aba Nivela IA para o fluxo de segurança.'], ['Answers use tools, not guesses.', 'See the Nivela AI tab for the safety flow.']) } },
     obs:  { x: 750, y: 340, w: 150, h: 54, t: 'Sentry · Railway', s: tr('erros e deploy', 'errors and deploy'),
@@ -618,21 +585,13 @@ function toast(msg) {
   }
   onLang(() => {
     wrap.innerHTML = '';
-    items().forEach(it => {
+    items().forEach((it, n) => {
       const im = IMG[it.k];
       const f = el('figure', { class: 'shot ' + it.s });
       f.innerHTML = `<button type="button" class="shot-btn" aria-label="${esc(tr('Ampliar: ', 'Enlarge: ') + it.t)}"><span class="frame ${it.kind}"><img src="assets/img/${im.f}" width="${im.w}" height="${im.h}" alt="${esc(imgAlt(it.k))}" loading="lazy" decoding="async"></span></button>
-        <figcaption><b>${esc(it.t)}</b>${esc(it.d)}</figcaption>`;
-      const btn = $('.shot-btn', f), fr = $('.frame', f);
+        <figcaption><span class="fig-no">${tr('Foto', 'Photo')} ${n + 1}</span><b>${esc(it.t)}</b>${esc(it.d)}</figcaption>`;
+      const btn = $('.shot-btn', f);
       btn.addEventListener('click', () => open(it));
-      if (!reduce) {
-        btn.addEventListener('pointermove', e => {
-          const r = btn.getBoundingClientRect();
-          fr.style.setProperty('--ry', ((e.clientX - r.left) / r.width - .5) * 8 + 'deg');
-          fr.style.setProperty('--rx', (.5 - (e.clientY - r.top) / r.height) * 6 + 'deg');
-        });
-        btn.addEventListener('pointerleave', () => { fr.style.setProperty('--rx', '0deg'); fr.style.setProperty('--ry', '0deg'); });
-      }
       wrap.append(f);
     });
   });
@@ -680,6 +639,7 @@ function toast(msg) {
     'best-practices': ['boas práticas', 'best practices'], seo: ['SEO', 'SEO'], 'largest-contentful-paint': ['LCP (ms)', 'LCP (ms)'],
     'cumulative-layout-shift': ['CLS', 'CLS'], 'total-blocking-time': ['TBT (ms)', 'TBT (ms)']
   };
+  const stampIO = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.remove('pre'); x.target.classList.add('slam'); stampIO.unobserve(x.target); } }), { threshold: .6 });
   const dur = ms => (ms == null ? '' : ms < 1000 ? `${ms} ms` : `${(ms / 1000).toFixed(1)} s`);
   const when = iso => { try { return new Date(iso).toLocaleString(LANG === 'en' ? 'en-US' : 'pt-BR', { dateStyle: 'short', timeStyle: 'short' }); } catch (e) { return iso; } };
 
@@ -705,6 +665,8 @@ function toast(msg) {
         <div><dt>${tr('Gerado em', 'Generated')}</dt><dd>${esc(when(data.generatedAt))}</dd></div>
       </dl>
       ${r.url ? `<a class="pl-run" href="${esc(r.url)}" target="_blank" rel="noopener">${tr('Ver execução no GitHub', 'View run on GitHub')} →</a>` : ''}`;
+    const pill = $('.pl-pill', head);
+    if (pill && !reduce) { pill.classList.add('pre'); stampIO.observe(pill); }
   }
 
   function renderGraph() {
@@ -775,14 +737,6 @@ function toast(msg) {
     .then(r => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
     .then(j => { data = j; render(); })
     .catch(() => { failed = true; render(); });
-})();
-
-/* ---------- entrada suave das seções ---------- */
-(function reveal() {
-  if (reduce || !('IntersectionObserver' in window)) return;
-  document.documentElement.classList.add('js');
-  const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }), { rootMargin: '0px 0px -8% 0px' });
-  $$('.sec .wrap > *, .contact > *').forEach(e => { e.classList.add('reveal'); io.observe(e); });
 })();
 
 applyStatic();

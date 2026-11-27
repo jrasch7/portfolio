@@ -4,21 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>João Vargas · Engenharia de software</title>
-<meta name="description" content="Portfólio interativo de João Vargas: SaaS multi-tenant, IA com salvaguardas e engenharia por dentro do Nivela.">
+<meta name="description" content="Portfólio interativo de João Vargas: SaaS multi-tenant, IA com salvaguardas e engenharia por dentro do Nivela, em forma de registro técnico.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
-<meta name="theme-color" content="#09090b">
+<meta name="theme-color" content="#f3efe4">
 <meta property="og:title" content="João Vargas · Engenharia de software">
 <meta property="og:description" content="SaaS multi-tenant, IA com salvaguardas e a parte técnica por trás de cada projeto, para explorar.">
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/barlow-condensed-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/b612-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/barlow-condensed-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/barlow-condensed-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/b612-mono-700-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">Pular para o conteúdo</a>
-<canvas id="bg" aria-hidden="true"></canvas>
 
 <header class="nav" id="nav">
-  <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">jv</span><span class="brand-name">João Vargas</span></a>
+  <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">JV</span><span class="brand-name">João Vargas</span></a>
   <nav data-i18n-label="nav.aria" aria-label="Seções">
     <a href="#galeria" data-i18n="nav.gallery">Galeria</a>
     <a href="#nivela" data-i18n="nav.nivela">Nivela por dentro</a>
@@ -36,57 +40,76 @@
 </header>
 
 <main id="main">
-<section class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow" data-i18n="hero.eyebrow">Novo Hamburgo · RS · Brasil</p>
-      <h1 data-i18n="hero.h1">Software que aguenta<br>o <em>dia a dia</em> de um negócio.</h1>
-      <p class="lead" data-i18n="hero.lead">Sou João Vargas, desenvolvedor full-stack. Construo o <strong>Nivela</strong>, um ERP SaaS multi-tenant para negócios de serviço, com financeiro, fiscal, agenda e uma IA que só age depois que a pessoa confirma.</p>
-      <div class="cta">
-        <a class="btn primary" href="#nivela" data-i18n="hero.cta1">Explorar o Nivela por dentro</a>
-        <button class="btn" type="button" data-open-palette><span data-i18n="hero.cta2">Abrir comandos</span> <kbd>Ctrl K</kbd></button>
-      </div>
-    </div>
-    <div class="term" id="term" role="img" data-i18n-label="term.aria" aria-label="Terminal simulado com um resumo do perfil">
-      <div class="term-bar"><span></span><span></span><span></span><b>jv@nivela ~ </b></div>
-      <pre id="term-out" aria-hidden="true"></pre>
-    </div>
-  </div>
-
+<section class="hero sheet" id="top">
   <div class="wrap">
-    <ul class="stats" id="stats" data-i18n-label="stats.aria" aria-label="Números do código do Nivela, arredondados para baixo">
-      <li><b data-count="290">0</b><span data-i18n="stats.1">services com a regra de negócio</span></li>
-      <li><b data-count="560">0</b><span data-i18n="stats.2">rotas HTTP</span></li>
-      <li><b data-count="200">0</b><span data-i18n="stats.3">migrations Alembic</span></li>
-      <li><b data-count="390">0</b><span data-i18n="stats.4">arquivos de teste</span></li>
+    <div class="form-bar">
+      <p class="form-title" data-i18n="hero.form">Registro técnico de trabalho</p>
+      <p class="sheet-no" data-i18n="sheet.1">Folha 1 de 9</p>
+    </div>
+
+    <dl class="fields">
+      <div><dt data-i18n="f.resp">Responsável</dt><dd>João Vargas</dd></div>
+      <div><dt data-i18n="f.base">Base</dt><dd>Novo Hamburgo · RS</dd></div>
+      <div class="wide"><dt data-i18n="f.sys">Sistema sob responsabilidade</dt><dd data-i18n="f.sysv">Nivela, ERP SaaS multi-tenant</dd></div>
+      <div><dt data-i18n="f.lang">Idiomas do registro</dt><dd>PT · EN</dd></div>
+    </dl>
+
+    <div class="hero-grid">
+      <fieldset class="box work">
+        <legend data-i18n="hero.legend">Descrição do serviço</legend>
+        <h1 data-i18n="hero.h1">Software que aguenta<br>o <em>dia a dia</em> de um negócio.</h1>
+        <p class="lead" data-i18n="hero.lead">Sou João Vargas, desenvolvedor full-stack. Construo o <strong>Nivela</strong>, um ERP SaaS multi-tenant para negócios de serviço, com financeiro, fiscal, agenda e uma IA que só age depois que a pessoa confirma.</p>
+        <div class="cta">
+          <a class="btn primary" href="#nivela" data-i18n="hero.cta1">Explorar o Nivela por dentro</a>
+          <button class="btn" type="button" data-open-palette><span data-i18n="hero.cta2">Abrir comandos</span> <kbd>Ctrl K</kbd></button>
+        </div>
+      </fieldset>
+
+      <fieldset class="box term" id="term" role="img" data-i18n-label="term.aria" aria-label="Anotações do inspetor, escritas à caneta">
+        <legend data-i18n="term.legend">Anotações do inspetor</legend>
+        <pre id="term-out" aria-hidden="true"></pre>
+      </fieldset>
+    </div>
+
+    <ul class="totals" id="stats" data-i18n-label="stats.aria" aria-label="Totais contados no código do Nivela, arredondados para baixo">
+      <li><span data-i18n="stats.1">services com a regra de negócio</span><b data-count="290">0</b></li>
+      <li><span data-i18n="stats.2">rotas HTTP</span><b data-count="560">0</b></li>
+      <li><span data-i18n="stats.3">migrations Alembic</span><b data-count="200">0</b></li>
+      <li><span data-i18n="stats.4">arquivos de teste</span><b data-count="390">0</b></li>
     </ul>
     <p class="fine" data-i18n="stats.fine">Contados no código do Nivela em novembro de 2026 e arredondados para baixo. Nada aqui é estimativa de marketing.</p>
   </div>
 </section>
 
-<section class="sec" id="sobre">
-  <div class="wrap about">
-    <figure class="portrait" id="portrait">
-      <span class="mono" aria-hidden="true">JV</span>
-    </figure>
-    <div>
-      <p class="eyebrow" data-i18n="about.eyebrow">01 · Sobre</p>
+<section class="sec sheet" id="sobre">
+  <div class="wrap">
+    <div class="sheet-head">
       <h2 data-i18n="about.h2">Transformo a rotina de um negócio em software confiável.</h2>
-      <p class="sub" data-i18n="about.p">Moro em Novo Hamburgo (RS) e cuido do Nivela de ponta a ponta: do problema operacional ao financeiro, ao fiscal e à IA, até o deploy. Gosto de regra escrita, de teste que falha quando deveria e de tela que funciona no celular.</p>
-      <dl class="facts">
-        <div><dt data-i18n="about.f1">Base</dt><dd>Novo Hamburgo · RS</dd></div>
-        <div><dt data-i18n="about.f2">Foco atual</dt><dd data-i18n="about.f2v">Nivela, ERP SaaS</dd></div>
-        <div><dt data-i18n="about.f3">Do problema ao</dt><dd data-i18n="about.f3v">deploy</dd></div>
-      </dl>
+      <p class="sheet-no" data-i18n="sheet.2">Folha 2 de 9</p>
+    </div>
+    <div class="about">
+      <figure class="portrait" id="portrait">
+        <span class="mono" aria-hidden="true">JV</span>
+      </figure>
+      <div>
+        <p class="sub" data-i18n="about.p">Moro em Novo Hamburgo (RS) e cuido do Nivela de ponta a ponta: do problema operacional ao financeiro, ao fiscal e à IA, até o deploy. Gosto de regra escrita, de teste que falha quando deveria e de tela que funciona no celular.</p>
+        <dl class="fields tight">
+          <div><dt data-i18n="about.f1">Base</dt><dd>Novo Hamburgo · RS</dd></div>
+          <div><dt data-i18n="about.f2">Foco atual</dt><dd data-i18n="about.f2v">Nivela, ERP SaaS</dd></div>
+          <div><dt data-i18n="about.f3">Do problema ao</dt><dd data-i18n="about.f3v">deploy</dd></div>
+        </dl>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="sec alt" id="galeria">
+<section class="sec sheet" id="galeria">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="gal.eyebrow">02 · Galeria</p>
-    <h2 data-i18n="gal.h2">O Nivela e os apps, em telas reais.</h2>
-    <p class="sub" data-i18n="gal.sub">Capturas da demonstração pública do Nivela e do site da SulCore. Clique para ampliar.</p>
+    <div class="sheet-head">
+      <h2 data-i18n="gal.h2">O Nivela e a SulCore, em telas reais.</h2>
+      <p class="sheet-no" data-i18n="sheet.3">Folha 3 de 9</p>
+    </div>
+    <p class="sub" data-i18n="gal.sub">Anexos: capturas da demonstração pública do Nivela e do site da SulCore. Clique para ampliar.</p>
     <div class="gallery" id="gallery"></div>
   </div>
 </section>
@@ -97,10 +120,12 @@
   <p id="lb-cap"></p>
 </dialog>
 
-<section class="sec" id="nivela">
+<section class="sec sheet" id="nivela">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="s1.eyebrow">03 · Nivela por dentro</p>
-    <h2 data-i18n="s1.h2">Clique, teste, quebre. A parte técnica do Nivela, sem PDF.</h2>
+    <div class="sheet-head">
+      <h2 data-i18n="s1.h2">Clique, teste, quebre. A parte técnica do Nivela, sem PDF.</h2>
+      <p class="sheet-no" data-i18n="sheet.4">Folha 4 de 9</p>
+    </div>
     <p class="sub" data-i18n="s1.sub">Três peças que definem o produto: como o sistema é dividido, como um cliente nunca enxerga o dado do outro e como a IA ajuda sem agir sozinha. As demos são didáticas e usam dados fictícios.</p>
 
     <div class="tabs" role="tablist" data-i18n-label="tabs.aria" aria-label="Demos técnicas">
@@ -149,28 +174,34 @@
   </div>
 </section>
 
-<section class="sec alt" id="projetos">
+<section class="sec sheet" id="projetos">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="s2.eyebrow">04 · Projetos</p>
-    <h2 data-i18n="s2.h2">O que está no ar, o que está em construção e como cada um é feito.</h2>
+    <div class="sheet-head">
+      <h2 data-i18n="s2.h2">O que está no ar e como cada coisa é feita.</h2>
+      <p class="sheet-no" data-i18n="sheet.5">Folha 5 de 9</p>
+    </div>
     <div class="cards" id="cards"></div>
   </div>
 </section>
 
-<section class="sec" id="ia-dev">
+<section class="sec sheet" id="ia-dev">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="s3.eyebrow">05 · IA no desenvolvimento</p>
-    <h2 data-i18n="s3.h2">Agentes de IA trabalham rápido. Quem decide sou eu.</h2>
+    <div class="sheet-head">
+      <h2 data-i18n="s3.h2">Agentes de IA trabalham rápido. Quem decide sou eu.</h2>
+      <p class="sheet-no" data-i18n="sheet.6">Folha 6 de 9</p>
+    </div>
     <p class="sub" data-i18n="s3.sub">Uso agentes para investigar, planejar, implementar e revisar, dentro de um processo desenhado para que velocidade não vire risco. Clique em cada etapa.</p>
     <ol class="pipe" id="pipe"></ol>
     <div class="detail wide" id="pipe-detail" aria-live="polite"></div>
   </div>
 </section>
 
-<section class="sec" id="pipeline">
+<section class="sec sheet" id="pipeline">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="pl.eyebrow">06 · Pipeline</p>
-    <h2 data-i18n="pl.h2">Um site simples, com uma pipeline de verdade.</h2>
+    <div class="sheet-head">
+      <h2 data-i18n="pl.h2">Um site simples, com uma pipeline de verdade.</h2>
+      <p class="sheet-no" data-i18n="sheet.7">Folha 7 de 9</p>
+    </div>
     <p class="sub" data-i18n="pl.sub">Este site não precisaria de CI/CD. Tem, de propósito, para mostrar as técnicas: etapas em grafo, um relatório por etapa, o artefato testado é o mesmo que vai ao ar, orçamento de desempenho e CSP estrita. Os dados abaixo vêm do relatório gerado pela própria pipeline.</p>
     <div class="pl-head" id="pl-head"></div>
     <div class="pl-graph" id="pl-graph"></div>
@@ -179,26 +210,36 @@
   </div>
 </section>
 
-<section class="sec alt" id="stack">
+<section class="sec sheet" id="stack">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="s4.eyebrow">07 · Stack</p>
-    <h2 data-i18n="s4.h2">Ferramentas que uso de verdade, por área.</h2>
+    <div class="sheet-head">
+      <h2 data-i18n="s4.h2">Ferramentas que uso de verdade, por área.</h2>
+      <p class="sheet-no" data-i18n="sheet.8">Folha 8 de 9</p>
+    </div>
     <div class="chips" id="stack-filter" role="group" data-i18n-label="stack.aria" aria-label="Filtrar por área"></div>
     <ul class="stack" id="stack-list"></ul>
     <p class="fine" id="stack-note"></p>
   </div>
 </section>
 
-<section class="sec" id="contato">
-  <div class="wrap contact">
-    <p class="eyebrow" data-i18n="s5.eyebrow">08 · Contato</p>
-    <h2 data-i18n="s5.h2">Vamos conversar sobre o seu sistema?</h2>
-    <p class="sub" data-i18n="s5.sub">Trabalho com produto e engenharia de ponta a ponta: do problema operacional ao deploy.</p>
-    <div class="cta">
-      <a class="btn primary" href="mailto:joaovargas1108@gmail.com">joaovargas1108@gmail.com</a>
-      <a class="btn" href="https://www.linkedin.com/in/jo%C3%A3o-vargas/" rel="noopener" target="_blank">LinkedIn</a>
-      <a class="btn" href="https://github.com/jrasch7" rel="noopener" target="_blank">GitHub</a>
-      <button class="btn" type="button" id="copy-mail" data-i18n="s5.copy">Copiar e-mail</button>
+<section class="sec sheet" id="contato">
+  <div class="wrap">
+    <div class="sheet-head">
+      <h2 data-i18n="s5.h2">Certificado de liberação: vamos conversar sobre o seu sistema?</h2>
+      <p class="sheet-no" data-i18n="sheet.9">Folha 9 de 9</p>
+    </div>
+    <div class="release">
+      <p class="sub" data-i18n="s5.sub">Trabalho com produto e engenharia de ponta a ponta: do problema operacional ao deploy. Se o que você viu nas folhas anteriores é o tipo de trabalho que a sua equipe precisa, este é o campo de assinatura.</p>
+      <div class="sign">
+        <p class="signature" aria-hidden="true">João Vargas</p>
+        <p class="sign-line" data-i18n="s5.sign">Assinatura do responsável</p>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="mailto:joaovargas1108@gmail.com">joaovargas1108@gmail.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/jo%C3%A3o-vargas/" rel="noopener" target="_blank">LinkedIn</a>
+        <a class="btn" href="https://github.com/jrasch7" rel="noopener" target="_blank">GitHub</a>
+        <button class="btn" type="button" id="copy-mail" data-i18n="s5.copy">Copiar e-mail</button>
+      </div>
     </div>
   </div>
 </section>

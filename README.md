@@ -34,7 +34,8 @@ As capturas em `assets/img/` são reais, em WebP: demonstração pública do Niv
 | `index.html` | Estrutura e textos em português (cada texto traduzível tem `data-i18n="chave"`) |
 | `assets/i18n.js` | Textos fixos do HTML em inglês, por chave |
 | `assets/app.js` | Interações; o conteúdo das demos, projetos e stack tem as duas línguas via `tr(pt, en)` |
-| `assets/style.css` | Visual |
+| `assets/style.css` | Visual (registro técnico: papel, tinta, carimbo) |
+| `assets/fonts/` | Fontes hospedadas no próprio site (B612 Mono, Barlow Condensed, Caveat; licença OFL), sem requisição a terceiros |
 | `scripts/pipeline/` | Etapas da pipeline, relatório e execução local |
 | `tests/` | Testes ponta a ponta (Playwright + axe) |
 | `.github/workflows/` | `pipeline.yml` (CI/CD) e `codeql.yml` |
