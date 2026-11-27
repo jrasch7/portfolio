@@ -1,14 +1,14 @@
 {
   "schema": 1,
   "source": "local",
-  "generatedAt": "2026-11-27T03:51:42.268Z",
+  "generatedAt": "2026-11-27T06:32:45.039Z",
   "run": {
     "id": null,
     "number": null,
     "event": "local",
-    "branch": "claude/refino-design",
-    "sha": "9fc35c0131c0e88067a4221311cbdc8a8400a060",
-    "shaShort": "9fc35c0",
+    "branch": "claude/documentacao",
+    "sha": "4c04210d50243aee9bee6704216b3275c7caec47",
+    "shaShort": "4c04210",
     "url": null
   },
   "status": "partial",
@@ -17,7 +17,7 @@
     "failed": 0,
     "skipped": 2,
     "pending": 1,
-    "durationMs": 57499
+    "durationMs": 61484
   },
   "stages": [
     {
@@ -42,7 +42,7 @@
       },
       "afterPublish": false,
       "status": "skipped",
-      "durationMs": 2,
+      "durationMs": 1,
       "checks": [],
       "metrics": {},
       "note": {
@@ -72,7 +72,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 26,
+      "durationMs": 78,
       "checks": [
         {
           "name": "arquivos obrigatórios presentes",
@@ -133,11 +133,30 @@
           "ok": true,
           "detail": "",
           "en": "no console.log in shipped JavaScript"
+        },
+        {
+          "name": "MAPA_CODIGO.md em dia com o código",
+          "ok": true,
+          "detail": "",
+          "en": "MAPA_CODIGO.md up to date with the code"
+        },
+        {
+          "name": "links relativos de 32 documentos apontam para arquivos que existem",
+          "ok": true,
+          "detail": "",
+          "en": "relative links in 32 documents point to existing files"
+        },
+        {
+          "name": "todo documento de módulo está no índice MODULES.md",
+          "ok": true,
+          "detail": "",
+          "en": "every module document is listed in MODULES.md"
         }
       ],
       "metrics": {
-        "arquivos": 49,
-        "arquivosDeTexto": 38,
+        "arquivos": 77,
+        "documentos": 32,
+        "arquivosDeTexto": 66,
         "imagensKB": 117,
         "codigoGzipKB": 33.5
       },
@@ -167,13 +186,13 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 824,
+      "durationMs": 2849,
       "checks": [
         {
-          "name": "sintaxe válida em 20 arquivos JavaScript",
+          "name": "sintaxe válida em 21 arquivos JavaScript",
           "ok": true,
           "detail": "",
-          "en": "valid syntax in 20 JavaScript files"
+          "en": "valid syntax in 21 JavaScript files"
         },
         {
           "name": "HTML válido (html-validate)",
@@ -215,7 +234,7 @@
       "metrics": {
         "chavesDeTexto": 81,
         "ancoras": 10,
-        "arquivosJS": 20,
+        "arquivosJS": 21,
         "referencias": 12
       },
       "note": ""
@@ -244,7 +263,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 32,
+      "durationMs": 46,
       "checks": [
         {
           "name": "pasta publicada montada",
@@ -286,7 +305,7 @@
       "metrics": {
         "arquivos": 16,
         "tamanhoKB": 337,
-        "commit": "9fc35c0"
+        "commit": "4c04210"
       },
       "note": ""
     },
@@ -314,7 +333,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 18933,
+      "durationMs": 20469,
       "checks": [
         {
           "name": "página carrega com console limpo, sem violação de CSP e sem rolagem lateral",
@@ -416,7 +435,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 37191,
+      "durationMs": 37559,
       "checks": [
         {
           "name": "performance ≥ 90",
@@ -441,7 +460,7 @@
         {
           "name": "largest-contentful-paint ≤ 2500 ms",
           "ok": true,
-          "detail": "756"
+          "detail": "761"
         },
         {
           "name": "cumulative-layout-shift ≤ 0.05",
@@ -451,7 +470,7 @@
         {
           "name": "total-blocking-time ≤ 200 ms",
           "ok": true,
-          "detail": "28"
+          "detail": "26"
         }
       ],
       "metrics": {
@@ -460,9 +479,9 @@
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100,
-        "largest-contentful-paint": 756,
+        "largest-contentful-paint": 761,
         "cumulative-layout-shift": 0,
-        "total-blocking-time": 28
+        "total-blocking-time": 26
       },
       "note": ""
     },
@@ -490,7 +509,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 490,
+      "durationMs": 481,
       "checks": [
         {
           "name": "npm audit sem vulnerabilidade alta ou crítica",

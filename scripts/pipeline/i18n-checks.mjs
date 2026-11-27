@@ -2,6 +2,8 @@
 // Os scripts escrevem em português; aqui ficam as versões em inglês. Nome sem entrada aparece como está.
 const EXACT = {
   "arquivos obrigatórios presentes": "required files present",
+  "MAPA_CODIGO.md em dia com o código": "MAPA_CODIGO.md up to date with the code",
+  "todo documento de módulo está no índice MODULES.md": "every module document is listed in MODULES.md",
   "nenhum segredo nos arquivos versionados": "no secrets in tracked files",
   "nenhum IP nem host interno (repositório público)": "no IPs or internal hosts (public repository)",
   "só o e-mail de contato público aparece": "only the public contact email appears",
@@ -40,6 +42,7 @@ const EXACT = {
 
 const PATTERNS = [
   [/^cada imagem até (.+)$/, "each image up to $1"],
+  [/^links relativos de (\d+) documentos apontam para arquivos que existem$/, "relative links in $1 documents point to existing files"],
   [/^imagens somam até (.+)$/, "images total up to $1"],
   [/^HTML\+JS\+CSS comprimidos até (.+)$/, "HTML+JS+CSS gzipped up to $1"],
   [/^sintaxe válida em (\d+) arquivos JavaScript$/, "valid syntax in $1 JavaScript files"],

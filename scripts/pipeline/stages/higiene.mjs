@@ -1,14 +1,17 @@
 // Etapa 2: higiene do repositório (segredos, privacidade, orçamento, regras de interface).
 import { existsSync, readFileSync, statSync } from "node:fs";
-import { extname, join } from "node:path";
+import { dirname, extname, join, normalize } from "node:path";
 import { BUDGET, CONFLICT_RE, EMAIL_ALLOW, EMAIL_ALLOW_SUFFIX, EMAIL_RE, EMOJI_RE, PRIVACY_PATTERNS, SCAN_IGNORE, SECRET_PATTERNS } from "../patterns.mjs";
-import { ROOT, check, gzipBytes, kb, read, trackedFiles } from "../lib.mjs";
+import { ROOT, check, gzipBytes, kb, read, sh, trackedFiles } from "../lib.mjs";
 
 const TEXT = new Set([".html", ".css", ".js", ".mjs", ".json", ".md", ".yml", ".yaml", ".txt", ".svg", ".xml", ""]);
 const IMAGE = new Set([".webp", ".jpg", ".jpeg", ".png", ".svg"]);
 const REQUIRED = [
   "index.html", "README.md", "package-lock.json", "docs/PIPELINE.md", "assets/app.js", "assets/i18n.js", "assets/style.css",
-  ".github/workflows/pipeline.yml", ".github/workflows/codeql.yml", ".github/dependabot.yml",
+  ".github/workflows/pipeline.yml", ".github/workflows/codeql.yml", ".github/dependabot.yml", ".github/pull_request_template.md",
+  "AGENTS.md", "CLAUDE.md", "PRODUCT.md", "DESIGN.md", "SECURITY.md", "CONTRIBUTING.md",
+  "docs/README.md", "docs/CONTEXT.md", "docs/MODULES.md", "docs/MAPA_CODIGO.md", "docs/DEBT.md", "docs/arquivo/LOG.md",
+  "docs/desenvolvimento/FLUXO_GIT.md", "docs/arquitetura/PADRAO_CODIGO.md", "docs/arquitetura/PADRAO_UI.md", "docs/arquitetura/CONTEUDO_PUBLICO.md",
 ];
 
 export default async function higiene() {
@@ -62,8 +65,28 @@ export default async function higiene() {
   const logs = ["assets/app.js", "assets/i18n.js"].filter((f) => /\bconsole\.(log|debug)\(/.test(read(join(ROOT, f))));
   checks.push(check("sem console.log no JavaScript entregue", !logs.length, logs.join(", ")));
 
+  // Documentação viva: mapa gerado em dia, links entre documentos, módulos indexados.
+  const mapa = sh("node", ["scripts/docs/gerar-mapa-codigo.mjs", "--check"]);
+  checks.push(check("MAPA_CODIGO.md em dia com o código", mapa.code === 0, mapa.code === 0 ? "" : "rode npm run docs:mapa"));
+  const mds = files.filter((f) => f.endsWith(".md"));
+  const brokenLinks = [];
+  for (const f of mds) {
+    const text = read(join(ROOT, f)).replace(/```[\s\S]*?```/g, "");
+    for (const m of text.matchAll(/\]\(([^)\s]+)\)/g)) {
+      const link = m[1];
+      if (/^(https?:|mailto:|#)/.test(link)) continue;
+      const target = normalize(join(dirname(f), link.split("#")[0].split("?")[0]));
+      if (!existsSync(join(ROOT, target))) brokenLinks.push(`${f} -> ${link}`);
+    }
+  }
+  checks.push(check(`links relativos de ${mds.length} documentos apontam para arquivos que existem`, !brokenLinks.length, brokenLinks.slice(0, 4).join("; ")));
+  const modulosDocs = files.filter((f) => f.startsWith("docs/modulos/"));
+  const indice = existsSync(join(ROOT, "docs/MODULES.md")) ? read(join(ROOT, "docs/MODULES.md")) : "";
+  const semIndice = modulosDocs.filter((f) => !indice.includes(f.replace("docs/", "")));
+  checks.push(check("todo documento de módulo está no índice MODULES.md", !semIndice.length, semIndice.join(", ")));
+
   return {
     checks,
-    metrics: { arquivos: files.length, arquivosDeTexto: textFiles.length, imagensKB: Math.round(imagesTotal / 1024), codigoGzipKB: +(codeGz / 1024).toFixed(1) },
+    metrics: { arquivos: files.length, documentos: mds.length, arquivosDeTexto: textFiles.length, imagensKB: Math.round(imagesTotal / 1024), codigoGzipKB: +(codeGz / 1024).toFixed(1) },
   };
 }

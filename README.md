@@ -1,5 +1,7 @@
 # Portfólio · João Vargas
 
+**Regras de desenvolvimento, arquitetura e módulos:** [`AGENTS.md`](AGENTS.md) e [`docs/README.md`](docs/README.md). Produto: [`PRODUCT.md`](PRODUCT.md). Visual: [`DESIGN.md`](DESIGN.md).
+
 Portfólio interativo, estático e sem dependências: HTML, CSS e JavaScript puros. Sem build, sem rastreadores, sem cookies. Português e inglês, com botão **PT / EN** (a escolha fica salva no navegador).
 
 O que dá para explorar na página:

@@ -14,7 +14,7 @@ higiene ─┴─ estatico ── build ─┬─ testes ──────┐
 | # | Etapa | O que confere | Reproduzir |
 |---|---|---|---|
 | 1 | `pr-gate` | Título, corpo com seção de validação, branch, tamanho do diff (só em PR) | `npm run stage -- pr-gate` |
-| 2 | `higiene` | Segredos, IPs e hosts internos, e-mails, orçamento de tamanho, arquivos obrigatórios, sem emoji na UI | `npm run stage -- higiene` |
+| 2 | `higiene` | Segredos, IPs e hosts internos, e-mails, orçamento de tamanho, arquivos obrigatórios, sem emoji na UI, documentação em dia (mapa gerado, links entre `.md`, módulos indexados) | `npm run stage -- higiene` |
 | 3 | `estatico` | Sintaxe JS, HTML válido, paridade PT/EN, âncoras e arquivos referenciados | `npm run stage -- estatico` |
 | 4 | `build` | Monta `_site/`, versiona por hash, sitemap, robots, `build-info.json`, build determinístico | `npm run stage -- build` |
 | 5 | `testes` | Playwright (desktop e celular), acessibilidade (axe), console limpo, sem violação de CSP | `npm run stage -- testes` |
