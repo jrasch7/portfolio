@@ -27,6 +27,22 @@ const EN = window.I18N_EN || {};
 const renderers = [];
 const onLang = fn => { renderers.push(fn); fn(); };
 
+/* imagens reais (capturas) */
+const IMG = {
+  dash: { f: 'nivela-dashboard.webp', w: 1500, h: 1002 },
+  cel:  { f: 'nivela-celular.webp', w: 588, h: 950 },
+  pay1: { f: 'pay-inicio.webp', w: 600, h: 1298 },
+  pay2: { f: 'pay-extrato.webp', w: 600, h: 1298 },
+  sul:  { f: 'sulcore-demo.webp', w: 759, h: 767 }
+};
+const imgAlt = k => ({
+  dash: tr('Painel do Nivela no computador: faturamento do dia, ações recomendadas e agenda.', 'Nivela dashboard on desktop: daily revenue, recommended actions and schedule.'),
+  cel: tr('Painel do Nivela no celular, com menu inferior.', 'Nivela dashboard on a phone, with a bottom menu.'),
+  pay1: tr('Início do app Nivela Pay: saldo, atalhos e valores a liberar.', 'Nivela Pay home: balance, shortcuts and amounts to be released.'),
+  pay2: tr('Extrato do app Nivela Pay com filtros, resumo do período e lançamentos.', 'Nivela Pay statement with filters, period summary and entries.'),
+  sul: tr('Demonstração no site da SulCore: pedido em linguagem natural vira uma proposta para confirmar.', 'Demo on the SulCore site: a natural-language request becomes a proposal to confirm.')
+}[k]);
+
 function applyStatic() {
   $$('[data-i18n]').forEach(e => {
     if (e.dataset.pt === undefined) e.dataset.pt = e.innerHTML;
@@ -411,7 +427,7 @@ function toast(msg) {
 /* ---------- projetos ---------- */
 (function projects() {
   const P = () => [
-    { n: 'Nivela', st: ['live', tr('em produção', 'in production')],
+    { n: 'Nivela', img: 'dash', st: ['live', tr('em produção', 'in production')],
       d: tr('ERP SaaS multi-tenant para negócios de serviço: agenda, fila, financeiro, fiscal, assinaturas e a Nivela IA.', 'Multi-tenant SaaS ERP for service businesses: scheduling, queue, finance, fiscal, subscriptions and Nivela AI.'),
       tech: ['Python 3.12', 'Flask 3', 'SQLAlchemy 2', 'PostgreSQL + RLS', 'Redis/RQ', 'Stripe', 'Asaas', 'NFS-e'],
       det: tr(['Monólito modular: blueprints finos, regra em services, 290+ services e 560+ rotas.', 'Multi-tenancy por linha com tenant_id e RLS no PostgreSQL.', 'Financeiro com motor de títulos e conciliação OFX/CSV auditável; correções de dinheiro cobertas por testes de regressão.', 'Fiscal por emissão direta (NFS-e Nacional), sem intermediário pago.', 'Qualidade medida: gate visual com capturas reais, auditoria de celular e testes para telas que piscam ao carregar.'],
@@ -421,12 +437,12 @@ function toast(msg) {
       tech: ['Claude (Anthropic)', 'tool use', tr('idempotência', 'idempotency')],
       det: tr(['Três saídas possíveis: ação proposta validada, pergunta de esclarecimento ou recusa clara.', 'Confirmação explícita, revalidação no servidor, escopo de tenant e usuário, execução única.', 'Responde consultando o menu real, os guias e os dados do negócio por ferramentas, em vez de "de cabeça".', 'Avaliação de mudanças (prompt, modelo, ferramentas) antes de ir para staging.'],
               ['Three possible outcomes: a validated proposed action, a clarifying question or a clear refusal.', 'Explicit confirmation, server-side re-validation, tenant and user scope, single execution.', 'It answers by looking up the real menu, guides and business data through tools, not from memory.', 'Changes (prompt, model, tools) are evaluated before reaching staging.']) },
-    { n: 'Nivela Pay', st: ['beta', tr('beta fechado', 'closed beta')],
+    { n: 'Nivela Pay', img: 'pay1', st: ['beta', tr('beta fechado', 'closed beta')],
       d: tr('App de iPhone e Android com a conta de pagamento do negócio: saldo, extrato, transferências e comprovantes.', 'iPhone and Android app with the business’s payment account: balance, statement, transfers and receipts.'),
       tech: ['Expo SDK 57', 'React Native', 'TypeScript strict', 'Expo Router'],
       det: tr(['Zero regra de dinheiro no app: tudo vem da API do ERP e o app só formata.', 'Dinheiro em centavos inteiros, sempre.', 'Renovação de sessão com fila única e tratamento de renovação concorrente.', 'Hoje roda com dados de exemplo; a ligação com a API real é a próxima etapa.'],
               ['Zero money rules in the app: everything comes from the ERP API and the app only formats.', 'Money in integer cents, always.', 'Session refresh with a single queue and handling of concurrent refreshes.', 'It currently runs on sample data; connecting the real API is the next step.']) },
-    { n: 'SulCore', st: ['live', tr('site aberto', 'open site')],
+    { n: 'SulCore', img: 'sul', st: ['live', tr('site aberto', 'open site')],
       d: tr('Site da SulCore, feito para mostrar como se trabalha: exportação estática, CI forte e código aberto.', 'The SulCore website, built to show how the work is done: static export, strong CI and open source.'),
       tech: ['Next.js 16', 'TypeScript strict', 'Tailwind 4', 'Playwright', 'Vitest', 'GitHub Pages'],
       det: tr(['Exportação 100% estática, sem servidor, sem banco, sem rastreio.', 'Rotas /pt/ e /en/ com dicionários tipados.', 'CodeQL, OpenSSF Scorecard, Lighthouse CI e testes de acessibilidade no pipeline.', 'ADRs numerados para cada decisão.'],
@@ -439,7 +455,8 @@ function toast(msg) {
     wrap.innerHTML = '';
     P().forEach((p, i) => {
       const c = el('article', { class: 'card' });
-      c.innerHTML = `<header><h3>${esc(p.n)}</h3><span class="status ${p.st[0]}">${esc(p.st[1])}</span></header>
+      const im = p.img ? IMG[p.img] : null;
+      c.innerHTML = `${im ? `<div class="thumb"><img src="assets/img/${im.f}" width="${im.w}" height="${im.h}" alt="${esc(imgAlt(p.img))}" loading="lazy" decoding="async"></div>` : ''}<header><h3>${esc(p.n)}</h3><span class="status ${p.st[0]}">${esc(p.st[1])}</span></header>
         <p>${esc(p.d)}</p>
         <div>${p.tech.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
         <div class="more"><details${open[i] ? ' open' : ''}><summary>${tr('Por dentro', 'Under the hood')}</summary><ul>${p.det.map(x => `<li>${esc(x)}</li>`).join('')}</ul></details>
@@ -596,7 +613,64 @@ function toast(msg) {
   const io = new IntersectionObserver(es => es.forEach(x => {
     if (x.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + x.target.id));
   }), { rootMargin: '-40% 0px -55% 0px' });
-  ['nivela', 'projetos', 'ia-dev', 'stack', 'contato'].forEach(id => io.observe(document.getElementById(id)));
+  ['galeria', 'nivela', 'projetos', 'ia-dev', 'stack', 'contato'].forEach(id => io.observe(document.getElementById(id)));
+})();
+
+/* ---------- galeria com ampliação ---------- */
+(function gallery() {
+  const wrap = $('#gallery'), dlg = $('#lightbox'), body = $('#lb-body'), cap = $('#lb-cap');
+  const items = () => [
+    { k: 'dash', kind: 'browser', s: 's8', t: tr('Nivela no computador', 'Nivela on desktop'), d: tr('Demonstração pública, dados fictícios', 'Public demo, fictional data') },
+    { k: 'cel', kind: 'phone', s: 's4', t: tr('Nivela no celular', 'Nivela on phone'), d: tr('Mesma regra de negócio, tela pensada para o toque', 'Same business rules, screen designed for touch') },
+    { k: 'pay1', kind: 'phone', s: 's3', t: tr('Nivela Pay · Início', 'Nivela Pay · Home'), d: tr('Beta fechado, dados de exemplo', 'Closed beta, sample data') },
+    { k: 'pay2', kind: 'phone', s: 's3', t: tr('Nivela Pay · Extrato', 'Nivela Pay · Statement'), d: tr('Saldo e filtros calculados pela API do ERP', 'Balance and filters computed by the ERP API') },
+    { k: 'sul', kind: 'browser', s: 's6', t: tr('Site da SulCore', 'SulCore website'), d: tr('Demonstração com confirmação antes de gravar', 'Demo with confirmation before saving') }
+  ];
+  function open(it) {
+    const im = IMG[it.k];
+    body.innerHTML = `<img src="assets/img/${im.f}" width="${im.w}" height="${im.h}" alt="${esc(imgAlt(it.k))}">`;
+    cap.textContent = `${it.t}. ${it.d}.`;
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+  }
+  onLang(() => {
+    wrap.innerHTML = '';
+    items().forEach(it => {
+      const im = IMG[it.k];
+      const f = el('figure', { class: 'shot ' + it.s });
+      f.innerHTML = `<button type="button" class="shot-btn" aria-label="${esc(tr('Ampliar: ', 'Enlarge: ') + it.t)}"><span class="frame ${it.kind}"><img src="assets/img/${im.f}" width="${im.w}" height="${im.h}" alt="${esc(imgAlt(it.k))}" loading="lazy" decoding="async"></span></button>
+        <figcaption><b>${esc(it.t)}</b>${esc(it.d)}</figcaption>`;
+      const btn = $('.shot-btn', f), fr = $('.frame', f);
+      btn.addEventListener('click', () => open(it));
+      if (!reduce) {
+        btn.addEventListener('pointermove', e => {
+          const r = btn.getBoundingClientRect();
+          fr.style.setProperty('--ry', ((e.clientX - r.left) / r.width - .5) * 8 + 'deg');
+          fr.style.setProperty('--rx', (.5 - (e.clientY - r.top) / r.height) * 6 + 'deg');
+        });
+        btn.addEventListener('pointerleave', () => { fr.style.setProperty('--rx', '0deg'); fr.style.setProperty('--ry', '0deg'); });
+      }
+      wrap.append(f);
+    });
+  });
+  $('#lb-close').addEventListener('click', () => dlg.close ? dlg.close() : dlg.removeAttribute('open'));
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  renderers.push(() => { $('#lb-close').setAttribute('aria-label', tr('Fechar', 'Close')); dlg.setAttribute('aria-label', tr('Imagem ampliada', 'Enlarged image')); });
+})();
+
+/* ---------- foto (opcional): assets/foto.jpg ---------- */
+(function portrait() {
+  /* Para mostrar sua foto: coloque assets/foto.jpg (proporção 4:5) e mude para true. */
+  const HAS_PHOTO = false;
+  if (!HAS_PHOTO) return;
+  const fig = $('#portrait');
+  const probe = new Image();
+  probe.onload = () => {
+    probe.alt = '';
+    probe.width = 480; probe.height = 600;
+    fig.append(probe);
+    fig.classList.add('has-photo');
+  };
+  probe.src = 'assets/foto.jpg';
 })();
 
 /* ---------- entrada suave das seções ---------- */

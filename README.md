@@ -10,6 +10,12 @@ O que dá para explorar na página:
 - **Projetos** com a parte técnica de cada um, **etapas da IA no desenvolvimento** e **stack** filtrável.
 - **Paleta de comandos** com `Ctrl K` (ou `⌘ K`).
 
+## Imagens
+
+As capturas em `assets/img/` são reais, em WebP: demonstração pública do Nivela (dados fictícios), app Nivela Pay em modo de exemplo e a demonstração do site da SulCore. Nunca publique captura de cliente real.
+
+**Sua foto:** coloque `assets/foto.jpg` (proporção 4:5, até ~150 KB) e, em `assets/app.js`, mude `HAS_PHOTO` para `true`. Enquanto isso, a seção Sobre mostra o monograma "JV".
+
 ## Arquivos
 
 | Arquivo | O que tem |

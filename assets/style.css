@@ -221,11 +221,11 @@ h2,h3{text-wrap:balance}
 h1 em{color:var(--acc2)}
 .eyebrow{display:inline-flex;align-items:center;gap:10px}
 .eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--acc),transparent)}
-.btn.primary{background:linear-gradient(180deg,#9a6dfb,#7c3aed);border-color:#8b5cf6;box-shadow:0 8px 26px -8px rgba(139,92,246,.7),inset 0 1px 0 rgba(255,255,255,.22)}
-.btn.primary:hover{background:linear-gradient(180deg,#a67cfd,#8445f2);box-shadow:0 12px 32px -8px rgba(139,92,246,.85),inset 0 1px 0 rgba(255,255,255,.28)}
+.btn.primary{background:#6d28d9;border-color:#7c3aed;box-shadow:0 6px 16px -6px rgba(0,0,0,.6)}
+.btn.primary:hover{background:#5b21b6;border-color:#8b5cf6;box-shadow:0 10px 22px -8px rgba(0,0,0,.65)}
 .nav nav a.on{position:relative}
 .nav nav a.on::after{content:"";position:absolute;left:14px;right:14px;bottom:5px;height:2px;border-radius:2px;background:var(--acc2)}
-.term{position:relative;box-shadow:0 40px 90px -30px rgba(139,92,246,.45),0 0 0 1px rgba(255,255,255,.04) inset}
+.term{position:relative;box-shadow:0 30px 70px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.04) inset}
 .term::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.035),transparent 30%);pointer-events:none}
 .term-bar span:nth-child(1){background:#f87171}.term-bar span:nth-child(2){background:#fbbf24}.term-bar span:nth-child(3){background:#4ade80}
 .stats{background:linear-gradient(90deg,rgba(139,92,246,.25),var(--line) 40%,var(--line))}
@@ -234,13 +234,59 @@ h1 em{color:var(--acc2)}
 .stats b{color:var(--txt)}
 .card{position:relative;background:linear-gradient(180deg,rgba(24,24,27,.9),rgba(16,16,19,.9));overflow:hidden;transition:transform .25s,border-color .2s,box-shadow .25s}
 .card::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent,var(--acc2),transparent);opacity:0;transition:opacity .3s}
-.card:hover{transform:translateY(-3px);box-shadow:0 24px 50px -28px rgba(139,92,246,.6)}
+.card:hover{transform:translateY(-3px);box-shadow:0 24px 44px -26px rgba(0,0,0,.85)}
 .card:hover::before{opacity:1}
 .tag{border:1px solid rgba(167,139,250,.22)}
 .pipe button{background:linear-gradient(180deg,rgba(24,24,27,.9),rgba(16,16,19,.9))}
 .pipe button:hover{transform:translateY(-2px)}
 .sec.alt{background:linear-gradient(180deg,rgba(16,16,19,.9),rgba(13,13,16,.92))}
 .foot{background:rgba(9,9,11,.8)}
+
+/* ---------- sobre ---------- */
+.about{display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+.portrait{position:relative;margin:0;aspect-ratio:4/5;border-radius:20px;overflow:hidden;border:1px solid var(--line2);background:linear-gradient(160deg,#1d1633,#101013 70%)}
+.portrait .mono{position:absolute;inset:0;display:grid;place-items:center;font:800 clamp(3.4rem,9vw,5.4rem) var(--mono);letter-spacing:-.04em;color:rgba(196,181,253,.5)}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 36px;margin:28px 0 0;padding-top:22px;border-top:1px solid var(--line)}
+.facts dt{font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--txt3)}
+.facts dd{margin:4px 0 0;font-weight:600}
+
+/* ---------- galeria ---------- */
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:22px;margin-top:34px;align-items:center}
+.shot{margin:0;display:flex;flex-direction:column;gap:12px}
+.shot.s8{grid-column:span 8}.shot.s6{grid-column:span 6}.shot.s4{grid-column:span 4}.shot.s3{grid-column:span 3}
+.shot-btn{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;perspective:1000px;color:inherit}
+.frame{display:block;border:1px solid var(--line2);background:var(--bg3);overflow:hidden;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s ease-out,border-color .2s;box-shadow:0 24px 50px -28px rgba(0,0,0,.9)}
+.shot-btn:hover .frame,.shot-btn:focus-visible .frame{border-color:var(--acc2)}
+.frame img{display:block;width:100%;height:auto}
+.frame.browser{border-radius:14px}
+.frame.browser::before{content:"";display:block;height:30px;background-color:var(--bg3);background-image:radial-gradient(circle at 18px 15px,#f87171 4px,transparent 5px),radial-gradient(circle at 36px 15px,#fbbf24 4px,transparent 5px),radial-gradient(circle at 54px 15px,#4ade80 4px,transparent 5px);background-repeat:no-repeat;border-bottom:1px solid var(--line)}
+.frame.phone{border-radius:34px;border:8px solid #1c1c21;outline:1px solid var(--line2);max-width:290px;margin-inline:auto}
+.frame.phone img{border-radius:24px}
+.shot figcaption{font-size:.84rem;color:var(--txt2);text-align:center}
+.shot figcaption b{display:block;color:var(--txt);font-size:.92rem}
+
+.lightbox{border:1px solid var(--line2);border-radius:16px;background:var(--bg2);color:var(--txt);padding:16px;max-width:min(1100px,94vw);max-height:92vh;overflow:auto}
+.lightbox::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(4px)}
+.lightbox img{display:block;max-width:100%;max-height:74vh;margin:0 auto;border-radius:10px}
+.lightbox p{margin:12px 4px 0;color:var(--txt2);text-align:center;font-size:.9rem}
+.lb-close{position:absolute;top:8px;right:8px;z-index:2;width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);background:var(--bg3);color:var(--txt);font:400 1.6rem/1 var(--sans);cursor:pointer}
+
+/* ---------- miniatura nos projetos ---------- */
+.thumb{margin:-8px -8px 4px;aspect-ratio:16/9;overflow:hidden;border-radius:10px;border:1px solid var(--line);background:var(--bg3)}
+.thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+
+@media (max-width:960px){
+  .about{grid-template-columns:1fr}
+  .portrait{max-width:300px}
+  .shot.s8,.shot.s6{grid-column:span 12}
+  .shot.s4,.shot.s3{grid-column:span 6}
+}
+@media (max-width:560px){
+  .gallery{gap:30px}
+  .shot.s4,.shot.s3{grid-column:span 12}
+  .facts{grid-template-columns:1fr 1fr}
+}
 
 /* entrada suave (só com JS e sem preferência por menos movimento) */
 .js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}

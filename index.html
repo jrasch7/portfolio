@@ -19,6 +19,7 @@
 <header class="nav" id="nav">
   <a class="brand" href="#top" aria-label="João Vargas"><span class="brand-mark">jv</span><span class="brand-name">João Vargas</span></a>
   <nav data-i18n-label="nav.aria" aria-label="Seções">
+    <a href="#galeria" data-i18n="nav.gallery">Galeria</a>
     <a href="#nivela" data-i18n="nav.nivela">Nivela por dentro</a>
     <a href="#projetos" data-i18n="nav.projects">Projetos</a>
     <a href="#ia-dev" data-i18n="nav.iadev">IA no desenvolvimento</a>
@@ -61,9 +62,42 @@
   </div>
 </section>
 
+<section class="sec" id="sobre">
+  <div class="wrap about">
+    <figure class="portrait" id="portrait">
+      <span class="mono" aria-hidden="true">JV</span>
+    </figure>
+    <div>
+      <p class="eyebrow" data-i18n="about.eyebrow">01 · Sobre</p>
+      <h2 data-i18n="about.h2">Transformo a rotina de um negócio em software confiável.</h2>
+      <p class="sub" data-i18n="about.p">Moro em Novo Hamburgo (RS) e cuido do Nivela de ponta a ponta: do problema operacional ao financeiro, ao fiscal e à IA, até o deploy. Gosto de regra escrita, de teste que falha quando deveria e de tela que funciona no celular.</p>
+      <dl class="facts">
+        <div><dt data-i18n="about.f1">Base</dt><dd>Novo Hamburgo · RS</dd></div>
+        <div><dt data-i18n="about.f2">Foco atual</dt><dd data-i18n="about.f2v">Nivela, ERP SaaS</dd></div>
+        <div><dt data-i18n="about.f3">Do problema ao</dt><dd data-i18n="about.f3v">deploy</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="galeria">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="gal.eyebrow">02 · Galeria</p>
+    <h2 data-i18n="gal.h2">O Nivela e os apps, em telas reais.</h2>
+    <p class="sub" data-i18n="gal.sub">Capturas da demonstração pública do Nivela, do app Nivela Pay (dados de exemplo) e do site da SulCore. Clique para ampliar.</p>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<dialog class="lightbox" id="lightbox" aria-label="Imagem ampliada">
+  <button type="button" class="lb-close" id="lb-close" aria-label="Fechar">×</button>
+  <div id="lb-body"></div>
+  <p id="lb-cap"></p>
+</dialog>
+
 <section class="sec" id="nivela">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="s1.eyebrow">01 · Nivela por dentro</p>
+    <p class="eyebrow" data-i18n="s1.eyebrow">03 · Nivela por dentro</p>
     <h2 data-i18n="s1.h2">Clique, teste, quebre. A parte técnica do Nivela, sem PDF.</h2>
     <p class="sub" data-i18n="s1.sub">Três peças que definem o produto: como o sistema é dividido, como um cliente nunca enxerga o dado do outro e como a IA ajuda sem agir sozinha. As demos são didáticas e usam dados fictícios.</p>
 
@@ -115,7 +149,7 @@
 
 <section class="sec alt" id="projetos">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="s2.eyebrow">02 · Projetos</p>
+    <p class="eyebrow" data-i18n="s2.eyebrow">04 · Projetos</p>
     <h2 data-i18n="s2.h2">O que está no ar, o que está em construção e como cada um é feito.</h2>
     <div class="cards" id="cards"></div>
   </div>
@@ -123,7 +157,7 @@
 
 <section class="sec" id="ia-dev">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="s3.eyebrow">03 · IA no desenvolvimento</p>
+    <p class="eyebrow" data-i18n="s3.eyebrow">05 · IA no desenvolvimento</p>
     <h2 data-i18n="s3.h2">Agentes de IA trabalham rápido. Quem decide sou eu.</h2>
     <p class="sub" data-i18n="s3.sub">Uso agentes para investigar, planejar, implementar e revisar, dentro de um processo desenhado para que velocidade não vire risco. Clique em cada etapa.</p>
     <ol class="pipe" id="pipe"></ol>
@@ -133,7 +167,7 @@
 
 <section class="sec alt" id="stack">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="s4.eyebrow">04 · Stack</p>
+    <p class="eyebrow" data-i18n="s4.eyebrow">06 · Stack</p>
     <h2 data-i18n="s4.h2">Ferramentas que uso de verdade, por área.</h2>
     <div class="chips" id="stack-filter" role="group" data-i18n-label="stack.aria" aria-label="Filtrar por área"></div>
     <ul class="stack" id="stack-list"></ul>
@@ -143,7 +177,7 @@
 
 <section class="sec" id="contato">
   <div class="wrap contact">
-    <p class="eyebrow" data-i18n="s5.eyebrow">05 · Contato</p>
+    <p class="eyebrow" data-i18n="s5.eyebrow">07 · Contato</p>
     <h2 data-i18n="s5.h2">Vamos conversar sobre o seu sistema?</h2>
     <p class="sub" data-i18n="s5.sub">Trabalho com produto e engenharia de ponta a ponta: do problema operacional ao deploy.</p>
     <div class="cta">
