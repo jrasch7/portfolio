@@ -31,15 +31,11 @@ const onLang = fn => { renderers.push(fn); fn(); };
 const IMG = {
   dash: { f: 'nivela-dashboard.webp', w: 1500, h: 1002 },
   cel:  { f: 'nivela-celular.webp', w: 588, h: 950 },
-  pay1: { f: 'pay-inicio.webp', w: 600, h: 1298 },
-  pay2: { f: 'pay-extrato.webp', w: 600, h: 1298 },
   sul:  { f: 'sulcore-demo.webp', w: 759, h: 767 }
 };
 const imgAlt = k => ({
   dash: tr('Painel do Nivela no computador: faturamento do dia, ações recomendadas e agenda.', 'Nivela dashboard on desktop: daily revenue, recommended actions and schedule.'),
   cel: tr('Painel do Nivela no celular, com menu inferior.', 'Nivela dashboard on a phone, with a bottom menu.'),
-  pay1: tr('Início do app Nivela Pay: saldo, atalhos e valores a liberar.', 'Nivela Pay home: balance, shortcuts and amounts to be released.'),
-  pay2: tr('Extrato do app Nivela Pay com filtros, resumo do período e lançamentos.', 'Nivela Pay statement with filters, period summary and entries.'),
   sul: tr('Demonstração no site da SulCore: pedido em linguagem natural vira uma proposta para confirmar.', 'Demo on the SulCore site: a natural-language request becomes a proposal to confirm.')
 }[k]);
 
@@ -80,50 +76,17 @@ function toast(msg) {
   toastT = setTimeout(() => t.classList.remove('on'), 2200);
 }
 
-/* ---------- fundo: grade de pontos que reage ao mouse ---------- */
-(function bg() {
-  const cv = $('#bg'), cx = cv.getContext('2d');
-  let w, h, dpr, pts = [], mx = -999, my = -999;
-  const gap = 46;
-  function size() {
-    dpr = Math.min(devicePixelRatio || 1, 2);
-    w = innerWidth; h = innerHeight;
-    cv.width = w * dpr; cv.height = h * dpr;
-    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    pts = [];
-    for (let y = gap / 2; y < h; y += gap) for (let x = gap / 2; x < w; x += gap) pts.push([x, y]);
-    draw();
-  }
-  function draw() {
-    cx.clearRect(0, 0, w, h);
-    for (const [x, y] of pts) {
-      const d = Math.hypot(x - mx, y - my);
-      const k = Math.max(0, 1 - d / 190);
-      cx.fillStyle = k > 0 ? `rgba(167,139,250,${0.12 + k * 0.45})` : 'rgba(255,255,255,0.07)';
-      cx.beginPath();
-      cx.arc(x, y, 1.1 + k * 2.2, 0, 6.283);
-      cx.fill();
-    }
-  }
-  addEventListener('resize', size);
-  if (!reduce) {
-    addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; requestAnimationFrame(draw); }, { passive: true });
-    addEventListener('pointerleave', () => { mx = my = -999; draw(); });
-  }
-  size();
-})();
-
 /* ---------- terminal do hero ---------- */
 (function terminal() {
   const out = $('#term-out');
   let token = 0;
   const lines = () => [
-    ['p', '$ whoami'], ['v', 'joao-vargas · full-stack · Novo Hamburgo/RS'],
-    ['p', '$ cat ' + tr('foco.txt', 'focus.txt')], ['k', tr('SaaS multi-tenant  ·  financeiro e fiscal  ·  IA com confirmação', 'multi-tenant SaaS  ·  finance and fiscal  ·  AI with confirmation')],
-    ['p', '$ nivela --stack'], ['v', 'Python 3.12 · Flask 3 · SQLAlchemy 2 · PostgreSQL (RLS)'],
-    ['v', 'Redis/RQ · Stripe · Asaas · NFS-e Nacional · Anthropic'],
-    ['p', '$ nivela ' + tr('--regra-numero-1', '--rule-number-1')], ['d', tr('toda query de negócio filtra tenant_id. Sem exceção.', 'every business query filters by tenant_id. No exceptions.')],
-    ['p', '$ _']
+    ['p', tr('Inspeção do sistema Nivela', 'Inspection of the Nivela system')],
+    ['v', tr('1. Isolamento entre clientes ..... conforme', '1. Isolation between customers ..... compliant')],
+    ['v', tr('2. IA só age após confirmação .... conforme', '2. AI acts only after confirmation .... compliant')],
+    ['v', tr('3. Dinheiro e fiscal sob teste ... conforme', '3. Money and fiscal under test ... compliant')],
+    ['d', tr('Regra nº 1: toda query de negócio filtra tenant_id. Sem exceção.', 'Rule no. 1: every business query filters by tenant_id. No exceptions.')],
+    ['k', tr('Liberado para serviço.', 'Released for service.')]
   ];
   const draw = (done, cur) => {
     out.innerHTML = done.map(l => `<span class="${l[0]}">${esc(l[1])}</span>`).join('\n') +
@@ -199,17 +162,12 @@ function toast(msg) {
   const NS = 'http://www.w3.org/2000/svg';
   const mk = (n, a = {}) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); return e; };
   const nodes = () => ({
-    web:  { x: 24,  y: 40,  w: 170, h: 62, t: tr('Navegador', 'Browser'), s: 'Jinja2 · Bootstrap · JS',
+    web:  { x: 24,  y: 40,  w: 200, h: 62, t: tr('Navegador', 'Browser'), s: 'Jinja2 · Bootstrap · JS',
       d: { h: tr('Core ERP no navegador', 'Core ERP in the browser'),
         p: tr('Interface do operador renderizada no servidor. JavaScript vanilla só onde precisa de interação.', 'Operator UI rendered on the server. Vanilla JavaScript only where interaction is needed.'),
         l: tr(['Sem framework SPA: carrega rápido e funciona bem em celular.', 'Padrão de UI documentado: ícones sempre Font Awesome, alvos de toque de 44 px, nenhuma rolagem lateral.', 'Telas passam por gate visual com captura real em desktop e celular.'],
               ['No SPA framework: loads fast and works well on phones.', 'Documented UI standard: icons always Font Awesome, 44 px touch targets, no sideways scrolling.', 'Screens go through a visual gate with real captures on desktop and phone.']) } },
-    pay:  { x: 24,  y: 170, w: 170, h: 62, t: tr('App Nivela Pay', 'Nivela Pay app'), s: 'Expo · React Native · TS',
-      d: { h: tr('App móvel (iPhone e Android)', 'Mobile app (iPhone and Android)'),
-        p: tr('A conta de pagamento do negócio: saldo, extrato, transferências e comprovantes.', 'The business’s payment account: balance, statement, transfers and receipts.'),
-        l: tr(['Nenhuma regra de dinheiro no app. Saldo, taxa e limite vêm prontos da API.', 'Dinheiro trafega sempre em centavos inteiros.', 'Login com o mesmo usuário do ERP e 2FA; sessão por token Bearer.'],
-              ['No money rules in the app. Balance, fees and limits come ready from the API.', 'Money always travels as integer cents.', 'Login with the same ERP user and 2FA; Bearer-token session.']) } },
-    ext:  { x: 24,  y: 300, w: 170, h: 62, t: tr('Apps parceiros', 'Partner apps'), s: tr('API de integração + webhooks', 'integration API + webhooks'),
+    ext:  { x: 24,  y: 170, w: 200, h: 62, t: tr('Apps parceiros', 'Partner apps'), s: 'API + webhooks',
       d: { h: tr('Ecossistema por API', 'API ecosystem'),
         p: tr('Outros produtos conversam com o ERP por uma API versionada e por webhooks.', 'Other products talk to the ERP through a versioned API and webhooks.'),
         l: tr(['Contrato versionado: o consumidor não quebra quando o ERP evolui.', 'Webhooks para eventos, em vez de polling.'],
@@ -229,7 +187,7 @@ function toast(msg) {
         p: tr('E-mail, lead da landing e rotinas pesadas saem da requisição.', 'Email, landing-page leads and heavy routines leave the request.'),
         l: tr(['Cada tarefa roda com app context, sessão de banco e tenant próprios.', 'Até 3 novas tentativas com espera crescente (30 s, 2 min, 10 min).', 'Sem Redis, cai para thread: simples em desenvolvimento, e a operação sabe o limite disso.'],
               ['Each task runs with its own app context, database session and tenant.', 'Up to 3 retries with growing waits (30 s, 2 min, 10 min).', 'Without Redis it falls back to a thread: simple in development, and operations know its limit.']) } },
-    orm:  { x: 520, y: 105, w: 170, h: 62, t: 'SQLAlchemy 2', s: 'Alembic · 200+ migrations',
+    orm:  { x: 520, y: 105, w: 200, h: 62, t: 'SQLAlchemy 2', s: 'Alembic · 200+ migrations',
       d: { h: tr('Acesso a dados e migrations', 'Data access and migrations'),
         p: tr('Todo schema muda por Alembic. Nunca ALTER TABLE manual em produção.', 'Every schema change goes through Alembic. Never a manual ALTER TABLE in production.'),
         l: tr(['200+ migrations versionadas, com upgrade e downgrade.', 'Migration que mexe em schema é validada em PostgreSQL descartável (upgrade, downgrade, upgrade).', 'Regra: tabela nova nasce com RLS na própria migration.'],
@@ -239,7 +197,7 @@ function toast(msg) {
         p: tr('Isolamento por linha: todas as tabelas de negócio têm tenant_id, e o PostgreSQL reforça com Row Level Security.', 'Row-level isolation: every business table has tenant_id, and PostgreSQL backs it up with Row Level Security.'),
         l: tr(['A request fixa o tenant no contexto e o banco filtra por conta própria.', 'Esquecer um WHERE no código não vira vazamento entre clientes.'],
               ['The request sets the tenant in context and the database filters on its own.', 'Forgetting a WHERE in code does not become a leak between customers.']) } },
-    pay2: { x: 750, y: 20,  w: 150, h: 54, t: 'Stripe · Asaas', s: tr('cobrança SaaS', 'SaaS billing'),
+    bill: { x: 750, y: 20,  w: 150, h: 54, t: 'Stripe · Asaas', s: tr('cobrança SaaS', 'SaaS billing'),
       d: { h: tr('Cobrança', 'Billing'), p: tr('Stripe no cartão (mensal e anual); Asaas para Pix e contingência.', 'Stripe for cards (monthly and annual); Asaas for Pix and as a fallback.'),
         l: tr(['Webhooks de cobrança.', 'Acesso do cliente muda conforme o status da assinatura.'], ['Billing webhooks.', 'Customer access changes with subscription status.']) } },
     fis:  { x: 750, y: 100, w: 150, h: 54, t: 'NFS-e Nacional', s: tr('emissão direta', 'direct issuance'),
@@ -248,14 +206,14 @@ function toast(msg) {
     mail: { x: 750, y: 180, w: 150, h: 54, t: 'Resend', s: tr('e-mail transacional', 'transactional email'),
       d: { h: tr('E-mail transacional', 'Transactional email'), p: tr('Envio por API com domínio próprio. Os envios saem pela fila.', 'Sent through an API with a custom domain. Sending goes through the queue.'),
         l: tr(['Recuperação de senha com tempo de resposta que não revela se o e-mail existe.'], ['Password recovery with a response time that does not reveal whether the email exists.']) } },
-    ia:   { x: 750, y: 260, w: 150, h: 54, t: 'Anthropic (Claude)', s: tr('Nivela IA', 'Nivela AI'),
+    ia:   { x: 750, y: 260, w: 150, h: 54, t: 'Claude API', s: tr('Nivela IA', 'Nivela AI'),
       d: { h: tr('IA dentro do produto', 'AI inside the product'), p: tr('A Nivela IA consulta dados por ferramentas e propõe ações. Quem executa é o service, depois da confirmação.', 'Nivela AI reads data through tools and proposes actions. The service executes, after confirmation.'),
         l: tr(['Respostas com ferramentas, não "de cabeça".', 'Ver a aba Nivela IA para o fluxo de segurança.'], ['Answers use tools, not guesses.', 'See the Nivela AI tab for the safety flow.']) } },
     obs:  { x: 750, y: 340, w: 150, h: 54, t: 'Sentry · Railway', s: tr('erros e deploy', 'errors and deploy'),
       d: { h: tr('Operação', 'Operations'), p: tr('Deploy em Railway com Gunicorn; erros no Sentry; CI no GitHub Actions.', 'Deployed on Railway with Gunicorn; errors in Sentry; CI on GitHub Actions.'),
         l: tr(['Deploy em produção é decisão humana, por PR de staging para main.'], ['Production deploy is a human decision, via a PR from staging to main.']) } }
   });
-  const E = [['web','bp'],['pay','bp'],['ext','bp'],['bp','svc'],['svc','wk'],['svc','orm'],['orm','db'],['wk','db'],['svc','pay2'],['svc','fis'],['wk','mail'],['svc','ia'],['svc','obs']];
+  const E = [['web','bp'],['ext','bp'],['bp','svc'],['svc','wk'],['svc','orm'],['orm','db'],['wk','db'],['svc','bill'],['svc','fis'],['wk','mail'],['svc','ia'],['svc','obs']];
   let selected = 'svc';
   function render() {
     const N = nodes();
@@ -272,7 +230,7 @@ function toast(msg) {
     });
     const nodeEls = {};
     for (const [id, n] of Object.entries(N)) {
-      const g = mk('g', { class: 'node', tabindex: 0, role: 'button', 'aria-label': `${n.t}: ${n.s}` });
+      const g = mk('g', { class: 'node', tabindex: 0, role: 'button' });
       g.append(mk('rect', { x: n.x, y: n.y, width: n.w, height: n.h }));
       const t1 = mk('text', { x: n.x + 14, y: n.y + 26 }); t1.textContent = n.t;
       const t2 = mk('text', { x: n.x + 14, y: n.y + 46, class: 'sm' }); t2.textContent = n.s;
@@ -403,7 +361,7 @@ function toast(msg) {
   async function proposal(id, who) {
     await sleep(500); if (id !== run) return;
     const m = add('ai', `${tr('Encontrei tudo. Confirma este agendamento?', 'I found everything. Do you confirm this booking?')}
-      <div class="prop" style="margin-top:10px"><span>${tr('cliente', 'customer')}: <b>Carlos</b></span><span>${tr('serviço', 'service')}: <b>${tr('Corte masculino', 'Men’s haircut')}</b></span><span>${tr('profissional · horário', 'professional · time')}: <b>${esc(who)}</b></span></div>
+      <div class="prop"><span>${tr('cliente', 'customer')}: <b>Carlos</b></span><span>${tr('serviço', 'service')}: <b>${tr('Corte masculino', 'Men’s haircut')}</b></span><span>${tr('profissional · horário', 'professional · time')}: <b>${esc(who)}</b></span></div>
       <div class="row"></div>`);
     sys(tr('estado', 'state'), tr('ação proposta e validada. Aguardando confirmação humana.', 'action proposed and validated. Waiting for human confirmation.'));
     const row = $('.row', m);
@@ -437,11 +395,6 @@ function toast(msg) {
       tech: ['Claude (Anthropic)', 'tool use', tr('idempotência', 'idempotency')],
       det: tr(['Três saídas possíveis: ação proposta validada, pergunta de esclarecimento ou recusa clara.', 'Confirmação explícita, revalidação no servidor, escopo de tenant e usuário, execução única.', 'Responde consultando o menu real, os guias e os dados do negócio por ferramentas, em vez de "de cabeça".', 'Avaliação de mudanças (prompt, modelo, ferramentas) antes de ir para staging.'],
               ['Three possible outcomes: a validated proposed action, a clarifying question or a clear refusal.', 'Explicit confirmation, server-side re-validation, tenant and user scope, single execution.', 'It answers by looking up the real menu, guides and business data through tools, not from memory.', 'Changes (prompt, model, tools) are evaluated before reaching staging.']) },
-    { n: 'Nivela Pay', img: 'pay1', st: ['beta', tr('beta fechado', 'closed beta')],
-      d: tr('App de iPhone e Android com a conta de pagamento do negócio: saldo, extrato, transferências e comprovantes.', 'iPhone and Android app with the business’s payment account: balance, statement, transfers and receipts.'),
-      tech: ['Expo SDK 57', 'React Native', 'TypeScript strict', 'Expo Router'],
-      det: tr(['Zero regra de dinheiro no app: tudo vem da API do ERP e o app só formata.', 'Dinheiro em centavos inteiros, sempre.', 'Renovação de sessão com fila única e tratamento de renovação concorrente.', 'Hoje roda com dados de exemplo; a ligação com a API real é a próxima etapa.'],
-              ['Zero money rules in the app: everything comes from the ERP API and the app only formats.', 'Money in integer cents, always.', 'Session refresh with a single queue and handling of concurrent refreshes.', 'It currently runs on sample data; connecting the real API is the next step.']) },
     { n: 'SulCore', img: 'sul', st: ['live', tr('site aberto', 'open site')],
       d: tr('Site da SulCore, feito para mostrar como se trabalha: exportação estática, CI forte e código aberto.', 'The SulCore website, built to show how the work is done: static export, strong CI and open source.'),
       tech: ['Next.js 16', 'TypeScript strict', 'Tailwind 4', 'Playwright', 'Vitest', 'GitHub Pages'],
@@ -515,8 +468,7 @@ function toast(msg) {
   const G = () => ({
     [tr('Back-end', 'Backend')]: [['Python 3.12', tr('Núcleo do Nivela', 'Nivela core')], ['Flask 3', tr('Core ERP e API', 'Core ERP and API')], ['SQLAlchemy 2', tr('ORM e consultas', 'ORM and queries')], ['Alembic', tr('200+ migrations versionadas', '200+ versioned migrations')], ['Gunicorn', tr('Servidor de produção', 'Production server')], ['Redis + RQ', tr('Fila, retry e cache', 'Queue, retries and cache')]],
     [tr('Dados', 'Data')]: [['PostgreSQL', tr('Banco único com RLS por tenant', 'Single database with per-tenant RLS')], ['Row Level Security', tr('Segunda barreira de isolamento', 'Second isolation barrier')], ['SQLite', tr('Banco dos testes do Nivela', 'Nivela’s test database')]],
-    [tr('Front-end', 'Frontend')]: [['TypeScript', tr('SulCore e Nivela Pay', 'SulCore and Nivela Pay')], ['Next.js 16', tr('Site da SulCore', 'SulCore website')], ['React 19', 'Next.js'], ['Tailwind 4', tr('Site da SulCore', 'SulCore website')], ['Jinja2', tr('Telas do Core ERP', 'Core ERP screens')], ['JavaScript vanilla', tr('Interações do ERP e deste portfólio', 'ERP interactions and this portfolio')]],
-    Mobile: [['Expo SDK 57', 'Nivela Pay'], ['React Native', 'Nivela Pay'], ['Expo Router', tr('Rotas do app', 'App routing')]],
+    [tr('Front-end', 'Frontend')]: [['TypeScript', 'SulCore'], ['Next.js 16', tr('Site da SulCore', 'SulCore website')], ['React 19', 'Next.js'], ['Tailwind 4', tr('Site da SulCore', 'SulCore website')], ['Jinja2', tr('Telas do Core ERP', 'Core ERP screens')], ['JavaScript vanilla', tr('Interações do ERP e deste portfólio', 'ERP interactions and this portfolio')]],
     [tr('IA', 'AI')]: [['Claude API', tr('Nivela IA e assistente de ajuda', 'Nivela AI and the help assistant')], ['Tool use', tr('Consulta de dados por ferramentas', 'Data lookups through tools')], [tr('Avaliação de prompts', 'Prompt evaluation'), tr('Comparar modelo e instrução antes de publicar', 'Compare model and instructions before publishing')]],
     [tr('Qualidade e operação', 'Quality and operations')]: [['pytest', tr('390+ arquivos de teste no Nivela', '390+ test files in Nivela')], ['Playwright', tr('Validação visual e E2E', 'Visual validation and E2E')], ['GitHub Actions', 'CI'], ['CodeQL', tr('Análise estática no site da SulCore', 'Static analysis on the SulCore site')], ['Docker', tr('Ambiente', 'Environment')], ['Railway', tr('Deploy do Nivela', 'Nivela deployment')], ['Sentry', tr('Erros em produção', 'Production errors')]],
     [tr('Integrações', 'Integrations')]: [['Stripe', tr('Assinatura no cartão', 'Card subscriptions')], ['Asaas', tr('Pix e contingência', 'Pix and fallback')], ['NFS-e Nacional', tr('Emissão fiscal direta', 'Direct fiscal issuance')], ['Resend', tr('E-mail transacional', 'Transactional email')]]
@@ -560,6 +512,7 @@ function toast(msg) {
     [tr('Conversar com a Nivela IA (simulação)', 'Talk to Nivela AI (simulation)'), 'demo', tab('t-ia', 'nivela')],
     [tr('Ir para: Projetos', 'Go to: Projects'), tr('seção', 'section'), go('projetos')],
     [tr('Ir para: IA no desenvolvimento', 'Go to: AI in development'), tr('seção', 'section'), go('ia-dev')],
+    [tr('Ir para: Pipeline', 'Go to: Pipeline'), tr('seção', 'section'), go('pipeline')],
     [tr('Ir para: Stack', 'Go to: Stack'), tr('seção', 'section'), go('stack')],
     [tr('Ir para: Contato', 'Go to: Contact'), tr('seção', 'section'), go('contato')],
     [tr('Copiar e-mail', 'Copy email'), tr('ação', 'action'), copyMail],
@@ -590,7 +543,7 @@ function toast(msg) {
   inp.addEventListener('keydown', e => {
     if (e.key === 'ArrowDown') { e.preventDefault(); idx = Math.min(idx + 1, shown.length - 1); draw(); }
     else if (e.key === 'ArrowUp') { e.preventDefault(); idx = Math.max(idx - 1, 0); draw(); }
-    else if (e.key === 'Enter' && shown[idx]) run(shown[idx]);
+    else if (e.key === 'Enter' && shown[idx]) { e.preventDefault(); run(shown[idx]); }
     else if (e.key === 'Tab') e.preventDefault();
   });
   pal.addEventListener('click', e => { if (e.target === pal) close(); });
@@ -613,7 +566,7 @@ function toast(msg) {
   const io = new IntersectionObserver(es => es.forEach(x => {
     if (x.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + x.target.id));
   }), { rootMargin: '-40% 0px -55% 0px' });
-  ['galeria', 'nivela', 'projetos', 'ia-dev', 'stack', 'contato'].forEach(id => io.observe(document.getElementById(id)));
+  ['galeria', 'nivela', 'projetos', 'ia-dev', 'pipeline', 'stack', 'contato'].forEach(id => io.observe(document.getElementById(id)));
 })();
 
 /* ---------- galeria com ampliação ---------- */
@@ -622,9 +575,7 @@ function toast(msg) {
   const items = () => [
     { k: 'dash', kind: 'browser', s: 's8', t: tr('Nivela no computador', 'Nivela on desktop'), d: tr('Demonstração pública, dados fictícios', 'Public demo, fictional data') },
     { k: 'cel', kind: 'phone', s: 's4', t: tr('Nivela no celular', 'Nivela on phone'), d: tr('Mesma regra de negócio, tela pensada para o toque', 'Same business rules, screen designed for touch') },
-    { k: 'pay1', kind: 'phone', s: 's3', t: tr('Nivela Pay · Início', 'Nivela Pay · Home'), d: tr('Beta fechado, dados de exemplo', 'Closed beta, sample data') },
-    { k: 'pay2', kind: 'phone', s: 's3', t: tr('Nivela Pay · Extrato', 'Nivela Pay · Statement'), d: tr('Saldo e filtros calculados pela API do ERP', 'Balance and filters computed by the ERP API') },
-    { k: 'sul', kind: 'browser', s: 's6', t: tr('Site da SulCore', 'SulCore website'), d: tr('Demonstração com confirmação antes de gravar', 'Demo with confirmation before saving') }
+    { k: 'sul', kind: 'browser', s: 's12', t: tr('Site da SulCore', 'SulCore website'), d: tr('Demonstração com confirmação antes de gravar', 'Demo with confirmation before saving') }
   ];
   function open(it) {
     const im = IMG[it.k];
@@ -634,21 +585,13 @@ function toast(msg) {
   }
   onLang(() => {
     wrap.innerHTML = '';
-    items().forEach(it => {
+    items().forEach((it, n) => {
       const im = IMG[it.k];
       const f = el('figure', { class: 'shot ' + it.s });
       f.innerHTML = `<button type="button" class="shot-btn" aria-label="${esc(tr('Ampliar: ', 'Enlarge: ') + it.t)}"><span class="frame ${it.kind}"><img src="assets/img/${im.f}" width="${im.w}" height="${im.h}" alt="${esc(imgAlt(it.k))}" loading="lazy" decoding="async"></span></button>
-        <figcaption><b>${esc(it.t)}</b>${esc(it.d)}</figcaption>`;
-      const btn = $('.shot-btn', f), fr = $('.frame', f);
+        <figcaption><span class="fig-no">${tr('Foto', 'Photo')} ${n + 1}</span><b>${esc(it.t)}</b>${esc(it.d)}</figcaption>`;
+      const btn = $('.shot-btn', f);
       btn.addEventListener('click', () => open(it));
-      if (!reduce) {
-        btn.addEventListener('pointermove', e => {
-          const r = btn.getBoundingClientRect();
-          fr.style.setProperty('--ry', ((e.clientX - r.left) / r.width - .5) * 8 + 'deg');
-          fr.style.setProperty('--rx', (.5 - (e.clientY - r.top) / r.height) * 6 + 'deg');
-        });
-        btn.addEventListener('pointerleave', () => { fr.style.setProperty('--rx', '0deg'); fr.style.setProperty('--ry', '0deg'); });
-      }
       wrap.append(f);
     });
   });
@@ -673,12 +616,127 @@ function toast(msg) {
   probe.src = 'assets/foto.jpg';
 })();
 
-/* ---------- entrada suave das seções ---------- */
-(function reveal() {
-  if (reduce || !('IntersectionObserver' in window)) return;
-  document.documentElement.classList.add('js');
-  const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }), { rootMargin: '0px 0px -8% 0px' });
-  $$('.sec .wrap > *, .contact > *').forEach(e => { e.classList.add('reveal'); io.observe(e); });
+/* ---------- tela da pipeline (lê pipeline.json, gerado pela própria pipeline) ---------- */
+(function pipelineView() {
+  const head = $('#pl-head'), graph = $('#pl-graph'), detail = $('#pl-detail'), note = $('#pl-note');
+  let data = null, failed = false, sel = null;
+  const L = o => (o && typeof o === 'object' ? (o[LANG] ?? o.pt ?? '') : (o ?? ''));
+  const ST = () => ({ passed: tr('Passou', 'Passed'), failed: tr('Falhou', 'Failed'), skipped: tr('Pulada', 'Skipped'), pending: tr('Pendente', 'Pending'), partial: tr('Parcial', 'Partial') });
+  const ICON = {
+    passed: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5"/></svg>',
+    failed: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>',
+    skipped: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8h9"/></svg>',
+    pending: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="4.5"/><path d="M8 5.5V8l1.8 1.2"/></svg>'
+  };
+  ICON.partial = ICON.pending;
+  const METRIC = {
+    arquivos: ['arquivos', 'files'], arquivosDeTexto: ['arquivos de texto', 'text files'], imagensKB: ['imagens (KB)', 'images (KB)'],
+    codigoGzipKB: ['código comprimido (KB)', 'gzipped code (KB)'], chavesDeTexto: ['chaves de texto', 'text keys'], ancoras: ['âncoras', 'anchors'],
+    arquivosJS: ['arquivos JS', 'JS files'], referencias: ['referências', 'references'], tamanhoKB: ['tamanho (KB)', 'size (KB)'], commit: ['commit', 'commit'],
+    testes: ['testes', 'tests'], execucoes: ['execuções', 'runs'], falhas: ['falhas', 'failures'], instaveis: ['instáveis', 'flaky'], projetos: ['projetos', 'projects'],
+    vulnerabilidades: ['vulnerabilidades', 'vulnerabilities'], diretivasCSP: ['diretivas CSP', 'CSP directives'], linhasDoDiff: ['linhas do diff', 'diff lines'],
+    esperouSegundos: ['espera (s)', 'wait (s)'], performance: ['desempenho', 'performance'], accessibility: ['acessibilidade', 'accessibility'],
+    'best-practices': ['boas práticas', 'best practices'], seo: ['SEO', 'SEO'], 'largest-contentful-paint': ['LCP (ms)', 'LCP (ms)'],
+    'cumulative-layout-shift': ['CLS', 'CLS'], 'total-blocking-time': ['TBT (ms)', 'TBT (ms)']
+  };
+  const stampIO = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.remove('pre'); x.target.classList.add('slam'); stampIO.unobserve(x.target); } }), { threshold: .6 });
+  const dur = ms => (ms == null ? '' : ms < 1000 ? `${ms} ms` : `${(ms / 1000).toFixed(1)} s`);
+  const when = iso => { try { return new Date(iso).toLocaleString(LANG === 'en' ? 'en-US' : 'pt-BR', { dateStyle: 'short', timeStyle: 'short' }); } catch (e) { return iso; } };
+
+  function levels() {
+    const by = Object.fromEntries(data.stages.map(s => [s.id, s]));
+    const lv = {};
+    const depth = s => lv[s.id] ?? (lv[s.id] = s.needs.length ? 1 + Math.max(...s.needs.map(n => depth(by[n]))) : 0);
+    data.stages.forEach(depth);
+    const cols = [];
+    data.stages.forEach(s => (cols[lv[s.id]] ??= []).push(s));
+    return cols;
+  }
+
+  function renderHead() {
+    const t = data.totals, r = data.run, S = ST();
+    const src = data.source === 'ci' ? tr('GitHub Actions', 'GitHub Actions') : tr('Execução local', 'Local run');
+    head.innerHTML = `<span class="pl-pill ${data.status}"><i>${ICON[data.status] || ICON.pending}</i>${esc(S[data.status] || data.status)}</span>
+      <dl class="pl-meta">
+        <div><dt>${tr('Fonte', 'Source')}</dt><dd>${esc(src)}</dd></div>
+        <div><dt>commit</dt><dd><code>${esc(r.shaShort)}</code> · ${esc(r.branch)}</dd></div>
+        <div><dt>${tr('Etapas', 'Stages')}</dt><dd>${t.passed} ${tr('ok', 'ok')} · ${t.failed} ${tr('falhas', 'failed')} · ${t.skipped + t.pending} ${tr('puladas ou pendentes', 'skipped or pending')}</dd></div>
+        <div><dt>${tr('Tempo', 'Time')}</dt><dd>${dur(t.durationMs) || '–'}</dd></div>
+        <div><dt>${tr('Gerado em', 'Generated')}</dt><dd>${esc(when(data.generatedAt))}</dd></div>
+      </dl>
+      ${r.url ? `<a class="pl-run" href="${esc(r.url)}" target="_blank" rel="noopener">${tr('Ver execução no GitHub', 'View run on GitHub')} →</a>` : ''}`;
+    const pill = $('.pl-pill', head);
+    if (pill && !reduce) { pill.classList.add('pre'); stampIO.observe(pill); }
+  }
+
+  function renderGraph() {
+    const S = ST(), cols = levels();
+    graph.innerHTML = '<svg class="pl-edges" aria-hidden="true"></svg>';
+    cols.forEach((col, i) => {
+      const c = el('div', { class: 'pl-col', role: 'group', 'aria-label': tr(`Nível ${i + 1}`, `Level ${i + 1}`) });
+      col.forEach(s => {
+        const idx = data.stages.indexOf(s) + 1;
+        const b = el('button', { type: 'button', class: `pl-node ${s.status}`, 'data-id': s.id, 'aria-pressed': String(s.id === sel) },
+          `<span class="pl-top"><span class="pl-num">${String(idx).padStart(2, '0')}</span><i class="pl-ic">${ICON[s.status] || ICON.pending}</i></span>
+           <b>${esc(L(s.name))}</b><span class="pl-st">${esc(S[s.status] || s.status)}${s.durationMs ? ' · ' + dur(s.durationMs) : ''}</span>`);
+        b.addEventListener('click', () => { sel = s.id; renderGraph(); renderDetail(); });
+        c.append(b);
+      });
+      graph.append(c);
+    });
+    requestAnimationFrame(drawEdges);
+  }
+
+  function drawEdges() {
+    const svg = $('.pl-edges', graph);
+    if (!svg) return;
+    const box = graph.getBoundingClientRect();
+    if (innerWidth < 900) { svg.innerHTML = ''; return; }
+    svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+    svg.setAttribute('width', box.width); svg.setAttribute('height', box.height);
+    const pos = id => { const n = $(`.pl-node[data-id="${id}"]`, graph); const r = n.getBoundingClientRect(); return { l: r.left - box.left, r: r.right - box.left, y: r.top - box.top + r.height / 2 }; };
+    svg.innerHTML = data.stages.flatMap(s => s.needs.map(n => {
+      const a = pos(n), b = pos(s.id), mx = (a.r + b.l) / 2;
+      const hot = s.id === sel || n === sel;
+      return `<path class="${hot ? 'hot' : ''}" d="M${a.r} ${a.y} C${mx} ${a.y} ${mx} ${b.y} ${b.l} ${b.y}"/>`;
+    })).join('');
+  }
+
+  function renderDetail() {
+    const s = data.stages.find(x => x.id === sel), S = ST();
+    if (!s) { detail.innerHTML = ''; return; }
+    const checks = (s.checks || []).map(c => `<li class="${c.ok ? 'ok' : 'bad'}"><i>${c.ok ? ICON.passed : ICON.failed}</i><span>${esc(LANG === 'en' && c.en ? c.en : c.name)}${c.detail ? ` <em>${esc(c.detail)}</em>` : ''}</span></li>`).join('');
+    const metrics = Object.entries(s.metrics || {}).map(([k, v]) => `<span class="pl-metric"><small>${esc(METRIC[k] ? METRIC[k][LANG === 'en' ? 1 : 0] : k)}</small><b>${esc(v)}</b></span>`).join('');
+    const nt = L(s.note);
+    detail.innerHTML = `<h3>${esc(L(s.name))} <span class="pl-pill ${s.status}"><i>${ICON[s.status] || ICON.pending}</i>${esc(S[s.status] || s.status)}</span></h3>
+      <p>${esc(L(s.what))}</p>
+      <p class="pl-why"><b>${tr('Por que existe', 'Why it exists')}:</b> ${esc(L(s.why))}</p>
+      ${nt ? `<p class="pl-nt">${esc(nt)}</p>` : ''}
+      ${metrics ? `<div class="pl-metrics">${metrics}</div>` : ''}
+      ${checks ? `<ul class="pl-checks">${checks}</ul>` : ''}
+      <p class="pl-foot"><span class="tag">${tr('inspirada em', 'inspired by')} ${esc(L(s.inspired))}</span> <code>${esc(s.command)}</code></p>`;
+  }
+
+  function render() {
+    if (failed || !data) {
+      head.innerHTML = ''; graph.innerHTML = '';
+      detail.innerHTML = `<p class="hint">${failed ? tr('Não foi possível ler pipeline.json agora.', 'Could not read pipeline.json right now.') : tr('Carregando o relatório da pipeline…', 'Loading the pipeline report…')}</p>`;
+      note.textContent = '';
+      return;
+    }
+    if (!sel) sel = (data.stages.find(s => s.status === 'failed') || data.stages.find(s => s.id === 'testes') || data.stages[0]).id;
+    renderHead(); renderGraph(); renderDetail();
+    note.textContent = data.source === 'ci'
+      ? tr('Relatório gerado pela pipeline no GitHub Actions a cada push na main. Etapas que rodam depois da publicação aparecem como pendentes aqui e têm o resultado no Actions.', 'Report generated by the pipeline on GitHub Actions on every push to main. Stages that run after publishing show as pending here, with their result in Actions.')
+      : tr('Relatório de uma execução local da pipeline (npm run pipeline). Em produção, o GitHub Actions gera este arquivo a cada push na main.', 'Report from a local pipeline run (npm run pipeline). In production, GitHub Actions generates this file on every push to main.');
+  }
+
+  addEventListener('resize', () => { if (data && !failed) drawEdges(); });
+  onLang(render);
+  fetch('pipeline.json', { cache: 'no-store' })
+    .then(r => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+    .then(j => { data = j; render(); })
+    .catch(() => { failed = true; render(); });
 })();
 
 applyStatic();

@@ -1,0 +1,622 @@
+{
+  "schema": 1,
+  "source": "local",
+  "generatedAt": "2026-11-27T01:47:29.992Z",
+  "run": {
+    "id": null,
+    "number": null,
+    "event": "local",
+    "branch": "claude/pipeline",
+    "sha": "7521c0d63efb541f13cd3a79b75a17a3063ba63e",
+    "shaShort": "7521c0d",
+    "url": null
+  },
+  "status": "partial",
+  "totals": {
+    "passed": 6,
+    "failed": 0,
+    "skipped": 2,
+    "pending": 1,
+    "durationMs": 56061
+  },
+  "stages": [
+    {
+      "id": "pr-gate",
+      "name": {
+        "pt": "Gate do PR",
+        "en": "PR gate"
+      },
+      "needs": [],
+      "command": "npm run stage -- pr-gate",
+      "what": {
+        "pt": "Confere o pull request antes de qualquer outra coisa: título no padrão, corpo com a seção de validação, branch que não é a main e tamanho do diff.",
+        "en": "Checks the pull request before anything else: title format, a validation section in the body, a branch that is not main, and diff size."
+      },
+      "why": {
+        "pt": "PR pequeno e explicado é revisável. A regra existe para ninguém precisar adivinhar o que mudou nem como foi testado.",
+        "en": "A small, explained PR can be reviewed. The rule exists so nobody has to guess what changed or how it was tested."
+      },
+      "inspired": {
+        "pt": "pr_quality_gate.py do Nivela",
+        "en": "Nivela's pr_quality_gate.py"
+      },
+      "afterPublish": false,
+      "status": "skipped",
+      "durationMs": 1,
+      "checks": [],
+      "metrics": {},
+      "note": {
+        "pt": "Só roda em pull request.",
+        "en": "Only runs on pull requests."
+      }
+    },
+    {
+      "id": "higiene",
+      "name": {
+        "pt": "Higiene do repositório",
+        "en": "Repository hygiene"
+      },
+      "needs": [],
+      "command": "npm run stage -- higiene",
+      "what": {
+        "pt": "Varre os arquivos versionados atrás de segredos, IPs, hosts internos e e-mails fora da lista; confere orçamento de tamanho, arquivos obrigatórios e a regra de não usar emoji na interface.",
+        "en": "Scans tracked files for secrets, IPs, internal hosts and emails outside the allowlist; checks size budgets, required files and the no-emoji-in-UI rule."
+      },
+      "why": {
+        "pt": "O repositório é público. Um segredo ou um endereço interno que escapa não volta atrás, então a barreira fica no começo.",
+        "en": "The repository is public. A leaked secret or internal address cannot be taken back, so the barrier sits at the start."
+      },
+      "inspired": {
+        "pt": "check_repository_files.py do Nivela e regras de site público do SulCore",
+        "en": "Nivela's check_repository_files.py and SulCore's public-site rules"
+      },
+      "afterPublish": false,
+      "status": "passed",
+      "durationMs": 25,
+      "checks": [
+        {
+          "name": "arquivos obrigatórios presentes",
+          "ok": true,
+          "detail": "",
+          "en": "required files present"
+        },
+        {
+          "name": "nenhum segredo nos arquivos versionados",
+          "ok": true,
+          "detail": "",
+          "en": "no secrets in tracked files"
+        },
+        {
+          "name": "nenhum IP nem host interno (repositório público)",
+          "ok": true,
+          "detail": "",
+          "en": "no IPs or internal hosts (public repository)"
+        },
+        {
+          "name": "só o e-mail de contato público aparece",
+          "ok": true,
+          "detail": "",
+          "en": "only the public contact email appears"
+        },
+        {
+          "name": "sem marcador de conflito de merge",
+          "ok": true,
+          "detail": "",
+          "en": "no merge conflict markers"
+        },
+        {
+          "name": "cada imagem até 150.0 KB",
+          "ok": true,
+          "detail": "",
+          "en": "each image up to 150.0 KB"
+        },
+        {
+          "name": "imagens somam até 400.0 KB",
+          "ok": true,
+          "detail": "116.7 KB",
+          "en": "images total up to 400.0 KB"
+        },
+        {
+          "name": "HTML+JS+CSS comprimidos até 60.0 KB",
+          "ok": true,
+          "detail": "33.6 KB",
+          "en": "HTML+JS+CSS gzipped up to 60.0 KB"
+        },
+        {
+          "name": "sem emoji na interface (ícone é SVG ou texto)",
+          "ok": true,
+          "detail": "",
+          "en": "no emoji in the UI (icons are SVG or text)"
+        },
+        {
+          "name": "sem console.log no JavaScript entregue",
+          "ok": true,
+          "detail": "",
+          "en": "no console.log in shipped JavaScript"
+        }
+      ],
+      "metrics": {
+        "arquivos": 40,
+        "arquivosDeTexto": 35,
+        "imagensKB": 117,
+        "codigoGzipKB": 33.6
+      },
+      "note": ""
+    },
+    {
+      "id": "estatico",
+      "name": {
+        "pt": "Análise estática",
+        "en": "Static analysis"
+      },
+      "needs": [
+        "higiene"
+      ],
+      "command": "npm run stage -- estatico",
+      "what": {
+        "pt": "Sintaxe do JavaScript, validação do HTML, paridade entre português e inglês (toda chave tem tradução), âncoras internas que existem e arquivos referenciados que existem.",
+        "en": "JavaScript syntax, HTML validation, Portuguese/English parity (every key has a translation), internal anchors that exist and referenced files that exist."
+      },
+      "why": {
+        "pt": "Pega o erro barato antes de gastar tempo com navegador: link quebrado, texto sem tradução, HTML inválido.",
+        "en": "Catches cheap mistakes before spending time on a browser: broken links, untranslated text, invalid HTML."
+      },
+      "inspired": {
+        "pt": "etapa lint do Nivela e verify do SulCore",
+        "en": "Nivela's lint stage and SulCore's verify"
+      },
+      "afterPublish": false,
+      "status": "passed",
+      "durationMs": 931,
+      "checks": [
+        {
+          "name": "sintaxe válida em 20 arquivos JavaScript",
+          "ok": true,
+          "detail": "",
+          "en": "valid syntax in 20 JavaScript files"
+        },
+        {
+          "name": "HTML válido (html-validate)",
+          "ok": true,
+          "detail": "",
+          "en": "valid HTML (html-validate)"
+        },
+        {
+          "name": "todas as 82 chaves de texto têm tradução em inglês",
+          "ok": true,
+          "detail": "",
+          "en": "all 82 text keys have an English translation"
+        },
+        {
+          "name": "nenhuma tradução órfã ou vazia",
+          "ok": true,
+          "detail": "",
+          "en": "no orphan or empty translations"
+        },
+        {
+          "name": "10 âncoras internas apontam para um id existente",
+          "ok": true,
+          "detail": "",
+          "en": "10 internal anchors point to an existing id"
+        },
+        {
+          "name": "12 arquivos referenciados existem",
+          "ok": true,
+          "detail": "",
+          "en": "12 referenced files exist"
+        },
+        {
+          "name": "lang, viewport, título e descrição presentes",
+          "ok": true,
+          "detail": "",
+          "en": "lang, viewport, title and description present"
+        }
+      ],
+      "metrics": {
+        "chavesDeTexto": 82,
+        "ancoras": 10,
+        "arquivosJS": 20,
+        "referencias": 12
+      },
+      "note": ""
+    },
+    {
+      "id": "build",
+      "name": {
+        "pt": "Build reproduzível",
+        "en": "Reproducible build"
+      },
+      "needs": [
+        "estatico"
+      ],
+      "command": "npm run stage -- build",
+      "what": {
+        "pt": "Monta a pasta publicada, versiona os arquivos por hash de conteúdo, gera sitemap, robots e build-info com o hash de cada arquivo, e confere o que saiu.",
+        "en": "Assembles the published folder, versions files by content hash, generates sitemap, robots and a build-info file with every file's hash, and verifies the output."
+      },
+      "why": {
+        "pt": "O mesmo commit sempre gera o mesmo resultado. As etapas seguintes testam exatamente o artefato que vai ao ar, não o código-fonte.",
+        "en": "The same commit always produces the same result. The following stages test the exact artifact that ships, not the source."
+      },
+      "inspired": {
+        "pt": "verify-build.mjs do SulCore",
+        "en": "SulCore's verify-build.mjs"
+      },
+      "afterPublish": false,
+      "status": "passed",
+      "durationMs": 50,
+      "checks": [
+        {
+          "name": "pasta publicada montada",
+          "ok": true,
+          "detail": "16 arquivos, 336.7 KB",
+          "en": "published folder assembled"
+        },
+        {
+          "name": "build determinístico (dois builds, mesmos hashes)",
+          "ok": true,
+          "detail": "",
+          "en": "deterministic build (two builds, same hashes)"
+        },
+        {
+          "name": "9 referências do HTML publicado existem",
+          "ok": true,
+          "detail": "",
+          "en": "9 references in the published HTML exist"
+        },
+        {
+          "name": "arquivos de código versionados por hash de conteúdo",
+          "ok": true,
+          "detail": "",
+          "en": "code files versioned by content hash"
+        },
+        {
+          "name": "robots.txt e sitemap.xml gerados",
+          "ok": true,
+          "detail": "",
+          "en": "robots.txt and sitemap.xml generated"
+        },
+        {
+          "name": "build-info.json com hash de cada arquivo",
+          "ok": true,
+          "detail": "",
+          "en": "build-info.json with each file's hash"
+        }
+      ],
+      "metrics": {
+        "arquivos": 16,
+        "tamanhoKB": 337,
+        "commit": "7521c0d"
+      },
+      "note": ""
+    },
+    {
+      "id": "testes",
+      "name": {
+        "pt": "Testes ponta a ponta",
+        "en": "End-to-end tests"
+      },
+      "needs": [
+        "build"
+      ],
+      "command": "npm run stage -- testes",
+      "what": {
+        "pt": "Playwright em desktop e celular: troca de idioma, as três demos, galeria, paleta de comandos, esta tela. Mais acessibilidade (axe), console sem erros e nenhuma violação de CSP.",
+        "en": "Playwright on desktop and phone: language switch, the three demos, gallery, command palette, this screen. Plus accessibility (axe), a clean console and no CSP violations."
+      },
+      "why": {
+        "pt": "Teste que abre o site de verdade e usa. Acessibilidade entra como teste, não como boa intenção.",
+        "en": "A test that opens the real site and uses it. Accessibility is a test, not a good intention."
+      },
+      "inspired": {
+        "pt": "e2e do SulCore e varreduras de tela do Nivela",
+        "en": "SulCore's e2e and Nivela's screen sweeps"
+      },
+      "afterPublish": false,
+      "status": "passed",
+      "durationMs": 19017,
+      "checks": [
+        {
+          "name": "página carrega com console limpo, sem violação de CSP e sem rolagem lateral",
+          "ok": true,
+          "detail": "desktop + celular",
+          "en": "page loads with a clean console, no CSP violation and no sideways scroll"
+        },
+        {
+          "name": "imagens: nenhuma quebrada",
+          "ok": true,
+          "detail": "desktop + celular",
+          "en": "images: none broken"
+        },
+        {
+          "name": "troca de idioma PT/EN muda o texto e fica salva",
+          "ok": true,
+          "detail": "desktop + celular",
+          "en": "PT/EN switch changes the text and is remembered"
+        },
+        {
+          "name": "arquitetura: clicar num bloco mostra o detalhe",
+          "ok": true,
+          "detail": "desktop + celular",
+          "en": "architecture: clicking a block shows its detail"
+        },
+        {
+          "name": "isolamento de tenant: sem RLS vaza, com RLS protege",
+          "ok": true,
+          "detail": "desktop + celular",
+          "en": "tenant isolation: leaks without RLS, protected with it"
+        },
+        {
+          "name": "Nivela IA: confirmação repetida não executa duas vezes",
+          "ok": true,
+          "detail": "desktop + celular",
+          "en": "Nivela AI: a repeated confirmation does not execute twice"
+        },
+        {
+          "name": "galeria: clicar amplia a imagem e Esc fecha",
+          "ok": true,
+          "detail": "desktop + celular",
+          "en": "gallery: clicking enlarges the image and Esc closes it"
+        },
+        {
+          "name": "paleta de comandos abre, filtra e navega",
+          "ok": true,
+          "detail": "desktop + celular",
+          "en": "command palette opens, filters and navigates"
+        },
+        {
+          "name": "tela da pipeline: mostra as nove etapas e o detalhe de cada uma",
+          "ok": true,
+          "detail": "desktop + celular",
+          "en": "pipeline screen: shows the nine stages and each one's detail"
+        },
+        {
+          "name": "artefato: build-info.json lista só arquivos que existem",
+          "ok": true,
+          "detail": "desktop + celular",
+          "en": "artifact: build-info.json lists only files that exist"
+        },
+        {
+          "name": "acessibilidade (axe): nenhuma violação grave ou crítica, em PT e EN",
+          "ok": true,
+          "detail": "desktop + celular",
+          "en": "accessibility (axe): no serious or critical violation, in PT and EN"
+        }
+      ],
+      "metrics": {
+        "testes": 11,
+        "execucoes": 22,
+        "falhas": 0,
+        "instaveis": 0,
+        "projetos": "desktop, celular"
+      },
+      "note": ""
+    },
+    {
+      "id": "desempenho",
+      "name": {
+        "pt": "Desempenho",
+        "en": "Performance"
+      },
+      "needs": [
+        "build"
+      ],
+      "command": "npm run stage -- desempenho",
+      "what": {
+        "pt": "Lighthouse (3 execuções, mediana) com orçamento: desempenho, acessibilidade, boas práticas e SEO. Falha se a nota cair abaixo do mínimo.",
+        "en": "Lighthouse (3 runs, median) with a budget: performance, accessibility, best practices and SEO. Fails if a score drops below the minimum."
+      },
+      "why": {
+        "pt": "Orçamento é o que impede o site de ficar pesado aos poucos. A nota vira regra, e a regra vira falha de build.",
+        "en": "A budget is what stops a site from slowly getting heavy. The score becomes a rule, and the rule becomes a build failure."
+      },
+      "inspired": {
+        "pt": "Lighthouse CI do SulCore",
+        "en": "SulCore's Lighthouse CI"
+      },
+      "afterPublish": false,
+      "status": "passed",
+      "durationMs": 35640,
+      "checks": [
+        {
+          "name": "performance ≥ 90",
+          "ok": true,
+          "detail": "100"
+        },
+        {
+          "name": "accessibility ≥ 95",
+          "ok": true,
+          "detail": "100"
+        },
+        {
+          "name": "best-practices ≥ 95",
+          "ok": true,
+          "detail": "100"
+        },
+        {
+          "name": "seo ≥ 90",
+          "ok": true,
+          "detail": "100"
+        },
+        {
+          "name": "largest-contentful-paint ≤ 2500 ms",
+          "ok": true,
+          "detail": "1096"
+        },
+        {
+          "name": "cumulative-layout-shift ≤ 0.05",
+          "ok": true,
+          "detail": "0"
+        },
+        {
+          "name": "total-blocking-time ≤ 200 ms",
+          "ok": true,
+          "detail": "30"
+        }
+      ],
+      "metrics": {
+        "execucoes": 3,
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100,
+        "largest-contentful-paint": 1096,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 30
+      },
+      "note": ""
+    },
+    {
+      "id": "seguranca",
+      "name": {
+        "pt": "Segurança",
+        "en": "Security"
+      },
+      "needs": [
+        "build"
+      ],
+      "command": "npm run stage -- seguranca",
+      "what": {
+        "pt": "npm audit, política CSP estrita no que vai ao ar, nenhum recurso de terceiros, links externos com noopener e nova varredura de segredos no build. CodeQL roda em workflow próprio.",
+        "en": "npm audit, a strict CSP on what ships, no third-party resources, external links with noopener and another secret scan on the build. CodeQL runs in its own workflow."
+      },
+      "why": {
+        "pt": "Defesa em camadas: o código é varrido, as dependências são auditadas e o navegador é instruído a recusar o que não foi previsto.",
+        "en": "Defense in depth: the code is scanned, dependencies are audited and the browser is told to refuse anything unplanned."
+      },
+      "inspired": {
+        "pt": "security.yml (DevSecOps) do Nivela e CodeQL do SulCore",
+        "en": "Nivela's security.yml (DevSecOps) and SulCore's CodeQL"
+      },
+      "afterPublish": false,
+      "status": "passed",
+      "durationMs": 396,
+      "checks": [
+        {
+          "name": "npm audit sem vulnerabilidade alta ou crítica",
+          "ok": true,
+          "detail": "crítica 0, alta 0, moderada 0",
+          "en": "npm audit with no high or critical vulnerability"
+        },
+        {
+          "name": "CSP presente com default-src 'self'",
+          "ok": true,
+          "detail": "",
+          "en": "CSP present with default-src 'self'"
+        },
+        {
+          "name": "script-src sem 'unsafe-inline' nem 'unsafe-eval'",
+          "ok": true,
+          "detail": "'self'",
+          "en": "script-src without 'unsafe-inline' or 'unsafe-eval'"
+        },
+        {
+          "name": "style-src sem 'unsafe-inline'",
+          "ok": true,
+          "detail": "'self'",
+          "en": "style-src without 'unsafe-inline'"
+        },
+        {
+          "name": "object-src 'none', base-uri 'self', form-action 'none'",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "sem script inline nem manipulador de evento inline",
+          "ok": true,
+          "detail": "0 scripts, 0 manipuladores",
+          "en": "no inline script or inline event handler"
+        },
+        {
+          "name": "nenhum recurso carregado de terceiros (sem rastreadores, sem CDN)",
+          "ok": true,
+          "detail": "",
+          "en": "no third-party resources (no trackers, no CDN)"
+        },
+        {
+          "name": "links externos abrem com rel=noopener",
+          "ok": true,
+          "detail": "",
+          "en": "external links open with rel=noopener"
+        },
+        {
+          "name": "varredura de segredos no build",
+          "ok": true,
+          "detail": "",
+          "en": "secret scan on the build"
+        }
+      ],
+      "metrics": {
+        "vulnerabilidades": 0,
+        "diretivasCSP": 9
+      },
+      "note": ""
+    },
+    {
+      "id": "deploy",
+      "name": {
+        "pt": "Deploy",
+        "en": "Deploy"
+      },
+      "needs": [
+        "testes",
+        "desempenho",
+        "seguranca"
+      ],
+      "command": "GitHub Actions: job deploy",
+      "what": {
+        "pt": "Publica o artefato aprovado no GitHub Pages, só a partir da main. Esta tela entra no pacote publicado, então ela mesma é a prova: se você a vê, o deploy aconteceu.",
+        "en": "Publishes the approved artifact to GitHub Pages, from main only. This screen ships inside the package, so it is its own proof: if you can see it, the deploy happened."
+      },
+      "why": {
+        "pt": "Deploy só depois de tudo verde, sempre do mesmo artefato testado, sem build novo no meio do caminho.",
+        "en": "Deploy only after everything is green, always from the same tested artifact, with no new build in between."
+      },
+      "inspired": {
+        "pt": "deploy.yml do SulCore (ambiente protegido)",
+        "en": "SulCore's deploy.yml (protected environment)"
+      },
+      "afterPublish": false,
+      "status": "pending",
+      "durationMs": null,
+      "checks": [],
+      "metrics": {},
+      "note": {
+        "pt": "Roda no GitHub Actions.",
+        "en": "Runs on GitHub Actions."
+      }
+    },
+    {
+      "id": "smoke",
+      "name": {
+        "pt": "Fumaça pós-deploy",
+        "en": "Post-deploy smoke"
+      },
+      "needs": [
+        "deploy"
+      ],
+      "command": "npm run stage -- smoke",
+      "what": {
+        "pt": "Depois da publicação, confere o site no ar: responde 200, os arquivos carregam e a versão publicada é a do commit. Roda depois do deploy, então o resultado fica no Actions.",
+        "en": "After publishing, checks the live site: it answers 200, files load and the published version is the commit's. It runs after deploy, so its result lives in Actions."
+      },
+      "why": {
+        "pt": "Deploy que terminou não é deploy que funciona. Esta etapa confere o que o visitante realmente recebe.",
+        "en": "A finished deploy is not a working deploy. This stage checks what a visitor actually receives."
+      },
+      "inspired": {
+        "pt": "smoke-pos-deploy.yml do Nivela",
+        "en": "Nivela's smoke-pos-deploy.yml"
+      },
+      "afterPublish": true,
+      "status": "skipped",
+      "durationMs": 1,
+      "checks": [],
+      "metrics": {},
+      "note": {
+        "pt": "Só roda depois do deploy no GitHub Actions.",
+        "en": "Only runs after deploy on GitHub Actions."
+      }
+    }
+  ]
+}
