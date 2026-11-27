@@ -13,7 +13,7 @@ O portfólio é um site estático sem build. Uma pipeline completa é mais do qu
 2. As etapas formam um grafo (`needs`) definido uma vez em `scripts/pipeline/stages.mjs`; dali saem a execução local, o workflow e a tela do site.
 3. Cada etapa grava um relatório JSON. Um job final junta tudo em `pipeline.json`, que é empacotado no site.
 4. O artefato é construído uma vez e é o mesmo testado e publicado.
-5. Deploy só da `main`, só com a variável `PAGES_DEPLOY=true`, seguido de um smoke.
+5. Deploy só da `main`, ligado por padrão (a variável `PAGES_DEPLOY=false` o desliga), seguido de um smoke.
 
 ## Consequências
 

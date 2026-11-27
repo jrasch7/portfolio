@@ -52,7 +52,7 @@ python3 -m http.server 8000
 
 ## Publicar
 
-O deploy é uma etapa da pipeline (GitHub Pages por artefato). Para ligar: **Settings → Pages → Source: GitHub Actions** e a variável de Actions `PAGES_DEPLOY=true`. Sem a variável, a pipeline roda como verificação e não publica. Alternativa sem Actions: **Source: Deploy from a branch → `main` / `(root)`** (publica o código-fonte, sem as verificações).
+O deploy é uma etapa da pipeline (GitHub Pages por artefato). Para ligar: **Settings → Pages → Source: GitHub Actions**. Para desligar o deploy, crie a variável de Actions `PAGES_DEPLOY=false`. Alternativa sem Actions: **Source: Deploy from a branch → `main` / `(root)`** (publica o código-fonte, sem as verificações).
 
 ## Regras de conteúdo
 
