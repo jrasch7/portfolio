@@ -1,14 +1,14 @@
 {
   "schema": 1,
   "source": "local",
-  "generatedAt": "2026-11-27T01:47:29.992Z",
+  "generatedAt": "2026-11-27T01:49:14.798Z",
   "run": {
     "id": null,
     "number": null,
     "event": "local",
-    "branch": "claude/pipeline",
-    "sha": "7521c0d63efb541f13cd3a79b75a17a3063ba63e",
-    "shaShort": "7521c0d",
+    "branch": "claude/ajustes-design",
+    "sha": "2b67e9c063926439b4f4f15d965b44c50f917ff2",
+    "shaShort": "2b67e9c",
     "url": null
   },
   "status": "partial",
@@ -17,7 +17,7 @@
     "failed": 0,
     "skipped": 2,
     "pending": 1,
-    "durationMs": 56061
+    "durationMs": 55204
   },
   "stages": [
     {
@@ -72,7 +72,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 25,
+      "durationMs": 28,
       "checks": [
         {
           "name": "arquivos obrigatórios presentes",
@@ -119,7 +119,7 @@
         {
           "name": "HTML+JS+CSS comprimidos até 60.0 KB",
           "ok": true,
-          "detail": "33.6 KB",
+          "detail": "33.5 KB",
           "en": "HTML+JS+CSS gzipped up to 60.0 KB"
         },
         {
@@ -136,10 +136,10 @@
         }
       ],
       "metrics": {
-        "arquivos": 40,
-        "arquivosDeTexto": 35,
+        "arquivos": 48,
+        "arquivosDeTexto": 37,
         "imagensKB": 117,
-        "codigoGzipKB": 33.6
+        "codigoGzipKB": 33.5
       },
       "note": ""
     },
@@ -167,7 +167,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 931,
+      "durationMs": 889,
       "checks": [
         {
           "name": "sintaxe válida em 20 arquivos JavaScript",
@@ -182,10 +182,10 @@
           "en": "valid HTML (html-validate)"
         },
         {
-          "name": "todas as 82 chaves de texto têm tradução em inglês",
+          "name": "todas as 81 chaves de texto têm tradução em inglês",
           "ok": true,
           "detail": "",
-          "en": "all 82 text keys have an English translation"
+          "en": "all 81 text keys have an English translation"
         },
         {
           "name": "nenhuma tradução órfã ou vazia",
@@ -213,7 +213,7 @@
         }
       ],
       "metrics": {
-        "chavesDeTexto": 82,
+        "chavesDeTexto": 81,
         "ancoras": 10,
         "arquivosJS": 20,
         "referencias": 12
@@ -244,12 +244,12 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 50,
+      "durationMs": 40,
       "checks": [
         {
           "name": "pasta publicada montada",
           "ok": true,
-          "detail": "16 arquivos, 336.7 KB",
+          "detail": "16 arquivos, 336.6 KB",
           "en": "published folder assembled"
         },
         {
@@ -286,7 +286,7 @@
       "metrics": {
         "arquivos": 16,
         "tamanhoKB": 337,
-        "commit": "7521c0d"
+        "commit": "2b67e9c"
       },
       "note": ""
     },
@@ -314,7 +314,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 19017,
+      "durationMs": 18688,
       "checks": [
         {
           "name": "página carrega com console limpo, sem violação de CSP e sem rolagem lateral",
@@ -416,7 +416,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 35640,
+      "durationMs": 35165,
       "checks": [
         {
           "name": "performance ≥ 90",
@@ -441,7 +441,7 @@
         {
           "name": "largest-contentful-paint ≤ 2500 ms",
           "ok": true,
-          "detail": "1096"
+          "detail": "761"
         },
         {
           "name": "cumulative-layout-shift ≤ 0.05",
@@ -451,7 +451,7 @@
         {
           "name": "total-blocking-time ≤ 200 ms",
           "ok": true,
-          "detail": "30"
+          "detail": "41"
         }
       ],
       "metrics": {
@@ -460,9 +460,9 @@
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100,
-        "largest-contentful-paint": 1096,
+        "largest-contentful-paint": 761,
         "cumulative-layout-shift": 0,
-        "total-blocking-time": 30
+        "total-blocking-time": 41
       },
       "note": ""
     },
@@ -490,7 +490,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 396,
+      "durationMs": 392,
       "checks": [
         {
           "name": "npm audit sem vulnerabilidade alta ou crítica",

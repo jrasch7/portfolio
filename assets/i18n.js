@@ -9,7 +9,6 @@ window.I18N_EN = {
   'sheet.1': 'Sheet 1 of 9', 'sheet.2': 'Sheet 2 of 9', 'sheet.3': 'Sheet 3 of 9', 'sheet.4': 'Sheet 4 of 9', 'sheet.5': 'Sheet 5 of 9',
   'sheet.6': 'Sheet 6 of 9', 'sheet.7': 'Sheet 7 of 9', 'sheet.8': 'Sheet 8 of 9', 'sheet.9': 'Sheet 9 of 9',
   'f.resp': 'Responsible', 'f.base': 'Base', 'f.sys': 'System under responsibility', 'f.sysv': 'Nivela, a multi-tenant SaaS ERP', 'f.lang': 'Languages of this log',
-  'hero.legend': 'Description of the work',
   'hero.h1': 'Software that holds up<br>the <em>day to day</em> of a business.',
   'hero.lead': "I'm João Vargas, a full-stack developer. I build <strong>Nivela</strong>, a multi-tenant SaaS ERP for service businesses, with finance, fiscal, scheduling and an AI that only acts after a person confirms.",
   'hero.cta1': 'Explore Nivela from the inside',
