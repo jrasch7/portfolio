@@ -333,7 +333,7 @@ h1 em{color:var(--acc2)}
 
 .pl-why{font-size:.93rem}
 .pl-why b{color:var(--txt)}
-.pl-nt{padding:10px 14px;border-left:3px solid var(--warn);background:rgba(251,191,36,.06);border-radius:0 8px 8px 0;font-size:.9rem}
+.pl-nt{padding:10px 14px;border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.06);border-radius:10px;font-size:.9rem}
 .pl-metrics{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
 .pl-metric{display:flex;flex-direction:column;gap:2px;min-width:84px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg3)}
 .pl-metric small{font:600 .68rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--txt3)}
