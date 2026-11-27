@@ -26,7 +26,7 @@ Produto completo (público, restrições, voz): [`../PRODUCT.md`](../PRODUCT.md)
 | Servidor local | `scripts/serve.mjs` (Node, sem dependências) |
 | Pipeline | Node ≥ 22: scripts em `scripts/pipeline/`; Playwright, axe, html-validate, Lighthouse CI como dependências de desenvolvimento |
 | CI/CD | GitHub Actions (`.github/workflows/`), deploy no GitHub Pages por artefato |
-| Hospedagem | GitHub Pages |
+| Hospedagem | GitHub Pages, hoje por branch (`main`, raiz); por artefato quando o Actions da conta funcionar |
 
 Não há backend, banco, API própria, cookie, rastreador nem requisição a terceiros. É decisão ([ADR 0004](adr/0004-site-estatico-sem-framework-nem-build.md)).
 
