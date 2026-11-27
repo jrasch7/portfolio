@@ -2,6 +2,12 @@
 
 Histórico cronológico, do mais novo para o mais antigo. Formato fixo (ver [`AGENTS.md`](../../AGENTS.md)).
 
+## [2026-11-27] — Site no ar e organização de branches
+**Status:** concluída (limpeza das branches remotas pendente do dono)
+**O que foi feito:** repositório tornado público e Pages ativado por branch (`main`, raiz): site em `https://jrasch7.github.io/portfolio/`, verificado (200 em todos os arquivos, sem erro de console, sem violação de CSP, 9 etapas na tela da pipeline). Mergeados os dois PRs do Dependabot (`codeql-action` 4.39.2 → 4.39.5, `init` e `analyze` juntos; o changelog oficial só traz atualização do pacote do CodeQL). Branches locais já mergeadas apagadas nos dois repositórios.
+**Decisões tomadas:** a `feat/restruturacao-…` (2 commits de bot de abril, só no `app.py` removido) é obsoleta: o conteúdo atual a substitui por completo. A sessão de agente não apaga branch remota (proxy bloqueia o `git push --delete`; sem ferramenta no MCP): fica para o dono ([`DEBT.md`](../DEBT.md) item 6).
+**Próximo passo:** apagar as branches remotas; resolver o Actions da conta e trocar o Pages para "GitHub Actions".
+
 ## [2026-11-27] — Licença: todos os direitos reservados
 **Status:** concluída
 **O que foi feito:** aviso explícito de "todos os direitos reservados" no `README.md` (com a exceção das fontes, que seguem a OFL) e nota no `CONTRIBUTING.md`; item de licença removido de [`DEBT.md`](../DEBT.md).

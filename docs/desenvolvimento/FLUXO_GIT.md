@@ -18,6 +18,8 @@ Regras de trabalho com Git neste repositório. Resumo para quem já conhece o fl
 
 Sempre a partir de `main` atualizada: `git fetch origin --prune && git checkout -b <branch> origin/main`. Branch já mergeada não se reaproveita: crie outra.
 
+**Limpeza:** branch cujo PR foi mergeado é obsoleta e se apaga (local e remota). Ligue Settings → General → **Automatically delete head branches** para o GitHub apagar a remota sozinho no merge. Antes de apagar uma branch que não conhece, confira se o conteúdo dela já está na `main` (`git log origin/main..origin/<branch>`): não apague só porque "tem N commits à frente".
+
 ## Rotina
 
 1. `git fetch origin --prune`; conferir PRs e branches abertas (para não pisar em outro trabalho).

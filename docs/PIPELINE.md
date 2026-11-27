@@ -54,7 +54,7 @@ Cada etapa grava `reports/<etapa>.json` (status, tempo, verificações, métrica
 
 O deploy usa o Pages em modo "GitHub Actions". Para ligar:
 
-Settings → Pages → Source: **GitHub Actions**. Só isso.
+**Hoje** o Pages publica **direto da branch** (`main`, raiz): o site é o código-fonte, sem as verificações da pipeline. Para publicar pela pipeline (artefato testado, com o `pipeline.json` gerado pelo CI): Settings → Pages → Source: **GitHub Actions**. Só isso, depois que o Actions da conta voltar a executar ([`DEBT.md`](DEBT.md)).
 
 O job `deploy` roda a cada push na `main`, depois que testes, desempenho e segurança passam. Para desligá-lo sem apagar nada, crie a variável de Actions `PAGES_DEPLOY` com o valor `false`.
 
