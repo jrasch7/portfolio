@@ -12,6 +12,8 @@
     "stage": "node scripts/pipeline/run.mjs",
     "pipeline": "node scripts/pipeline/all.mjs",
     "report": "node scripts/pipeline/report.mjs",
+    "docs:mapa": "node scripts/docs/gerar-mapa-codigo.mjs",
+    "docs:check": "node scripts/docs/gerar-mapa-codigo.mjs --check",
     "test": "playwright test"
   },
   "devDependencies": {
