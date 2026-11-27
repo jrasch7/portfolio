@@ -1,6 +1,6 @@
 # Como contribuir
 
-Este é o portfólio pessoal de João Vargas. Sugestões e correções são bem-vindas, mas o conteúdo (o que o site afirma sobre ele e sobre o Nivela) é decisão do dono.
+Este é o portfólio pessoal de João Vargas. O repositório é público para leitura e referência, com todos os direitos reservados (ver [`README.md`](README.md)). Sugestões e correções são bem-vindas, mas o conteúdo (o que o site afirma sobre ele e sobre o Nivela) é decisão do dono, e uma contribuição aceita passa a fazer parte do repositório sob os mesmos termos.
 
 1. Leia [`AGENTS.md`](AGENTS.md): regras de trabalho (também valem para pessoas) e o roteiro de toda tarefa.
 2. Fluxo de Git e PR: [`docs/desenvolvimento/FLUXO_GIT.md`](docs/desenvolvimento/FLUXO_GIT.md). Nada direto na `main`.

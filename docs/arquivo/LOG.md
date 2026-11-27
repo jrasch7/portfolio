@@ -2,6 +2,12 @@
 
 Histórico cronológico, do mais novo para o mais antigo. Formato fixo (ver [`AGENTS.md`](../../AGENTS.md)).
 
+## [2026-11-27] — Licença: todos os direitos reservados
+**Status:** concluída
+**O que foi feito:** aviso explícito de "todos os direitos reservados" no `README.md` (com a exceção das fontes, que seguem a OFL) e nota no `CONTRIBUTING.md`; item de licença removido de [`DEBT.md`](../DEBT.md).
+**Decisões tomadas:** o dono optou por não adotar licença aberta: o visual (registro técnico), os textos e as capturas são a marca dele. Sem arquivo `LICENSE`. Revisar se quiser abrir só a pipeline e os testes (MIT).
+**Próximo passo:** nenhum.
+
 ## [2026-11-27] — Documentação, regras de desenvolvimento e módulos
 **Status:** concluída
 **O que foi feito:** `AGENTS.md` e `CLAUDE.md`; `docs/` com índice, contexto, módulos (um por bloco do `app.js`), padrões de código e de interface, conteúdo público, fluxo de Git, ADRs 0002 a 0004, dívida e este log; modelo de PR; `SECURITY.md` e `CONTRIBUTING.md`; gerador do mapa do código (`npm run docs:mapa`) e checagens de documentação na etapa `higiene` (mapa em dia, links dos `.md`, arquivos de documentação obrigatórios).

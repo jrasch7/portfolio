@@ -63,3 +63,9 @@ O deploy é uma etapa da pipeline (GitHub Pages por artefato). Para ligar: **Set
 - Acessibilidade: navegação por teclado, foco visível, alvos de toque de 44 px, `prefers-reduced-motion` respeitado.
 
 Versões anteriores (Flask + PostgreSQL) continuam no histórico do Git.
+
+## Licença
+
+© 2026 João Vargas. **Todos os direitos reservados.** O código e o conteúdo estão públicos para leitura e referência. Não é permitido copiar, modificar, redistribuir nem reutilizar o site, o visual ou os textos sem autorização por escrito do autor.
+
+Exceções com licença própria: as fontes em `assets/fonts/` (Barlow Condensed, B612 Mono e Caveat) seguem a SIL Open Font License; as dependências de desenvolvimento seguem as licenças de cada pacote.
