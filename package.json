@@ -1,0 +1,23 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Portfólio interativo de João Vargas, com pipeline de CI/CD visível no próprio site.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "serve": "node scripts/serve.mjs .",
+    "stage": "node scripts/pipeline/run.mjs",
+    "pipeline": "node scripts/pipeline/all.mjs",
+    "report": "node scripts/pipeline/report.mjs",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.1",
+    "@lhci/cli": "^0.16.1",
+    "@playwright/test": "^1.65.1",
+    "html-validate": "^11.23.0"
+  }
+}

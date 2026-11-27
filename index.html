@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>João Vargas · Engenharia de software</title>
 <meta name="description" content="Portfólio interativo de João Vargas: SaaS multi-tenant, IA com salvaguardas e engenharia por dentro do Nivela.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="theme-color" content="#09090b">
 <meta property="og:title" content="João Vargas · Engenharia de software">
 <meta property="og:description" content="SaaS multi-tenant, IA com salvaguardas e a parte técnica por trás de cada projeto, para explorar.">
@@ -17,12 +18,13 @@
 <canvas id="bg" aria-hidden="true"></canvas>
 
 <header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="João Vargas"><span class="brand-mark">jv</span><span class="brand-name">João Vargas</span></a>
+  <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">jv</span><span class="brand-name">João Vargas</span></a>
   <nav data-i18n-label="nav.aria" aria-label="Seções">
     <a href="#galeria" data-i18n="nav.gallery">Galeria</a>
     <a href="#nivela" data-i18n="nav.nivela">Nivela por dentro</a>
     <a href="#projetos" data-i18n="nav.projects">Projetos</a>
     <a href="#ia-dev" data-i18n="nav.iadev">IA no desenvolvimento</a>
+    <a href="#pipeline" data-i18n="nav.pipeline">Pipeline</a>
     <a href="#stack" data-i18n="nav.stack">Stack</a>
     <a href="#contato" data-i18n="nav.contact">Contato</a>
   </nav>
@@ -84,7 +86,7 @@
   <div class="wrap">
     <p class="eyebrow" data-i18n="gal.eyebrow">02 · Galeria</p>
     <h2 data-i18n="gal.h2">O Nivela e os apps, em telas reais.</h2>
-    <p class="sub" data-i18n="gal.sub">Capturas da demonstração pública do Nivela, do app Nivela Pay (dados de exemplo) e do site da SulCore. Clique para ampliar.</p>
+    <p class="sub" data-i18n="gal.sub">Capturas da demonstração pública do Nivela e do site da SulCore. Clique para ampliar.</p>
     <div class="gallery" id="gallery"></div>
   </div>
 </section>
@@ -102,9 +104,9 @@
     <p class="sub" data-i18n="s1.sub">Três peças que definem o produto: como o sistema é dividido, como um cliente nunca enxerga o dado do outro e como a IA ajuda sem agir sozinha. As demos são didáticas e usam dados fictícios.</p>
 
     <div class="tabs" role="tablist" data-i18n-label="tabs.aria" aria-label="Demos técnicas">
-      <button role="tab" id="t-arq" aria-controls="p-arq" aria-selected="true" data-i18n="tab.arq">Arquitetura</button>
-      <button role="tab" id="t-ten" aria-controls="p-ten" aria-selected="false" tabindex="-1" data-i18n="tab.ten">Isolamento de tenant</button>
-      <button role="tab" id="t-ia" aria-controls="p-ia" aria-selected="false" tabindex="-1" data-i18n="tab.ia">Nivela IA</button>
+      <button type="button" role="tab" id="t-arq" aria-controls="p-arq" aria-selected="true" data-i18n="tab.arq">Arquitetura</button>
+      <button type="button" role="tab" id="t-ten" aria-controls="p-ten" aria-selected="false" tabindex="-1" data-i18n="tab.ten">Isolamento de tenant</button>
+      <button type="button" role="tab" id="t-ia" aria-controls="p-ia" aria-selected="false" tabindex="-1" data-i18n="tab.ia">Nivela IA</button>
     </div>
 
     <div class="panel" id="p-arq" role="tabpanel" aria-labelledby="t-arq">
@@ -165,9 +167,21 @@
   </div>
 </section>
 
+<section class="sec" id="pipeline">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="pl.eyebrow">06 · Pipeline</p>
+    <h2 data-i18n="pl.h2">Um site simples, com uma pipeline de verdade.</h2>
+    <p class="sub" data-i18n="pl.sub">Este site não precisaria de CI/CD. Tem, de propósito, para mostrar as técnicas: etapas em grafo, um relatório por etapa, o artefato testado é o mesmo que vai ao ar, orçamento de desempenho e CSP estrita. Os dados abaixo vêm do relatório gerado pela própria pipeline.</p>
+    <div class="pl-head" id="pl-head"></div>
+    <div class="pl-graph" id="pl-graph"></div>
+    <div class="detail wide" id="pl-detail" aria-live="polite"></div>
+    <p class="fine" id="pl-note"></p>
+  </div>
+</section>
+
 <section class="sec alt" id="stack">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="s4.eyebrow">06 · Stack</p>
+    <p class="eyebrow" data-i18n="s4.eyebrow">07 · Stack</p>
     <h2 data-i18n="s4.h2">Ferramentas que uso de verdade, por área.</h2>
     <div class="chips" id="stack-filter" role="group" data-i18n-label="stack.aria" aria-label="Filtrar por área"></div>
     <ul class="stack" id="stack-list"></ul>
@@ -177,7 +191,7 @@
 
 <section class="sec" id="contato">
   <div class="wrap contact">
-    <p class="eyebrow" data-i18n="s5.eyebrow">07 · Contato</p>
+    <p class="eyebrow" data-i18n="s5.eyebrow">08 · Contato</p>
     <h2 data-i18n="s5.h2">Vamos conversar sobre o seu sistema?</h2>
     <p class="sub" data-i18n="s5.sub">Trabalho com produto e engenharia de ponta a ponta: do problema operacional ao deploy.</p>
     <div class="cta">
