@@ -1,14 +1,14 @@
 {
   "schema": 1,
   "source": "local",
-  "generatedAt": "2026-11-27T01:49:14.798Z",
+  "generatedAt": "2026-11-27T03:51:42.268Z",
   "run": {
     "id": null,
     "number": null,
     "event": "local",
-    "branch": "claude/ajustes-design",
-    "sha": "2b67e9c063926439b4f4f15d965b44c50f917ff2",
-    "shaShort": "2b67e9c",
+    "branch": "claude/refino-design",
+    "sha": "9fc35c0131c0e88067a4221311cbdc8a8400a060",
+    "shaShort": "9fc35c0",
     "url": null
   },
   "status": "partial",
@@ -17,7 +17,7 @@
     "failed": 0,
     "skipped": 2,
     "pending": 1,
-    "durationMs": 55204
+    "durationMs": 57499
   },
   "stages": [
     {
@@ -42,7 +42,7 @@
       },
       "afterPublish": false,
       "status": "skipped",
-      "durationMs": 1,
+      "durationMs": 2,
       "checks": [],
       "metrics": {},
       "note": {
@@ -72,7 +72,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 28,
+      "durationMs": 26,
       "checks": [
         {
           "name": "arquivos obrigatórios presentes",
@@ -136,8 +136,8 @@
         }
       ],
       "metrics": {
-        "arquivos": 48,
-        "arquivosDeTexto": 37,
+        "arquivos": 49,
+        "arquivosDeTexto": 38,
         "imagensKB": 117,
         "codigoGzipKB": 33.5
       },
@@ -167,7 +167,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 889,
+      "durationMs": 824,
       "checks": [
         {
           "name": "sintaxe válida em 20 arquivos JavaScript",
@@ -244,7 +244,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 40,
+      "durationMs": 32,
       "checks": [
         {
           "name": "pasta publicada montada",
@@ -286,7 +286,7 @@
       "metrics": {
         "arquivos": 16,
         "tamanhoKB": 337,
-        "commit": "2b67e9c"
+        "commit": "9fc35c0"
       },
       "note": ""
     },
@@ -314,7 +314,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 18688,
+      "durationMs": 18933,
       "checks": [
         {
           "name": "página carrega com console limpo, sem violação de CSP e sem rolagem lateral",
@@ -416,7 +416,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 35165,
+      "durationMs": 37191,
       "checks": [
         {
           "name": "performance ≥ 90",
@@ -441,7 +441,7 @@
         {
           "name": "largest-contentful-paint ≤ 2500 ms",
           "ok": true,
-          "detail": "761"
+          "detail": "756"
         },
         {
           "name": "cumulative-layout-shift ≤ 0.05",
@@ -451,7 +451,7 @@
         {
           "name": "total-blocking-time ≤ 200 ms",
           "ok": true,
-          "detail": "41"
+          "detail": "28"
         }
       ],
       "metrics": {
@@ -460,9 +460,9 @@
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100,
-        "largest-contentful-paint": 761,
+        "largest-contentful-paint": 756,
         "cumulative-layout-shift": 0,
-        "total-blocking-time": 41
+        "total-blocking-time": 28
       },
       "note": ""
     },
@@ -490,7 +490,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 392,
+      "durationMs": 490,
       "checks": [
         {
           "name": "npm audit sem vulnerabilidade alta ou crítica",
