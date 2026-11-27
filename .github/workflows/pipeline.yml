@@ -245,8 +245,9 @@ jobs:
   deploy:
     name: 8. Deploy (GitHub Pages)
     needs: [relatorio, testes, desempenho, seguranca]
-    # Só da main e só quando o Pages está configurado para "GitHub Actions" (variável PAGES_DEPLOY=true).
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.PAGES_DEPLOY == 'true'
+    # Só da main. Exige Settings > Pages > Source: GitHub Actions. Para desligar o deploy sem apagar o job,
+    # crie a variável de Actions PAGES_DEPLOY com o valor false.
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.PAGES_DEPLOY != 'false'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:

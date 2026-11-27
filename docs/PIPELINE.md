@@ -54,10 +54,9 @@ Cada etapa grava `reports/<etapa>.json` (status, tempo, verificações, métrica
 
 O deploy usa o Pages em modo "GitHub Actions". Para ligar:
 
-1. Settings → Pages → Source: **GitHub Actions**.
-2. Settings → Secrets and variables → Actions → Variables → `PAGES_DEPLOY` = `true`.
+Settings → Pages → Source: **GitHub Actions**. Só isso.
 
-Sem a variável, o job `deploy` simplesmente não roda e o resto da pipeline continua funcionando como verificação de PR.
+O job `deploy` roda a cada push na `main`, depois que testes, desempenho e segurança passam. Para desligá-lo sem apagar nada, crie a variável de Actions `PAGES_DEPLOY` com o valor `false`.
 
 ## Como a tela do site funciona
 
