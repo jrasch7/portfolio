@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-27T01:49:20.447Z",
+        "reason": "assistant decision, not user-confirmed: warm paper is the material of the chosen world (aircraft technical log / carbonless forms), paired with form-red and ballpoint-blue inks; not a default off-white"
+      }
+    ]
+  }
+}
