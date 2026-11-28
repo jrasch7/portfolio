@@ -60,8 +60,9 @@ test("bancada de IA: alternar a rodada muda os números e as fichas dos produtos
 
 test("SulCore: explica o que é e mostra as duas capturas // SulCore: explains what it is and shows both captures", async ({ page }) => {
   await goto(page);
-  await expect(page.locator("#cards .card", { hasText: "SulCore" })).toContainText(/Novo Hamburgo/);
+  await expect(page.locator("#cards .card", { has: page.getByRole("heading", { name: "SulCore", exact: true }) })).toContainText(/Novo Hamburgo/);
   await expect(page.locator("#gallery .shot")).toHaveCount(4);
+  await expect(page.locator("#cards .card", { has: page.getByRole("heading", { name: "Repara", exact: true }) })).toContainText(/OpenAI|WhatsApp/);
   await page.locator(".lang button[data-lang=en]").click();
   await expect(page.locator("#gallery img[src*='sulcore-ia-en']")).toHaveCount(1);
 });

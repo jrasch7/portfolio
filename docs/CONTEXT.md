@@ -46,6 +46,7 @@ Não há backend, banco, API própria, cookie, rastreador nem requisição a ter
 |---|---|
 | **Nivela** (`jrasch7/nivela_app`, privado) | Fonte dos números e do conteúdo técnico das demos. O portfólio **não** lê esse repositório em execução: os números são contados à mão (ou por script) e escritos no HTML com a data. Capturas vêm da demonstração pública do site do Nivela. |
 | **SulCore** (`sulcore/sulcore.github.io`, público) | Empresa de software de Novo Hamburgo em que o João é desenvolvedor com Theilor Pies (nomes já públicos no site da empresa). Referência de pipeline (ações fixadas por SHA, Lighthouse CI, e2e) e fonte de duas capturas. Aparece como projeto, com explicação do que a empresa faz. |
+| **Repara** (`thpies/Repara`, privado) | Produto da SulCore, braço do Nivela (WhatsApp, IA e utilitários; integra por API e webhook). Aparece como "em desenvolvimento", escrito só a partir da documentação do repositório e de contagem; nunca nome de cliente real. |
 | **Nivela Pay** | **Fora do portfólio** enquanto não estiver em produção. |
 
 ## Estado dos módulos

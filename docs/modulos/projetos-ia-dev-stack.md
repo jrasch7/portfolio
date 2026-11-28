@@ -17,7 +17,7 @@
 
 ## Regras
 
-- **Só entra projeto em produção ou com site aberto.** Em desenvolvimento ou beta fechado, só com decisão do dono. Nivela Pay e Hall 239 ficaram de fora por decisão dele.
+- **Só entra projeto em produção ou com site aberto.** Em desenvolvimento ou beta fechado, só com decisão do dono. Nivela Pay e Hall 239 ficaram de fora por decisão dele. **Exceção:** o Repara entra como "em desenvolvimento" (decisão do dono, 2026-11-28), porque nasceu de um sistema em uso diário e já é caso público no site da SulCore. Fonte: documentação do repositório privado `thpies/Repara` (nunca nome de cliente real) e contagem de novembro de 2026.
 - Todo número ou afirmação de projeto vem de código ou documentação real. "290+ services" é o valor medido do Nivela.
 - Cartões de projeto não são iguais por desenho: o que tem captura ganha miniatura; o que não tem, linha larga. Não force simetria.
 

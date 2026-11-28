@@ -2,6 +2,12 @@
 
 Histórico cronológico, do mais novo para o mais antigo. Formato fixo (ver [`AGENTS.md`](../../AGENTS.md)).
 
+## [2026-11-28] — Repara no portfólio e revisão de segurança
+**Status:** concluída
+**O que foi feito:** Repara entra em Projetos como "em desenvolvimento", escrito a partir da documentação do repositório privado e de contagem (mais de 100 mil linhas de Python, 138 arquivos de teste, 11 pacotes de segmento). Revisão de segurança do site no ar: cabeçalhos, CSP, `npm audit`, varredura do histórico inteiro de commits.
+**Decisões tomadas:** exceção à regra de "só em produção" para o Repara, por decisão do dono; nomes de modelo, custo em proporção e nome do Theilor Pies mantidos (o Theilor concordou).
+**Próximo passo:** restaurar ou descrever a bancada `aiworkbench`.
+
 ## [2026-11-28] — Termos claros, SulCore explicada e bancada de IA
 **Status:** concluída (aguardando a lista de outros projetos e estudos do dono, [`DEBT.md`](../DEBT.md) item 0)
 **O que foi feito:** etapas da pipeline renomeadas sem tradução literal ("Fumaça pós-deploy" virou "Conferência do site no ar"; "Gate do PR" virou "Conferência do pull request"; "Higiene" virou "Varredura"; "Deploy" virou "Publicação"), e o mesmo nos jobs do Actions e nos textos do site; "gate" e "smoke test" trocados por termos em português. SulCore ganhou texto que explica o que é e duas capturas reais (serviços e IA) por idioma, no lugar do console de demonstração. Nova folha 7, "Bancada de IA": duas rodadas de avaliação medidas, como a bancada funciona e sete fichas de IA aplicada nos produtos. Site passou a 10 folhas.
