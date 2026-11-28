@@ -21,7 +21,7 @@ higiene ─┴─ estatico ── build ─┬─ testes ──────┐
 | 6 | `desempenho` | Lighthouse (mediana de 3) com orçamento: nota mínima e limites de LCP, CLS e TBT | `npm run stage -- desempenho` |
 | 7 | `seguranca` | `npm audit`, CSP estrita, nenhum terceiro, `noopener`, segredos no build | `npm run stage -- seguranca` |
 | 8 | `deploy` | Publica o artefato aprovado no GitHub Pages (só da `main`) | job `deploy` |
-| 9 | `smoke` | Confere o site no ar: 200, todos os arquivos, versão publicada = commit. Local: roda contra o site público. | `npm run stage -- smoke` |
+| 9 | `smoke` (exibida como "Conferência do site no ar") | Confere o site no ar: 200, todos os arquivos, versão publicada = commit. Local: roda contra o site público. | `npm run stage -- smoke` |
 
 `relatorio` e `finalizar` não são etapas de verificação. `relatorio` junta os relatórios em `pipeline.json` e coloca o arquivo dentro do site. `finalizar` roda depois do smoke e republica **o mesmo artefato** com o `pipeline.json` refeito, agora com o resultado do smoke (que só pode existir depois da publicação). CodeQL roda em workflow próprio (`codeql.yml`).
 
@@ -47,7 +47,7 @@ Cada etapa grava `reports/<etapa>.json` (status, tempo, verificações, métrica
 - **CSP estrita por meta.** O GitHub Pages não deixa configurar cabeçalhos, então a política vai em `<meta http-equiv>`: nada inline, nada de terceiros.
 - **Ações fixadas por SHA**, permissões mínimas, `persist-credentials: false`, `concurrency` e `timeout-minutes` em todo job (como no SulCore e no Nivela).
 - **Sinal público sem detalhe de infraestrutura.** O `pipeline.json` publicado traz status, tempos e nomes de verificação; nunca log, máquina ou endereço. (Mesma regra do status público do Nivela.)
-- **Smoke depois do deploy.** Deploy que terminou não é deploy que funciona (smoke-pos-deploy do Nivela).
+- **Conferência do site no ar depois da publicação** (id `smoke`, do smoke-pos-deploy do Nivela). Publicação que terminou não é publicação que funciona.
 - **Dependabot** semanal para npm e Actions.
 
 ## Publicação

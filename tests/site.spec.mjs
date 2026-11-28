@@ -45,6 +45,27 @@ test("troca de idioma PT/EN muda o texto e fica salva // PT/EN switch changes th
   await expect(page.locator("h1")).toContainText("Software that holds up");
 });
 
+test("bancada de IA: alternar a rodada muda os números e as fichas dos produtos aparecem // AI bench: switching the round changes the figures and the product cards show", async ({ page }) => {
+  await goto(page);
+  await page.locator("#lab").scrollIntoViewIfNeeded();
+  await expect(page.locator("#bench-out .bar-row")).toHaveCount(2);
+  await expect(page.locator("#bench-out")).toContainText("94");
+  await page.locator("#bench-tabs .chip").first().click();
+  await expect(page.locator("#bench-out .bar-row")).toHaveCount(3);
+  await expect(page.locator("#bench-out")).toContainText("74%");
+  await expect(page.locator("#lab-uses .use")).toHaveCount(7);
+  await page.locator(".lang button[data-lang=en]").click();
+  await expect(page.locator("#lab h2")).toContainText("I measure before I trust");
+});
+
+test("SulCore: explica o que é e mostra as duas capturas // SulCore: explains what it is and shows both captures", async ({ page }) => {
+  await goto(page);
+  await expect(page.locator("#cards .card", { hasText: "SulCore" })).toContainText(/Novo Hamburgo/);
+  await expect(page.locator("#gallery .shot")).toHaveCount(4);
+  await page.locator(".lang button[data-lang=en]").click();
+  await expect(page.locator("#gallery img[src*='sulcore-ia-en']")).toHaveCount(1);
+});
+
 test("arquitetura: clicar num bloco mostra o detalhe // architecture: clicking a block shows its detail", async ({ page }) => {
   await goto(page);
   await page.locator("#arq .node").nth(1).scrollIntoViewIfNeeded();

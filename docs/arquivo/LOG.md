@@ -2,6 +2,12 @@
 
 Histórico cronológico, do mais novo para o mais antigo. Formato fixo (ver [`AGENTS.md`](../../AGENTS.md)).
 
+## [2026-11-28] — Termos claros, SulCore explicada e bancada de IA
+**Status:** concluída (aguardando a lista de outros projetos e estudos do dono, [`DEBT.md`](../DEBT.md) item 0)
+**O que foi feito:** etapas da pipeline renomeadas sem tradução literal ("Fumaça pós-deploy" virou "Conferência do site no ar"; "Gate do PR" virou "Conferência do pull request"; "Higiene" virou "Varredura"; "Deploy" virou "Publicação"), e o mesmo nos jobs do Actions e nos textos do site; "gate" e "smoke test" trocados por termos em português. SulCore ganhou texto que explica o que é e duas capturas reais (serviços e IA) por idioma, no lugar do console de demonstração. Nova folha 7, "Bancada de IA": duas rodadas de avaliação medidas, como a bancada funciona e sete fichas de IA aplicada nos produtos. Site passou a 10 folhas.
+**Decisões tomadas:** custo só em proporção (sem preço nem margem); nomes de modelo mantidos; ids internos das etapas (`pr-gate`, `smoke`) não mudam, só os nomes exibidos.
+**Próximo passo:** o João listar projetos, estudos e experimentos que quer mostrar.
+
 ## [2026-11-28] — Gate e smoke sem estado pendente
 **Status:** concluída
 **O que foi feito:** diagnóstico com a execução real do Actions (commit `37b27b7`): o job "Gate do PR" ficava verde mas o script se declarava "pulado" fora de PR; o job de smoke rodava e passava, mas o `pipeline.json` já estava empacotado antes do deploy e mostrava "pendente". Correções: o `pr-gate` passa a validar o último commit fora de PR; novo job `finalizar` republica o mesmo artefato com o `pipeline.json` refeito depois do smoke; o smoke local passa a rodar contra o site público; o `deploy` local é confirmado pelo smoke. Docs e ADR 0001 corrigidos: o Actions **funciona** e o Pages publica **por artefato** (a entrada do dia 27 dizia o contrário).

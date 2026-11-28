@@ -14,7 +14,7 @@ O que dá para explorar na página:
 
 ## Pipeline
 
-O site tem uma pipeline completa de propósito, para mostrar as técnicas (grafo de etapas, relatório por etapa, artefato único, orçamentos, CSP estrita, smoke pós-deploy). O resultado aparece na seção **Pipeline** do próprio site. Guia completo: [`docs/PIPELINE.md`](docs/PIPELINE.md).
+O site tem uma pipeline completa de propósito, para mostrar as técnicas (grafo de etapas, relatório por etapa, artefato único, orçamentos, CSP estrita, conferência do site no ar depois da publicação). O resultado aparece na seção **Pipeline** do próprio site. Guia completo: [`docs/PIPELINE.md`](docs/PIPELINE.md).
 
 ```bash
 npm ci
