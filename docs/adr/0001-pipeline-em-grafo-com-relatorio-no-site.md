@@ -20,4 +20,5 @@ O portfólio é um site estático sem build. Uma pipeline completa é mais do qu
 - Dá para rodar tudo antes do push (`npm run pipeline`).
 - A tela do site mostra dados reais e não precisa chamar a API do GitHub (que exige token em repositório privado e tem limite de requisições).
 - `pipeline.json` na raiz é um arquivo gerado, versionado como referência; fica desatualizado até a próxima execução local ou de CI.
-- `deploy` e `smoke` não conseguem aparecer com o resultado final dentro do pacote que o próprio deploy publica; a tela deixa isso explícito.
+- `deploy` e `smoke` não conseguem aparecer com o resultado final dentro do pacote que o próprio deploy publica. Solução: o job `finalizar` roda depois do smoke e republica o mesmo artefato com o `pipeline.json` refeito (segundo deploy, artefato `github-pages-final`). O custo é um segundo deploy por execução.
+- O `pr-gate` não pode depender de existir PR: fora de PR ele valida o último commit, para o estado "pulada" nunca aparecer na tela.

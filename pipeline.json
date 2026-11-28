@@ -1,23 +1,23 @@
 {
   "schema": 1,
   "source": "local",
-  "generatedAt": "2026-11-27T06:32:45.039Z",
+  "generatedAt": "2026-11-28T01:21:52.542Z",
   "run": {
     "id": null,
     "number": null,
     "event": "local",
-    "branch": "claude/documentacao",
-    "sha": "4c04210d50243aee9bee6704216b3275c7caec47",
-    "shaShort": "4c04210",
+    "branch": "claude/pipeline-sem-pendencias",
+    "sha": "37b27b7dc06a536bb7bad86fbcc259c042dbaec0",
+    "shaShort": "37b27b7",
     "url": null
   },
-  "status": "partial",
+  "status": "passed",
   "totals": {
-    "passed": 6,
+    "passed": 9,
     "failed": 0,
-    "skipped": 2,
-    "pending": 1,
-    "durationMs": 61484
+    "skipped": 0,
+    "pending": 0,
+    "durationMs": 60770
   },
   "stages": [
     {
@@ -29,8 +29,8 @@
       "needs": [],
       "command": "npm run stage -- pr-gate",
       "what": {
-        "pt": "Confere o pull request antes de qualquer outra coisa: título no padrão, corpo com a seção de validação, branch que não é a main e tamanho do diff.",
-        "en": "Checks the pull request before anything else: title format, a validation section in the body, a branch that is not main, and diff size."
+        "pt": "Confere o pull request antes de qualquer outra coisa: título no padrão, corpo com a seção de validação, branch que não é a main e tamanho do diff. Fora de PR (push na main, execução local) confere o último commit com as mesmas regras de título e tamanho.",
+        "en": "Checks the pull request before anything else: title format, a validation section in the body, a branch that is not main, and diff size. Outside a PR (push to main, local run) it checks the last commit with the same title and size rules."
       },
       "why": {
         "pt": "PR pequeno e explicado é revisável. A regra existe para ninguém precisar adivinhar o que mudou nem como foi testado.",
@@ -41,14 +41,33 @@
         "en": "Nivela's pr_quality_gate.py"
       },
       "afterPublish": false,
-      "status": "skipped",
-      "durationMs": 1,
-      "checks": [],
-      "metrics": {},
-      "note": {
-        "pt": "Só roda em pull request.",
-        "en": "Only runs on pull requests."
-      }
+      "status": "passed",
+      "durationMs": 12,
+      "checks": [
+        {
+          "name": "título do commit entre 15 e 100 caracteres, sem ponto final",
+          "ok": true,
+          "detail": "71 caracteres",
+          "en": "commit title between 15 and 100 characters, no trailing period"
+        },
+        {
+          "name": "título do commit sem WIP",
+          "ok": true,
+          "detail": "",
+          "en": "commit title without WIP"
+        },
+        {
+          "name": "commit com até 1500 linhas (sem lockfile e imagens)",
+          "ok": true,
+          "detail": "22 linhas",
+          "en": "commit up to 1500 lines (excluding lockfile and images)"
+        }
+      ],
+      "metrics": {
+        "modo": "commit",
+        "linhasDoDiff": 22
+      },
+      "note": ""
     },
     {
       "id": "higiene",
@@ -72,7 +91,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 78,
+      "durationMs": 76,
       "checks": [
         {
           "name": "arquivos obrigatórios presentes",
@@ -186,7 +205,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 2849,
+      "durationMs": 2978,
       "checks": [
         {
           "name": "sintaxe válida em 21 arquivos JavaScript",
@@ -263,7 +282,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 46,
+      "durationMs": 41,
       "checks": [
         {
           "name": "pasta publicada montada",
@@ -305,7 +324,7 @@
       "metrics": {
         "arquivos": 16,
         "tamanhoKB": 337,
-        "commit": "4c04210"
+        "commit": "37b27b7"
       },
       "note": ""
     },
@@ -333,7 +352,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 20469,
+      "durationMs": 18333,
       "checks": [
         {
           "name": "página carrega com console limpo, sem violação de CSP e sem rolagem lateral",
@@ -435,7 +454,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 37559,
+      "durationMs": 37076,
       "checks": [
         {
           "name": "performance ≥ 90",
@@ -460,7 +479,7 @@
         {
           "name": "largest-contentful-paint ≤ 2500 ms",
           "ok": true,
-          "detail": "761"
+          "detail": "756"
         },
         {
           "name": "cumulative-layout-shift ≤ 0.05",
@@ -470,7 +489,7 @@
         {
           "name": "total-blocking-time ≤ 200 ms",
           "ok": true,
-          "detail": "26"
+          "detail": "25"
         }
       ],
       "metrics": {
@@ -479,9 +498,9 @@
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100,
-        "largest-contentful-paint": 761,
+        "largest-contentful-paint": 756,
         "cumulative-layout-shift": 0,
-        "total-blocking-time": 26
+        "total-blocking-time": 25
       },
       "note": ""
     },
@@ -509,7 +528,7 @@
       },
       "afterPublish": false,
       "status": "passed",
-      "durationMs": 481,
+      "durationMs": 421,
       "checks": [
         {
           "name": "npm audit sem vulnerabilidade alta ou crítica",
@@ -596,13 +615,13 @@
         "en": "SulCore's deploy.yml (protected environment)"
       },
       "afterPublish": false,
-      "status": "pending",
+      "status": "passed",
       "durationMs": null,
       "checks": [],
       "metrics": {},
       "note": {
-        "pt": "Roda no GitHub Actions.",
-        "en": "Runs on GitHub Actions."
+        "pt": "Publicado no GitHub Pages; confirmado pelo smoke contra o site no ar.",
+        "en": "Published on GitHub Pages; confirmed by the smoke test against the live site."
       }
     },
     {
@@ -616,8 +635,8 @@
       ],
       "command": "npm run stage -- smoke",
       "what": {
-        "pt": "Depois da publicação, confere o site no ar: responde 200, os arquivos carregam e a versão publicada é a do commit. Roda depois do deploy, então o resultado fica no Actions.",
-        "en": "After publishing, checks the live site: it answers 200, files load and the published version is the commit's. It runs after deploy, so its result lives in Actions."
+        "pt": "Depois da publicação, confere o site no ar: responde 200, todos os arquivos carregam e a versão publicada é a do commit. Como roda depois do deploy, um job final republica a página com o resultado.",
+        "en": "After publishing, checks the live site: it answers 200, every file loads and the published version is the commit's. Since it runs after deploy, a final job republishes the page with its result."
       },
       "why": {
         "pt": "Deploy que terminou não é deploy que funciona. Esta etapa confere o que o visitante realmente recebe.",
@@ -628,14 +647,39 @@
         "en": "Nivela's smoke-pos-deploy.yml"
       },
       "afterPublish": true,
-      "status": "skipped",
-      "durationMs": 1,
-      "checks": [],
-      "metrics": {},
-      "note": {
-        "pt": "Só roda depois do deploy no GitHub Actions.",
-        "en": "Only runs after deploy on GitHub Actions."
-      }
+      "status": "passed",
+      "durationMs": 1833,
+      "checks": [
+        {
+          "name": "versão publicada é a do commit",
+          "ok": true,
+          "detail": "publicado 37b27b7",
+          "en": "published version is the commit's"
+        },
+        {
+          "name": "página inicial responde 200 com título",
+          "ok": true,
+          "detail": "HTTP 200",
+          "en": "home page answers 200 with a title"
+        },
+        {
+          "name": "16 arquivos publicados respondem 200",
+          "ok": true,
+          "detail": "",
+          "en": "16 published files answer 200"
+        },
+        {
+          "name": "pipeline.json publicado e válido",
+          "ok": true,
+          "detail": "",
+          "en": "pipeline.json published and valid"
+        }
+      ],
+      "metrics": {
+        "esperouSegundos": 0,
+        "arquivos": 16
+      },
+      "note": ""
     }
   ]
 }

@@ -11,8 +11,9 @@
 
 ## Estados e o que significam
 
-- `deploy` aparece como **passou** quando o relatório vem do CI na `main`: a página só existe se o deploy aconteceu. Fora disso, "pulada" (PR) ou "pendente" (execução local).
-- `smoke` roda **depois** que o site é publicado; no pacote publicado ele aparece **pendente**, e o resultado fica no GitHub Actions. A tela avisa isso.
+- `deploy` aparece como **passou** quando o relatório vem do CI na `main` (a página só existe se o deploy aconteceu) ou, numa execução local, quando o smoke confirma o site no ar. Só aparece "pulada" em PR e "pendente" numa execução local em que o smoke não passou.
+- `pr-gate` nunca aparece "pulada": em PR confere o PR; fora de PR confere o último commit.
+- `smoke` roda **depois** que o site é publicado. O pacote do deploy ainda não traz o resultado, então o job `finalizar` republica o mesmo artefato com o `pipeline.json` refeito: depois dele a tela mostra o smoke com o resultado real. Se o smoke falhar, `finalizar` não roda e a tela mantém "pendente".
 - Execução local mostra `source: local` ("Execução local"); a do CI mostra "GitHub Actions" e o link da execução.
 
 ## Armadilhas

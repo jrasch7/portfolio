@@ -9,8 +9,8 @@ export const STAGES = [
     needs: [],
     command: "npm run stage -- pr-gate",
     what: {
-      pt: "Confere o pull request antes de qualquer outra coisa: título no padrão, corpo com a seção de validação, branch que não é a main e tamanho do diff.",
-      en: "Checks the pull request before anything else: title format, a validation section in the body, a branch that is not main, and diff size.",
+      pt: "Confere o pull request antes de qualquer outra coisa: título no padrão, corpo com a seção de validação, branch que não é a main e tamanho do diff. Fora de PR (push na main, execução local) confere o último commit com as mesmas regras de título e tamanho.",
+      en: "Checks the pull request before anything else: title format, a validation section in the body, a branch that is not main, and diff size. Outside a PR (push to main, local run) it checks the last commit with the same title and size rules.",
     },
     why: {
       pt: "PR pequeno e explicado é revisável. A regra existe para ninguém precisar adivinhar o que mudou nem como foi testado.",
@@ -130,8 +130,8 @@ export const STAGES = [
     needs: ["deploy"],
     command: "npm run stage -- smoke",
     what: {
-      pt: "Depois da publicação, confere o site no ar: responde 200, os arquivos carregam e a versão publicada é a do commit. Roda depois do deploy, então o resultado fica no Actions.",
-      en: "After publishing, checks the live site: it answers 200, files load and the published version is the commit's. It runs after deploy, so its result lives in Actions.",
+      pt: "Depois da publicação, confere o site no ar: responde 200, todos os arquivos carregam e a versão publicada é a do commit. Como roda depois do deploy, um job final republica a página com o resultado.",
+      en: "After publishing, checks the live site: it answers 200, every file loads and the published version is the commit's. Since it runs after deploy, a final job republishes the page with its result.",
     },
     why: {
       pt: "Deploy que terminou não é deploy que funciona. Esta etapa confere o que o visitante realmente recebe.",

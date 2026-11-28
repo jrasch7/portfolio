@@ -2,10 +2,16 @@
 
 Histórico cronológico, do mais novo para o mais antigo. Formato fixo (ver [`AGENTS.md`](../../AGENTS.md)).
 
+## [2026-11-28] — Gate e smoke sem estado pendente
+**Status:** concluída
+**O que foi feito:** diagnóstico com a execução real do Actions (commit `37b27b7`): o job "Gate do PR" ficava verde mas o script se declarava "pulado" fora de PR; o job de smoke rodava e passava, mas o `pipeline.json` já estava empacotado antes do deploy e mostrava "pendente". Correções: o `pr-gate` passa a validar o último commit fora de PR; novo job `finalizar` republica o mesmo artefato com o `pipeline.json` refeito depois do smoke; o smoke local passa a rodar contra o site público; o `deploy` local é confirmado pelo smoke. Docs e ADR 0001 corrigidos: o Actions **funciona** e o Pages publica **por artefato** (a entrada do dia 27 dizia o contrário).
+**Decisões tomadas:** segundo deploy por execução (artefato `github-pages-final`) em vez de deixar o smoke pendente na página; itens de dívida do Actions e do Lighthouse fechados (a execução real passou nos orçamentos).
+**Próximo passo:** apagar as branches remotas obsoletas ([`DEBT.md`](../DEBT.md) item 4); conferir a próxima execução na `main` com o smoke aprovado na página.
+
 ## [2026-11-27] — Site no ar e organização de branches
 **Status:** concluída (limpeza das branches remotas pendente do dono)
 **O que foi feito:** repositório tornado público e Pages ativado por branch (`main`, raiz): site em `https://jrasch7.github.io/portfolio/`, verificado (200 em todos os arquivos, sem erro de console, sem violação de CSP, 9 etapas na tela da pipeline). Mergeados os dois PRs do Dependabot (`codeql-action` 4.39.2 → 4.39.5, `init` e `analyze` juntos; o changelog oficial só traz atualização do pacote do CodeQL). Branches locais já mergeadas apagadas nos dois repositórios.
-**Decisões tomadas:** a `feat/restruturacao-…` (2 commits de bot de abril, só no `app.py` removido) é obsoleta: o conteúdo atual a substitui por completo. A sessão de agente não apaga branch remota (proxy bloqueia o `git push --delete`; sem ferramenta no MCP): fica para o dono ([`DEBT.md`](../DEBT.md) item 6).
+**Decisões tomadas:** a `feat/restruturacao-…` (2 commits de bot de abril, só no `app.py` removido) é obsoleta: o conteúdo atual a substitui por completo. A sessão de agente não apaga branch remota (proxy bloqueia o `git push --delete`; sem ferramenta no MCP): fica para o dono ([`DEBT.md`](../DEBT.md) item 4).
 **Próximo passo:** apagar as branches remotas; resolver o Actions da conta e trocar o Pages para "GitHub Actions".
 
 ## [2026-11-27] — Licença: todos os direitos reservados
