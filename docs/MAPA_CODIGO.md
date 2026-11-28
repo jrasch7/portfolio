@@ -96,7 +96,7 @@ Infraestrutura: `run.mjs` (uma etapa), `all.mjs` (todas, local), `report.mjs` (j
 ## Workflows (`.github/workflows/`)
 
 - `codeql.yml` (CodeQL): `analyze` (Análise estática (…))
-- `pipeline.yml` (Pipeline): `pr-gate` (1. Gate do PR), `higiene` (2. Higiene do repositório), `estatico` (3. Análise estática), `build` (4. Build reproduzível), `testes` (5. Testes ponta a ponta), `desempenho` (6. Desempenho), `seguranca` (7. Segurança), `relatorio` (Relatório (pipeline.json)), `deploy` (8. Deploy (GitHub Pages)), `smoke` (9. Fumaça pós-deploy)
+- `pipeline.yml` (Pipeline): `pr-gate` (1. Gate do PR), `higiene` (2. Higiene do repositório), `estatico` (3. Análise estática), `build` (4. Build reproduzível), `testes` (5. Testes ponta a ponta), `desempenho` (6. Desempenho), `seguranca` (7. Segurança), `relatorio` (Relatório (pipeline.json)), `deploy` (8. Deploy (GitHub Pages)), `smoke` (9. Fumaça pós-deploy), `finalizar` (10. Republicar a página com o resultado do smoke)
 
 ## Documentação (`docs/`)
 

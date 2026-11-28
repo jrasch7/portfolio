@@ -7,13 +7,13 @@ Este site não precisaria de CI/CD. Ele tem uma de propósito, para mostrar as t
 ```
 pr-gate ─┐
 higiene ─┴─ estatico ── build ─┬─ testes ──────┐
-                               ├─ desempenho ──┼─ (relatorio) ─ deploy ─ smoke
+                               ├─ desempenho ──┼─ (relatorio) ─ deploy ─ smoke ─ (finalizar)
                                └─ seguranca ───┘
 ```
 
 | # | Etapa | O que confere | Reproduzir |
 |---|---|---|---|
-| 1 | `pr-gate` | Título, corpo com seção de validação, branch, tamanho do diff (só em PR) | `npm run stage -- pr-gate` |
+| 1 | `pr-gate` | Em PR: título, corpo com seção de validação, branch, tamanho do diff. Fora de PR (push na `main`, execução local): título e tamanho do último commit. Nunca fica "pulada". | `npm run stage -- pr-gate` |
 | 2 | `higiene` | Segredos, IPs e hosts internos, e-mails, orçamento de tamanho, arquivos obrigatórios, sem emoji na UI, documentação em dia (mapa gerado, links entre `.md`, módulos indexados) | `npm run stage -- higiene` |
 | 3 | `estatico` | Sintaxe JS, HTML válido, paridade PT/EN, âncoras e arquivos referenciados | `npm run stage -- estatico` |
 | 4 | `build` | Monta `_site/`, versiona por hash, sitemap, robots, `build-info.json`, build determinístico | `npm run stage -- build` |
@@ -21,9 +21,9 @@ higiene ─┴─ estatico ── build ─┬─ testes ──────┐
 | 6 | `desempenho` | Lighthouse (mediana de 3) com orçamento: nota mínima e limites de LCP, CLS e TBT | `npm run stage -- desempenho` |
 | 7 | `seguranca` | `npm audit`, CSP estrita, nenhum terceiro, `noopener`, segredos no build | `npm run stage -- seguranca` |
 | 8 | `deploy` | Publica o artefato aprovado no GitHub Pages (só da `main`) | job `deploy` |
-| 9 | `smoke` | Confere o site no ar: 200, arquivos, versão publicada = commit | `SITE_URL=... npm run stage -- smoke` |
+| 9 | `smoke` | Confere o site no ar: 200, todos os arquivos, versão publicada = commit. Local: roda contra o site público. | `npm run stage -- smoke` |
 
-`relatorio` não é uma etapa de verificação: é o job que junta os relatórios em `pipeline.json` e coloca o arquivo dentro do site. CodeQL roda em workflow próprio (`codeql.yml`).
+`relatorio` e `finalizar` não são etapas de verificação. `relatorio` junta os relatórios em `pipeline.json` e coloca o arquivo dentro do site. `finalizar` roda depois do smoke e republica **o mesmo artefato** com o `pipeline.json` refeito, agora com o resultado do smoke (que só pode existir depois da publicação). CodeQL roda em workflow próprio (`codeql.yml`).
 
 ## Rodar local
 
@@ -52,14 +52,12 @@ Cada etapa grava `reports/<etapa>.json` (status, tempo, verificações, métrica
 
 ## Publicação
 
-O deploy usa o Pages em modo "GitHub Actions". Para ligar:
+O Pages publica **por artefato** (Settings → Pages → Source: **GitHub Actions**), e é o que está ativo: a página no ar é o artefato `_site/` que passou em todas as etapas, não o código-fonte.
 
-**Hoje** o Pages publica **direto da branch** (`main`, raiz): o site é o código-fonte, sem as verificações da pipeline. Para publicar pela pipeline (artefato testado, com o `pipeline.json` gerado pelo CI): Settings → Pages → Source: **GitHub Actions**. Só isso, depois que o Actions da conta voltar a executar ([`DEBT.md`](DEBT.md)).
-
-O job `deploy` roda a cada push na `main`, depois que testes, desempenho e segurança passam. Para desligá-lo sem apagar nada, crie a variável de Actions `PAGES_DEPLOY` com o valor `false`.
+O job `deploy` roda a cada push na `main`, depois que testes, desempenho e segurança passam; `smoke` confere o site publicado; `finalizar` republica a página com o resultado do smoke. Para desligar o deploy sem apagar nada, crie a variável de Actions `PAGES_DEPLOY` com o valor `false`.
 
 ## Como a tela do site funciona
 
 `pipeline.json` (schema 1) tem `source` (`ci` ou `local`), a execução (`run`), os totais e a lista de etapas com textos em PT e EN, status, tempo, verificações e métricas. A seção Pipeline do site lê esse arquivo com `fetch`, desenha o grafo a partir de `needs` e mostra o detalhe de cada etapa. O `pipeline.json` na raiz do repositório é a versão de referência de uma execução local; no GitHub Actions o job `relatorio` o substitui dentro do site publicado.
 
-As etapas `deploy` e `smoke` rodam depois que o relatório foi empacotado. O `deploy` aparece como aprovado porque a página só existe se ele aconteceu; o `smoke` aparece como pendente e tem o resultado no Actions.
+As etapas `deploy` e `smoke` rodam depois que o relatório foi empacotado. O `deploy` aparece como aprovado porque a página só existe se ele aconteceu. O `smoke` só pode existir depois da publicação, por isso o job `finalizar` refaz o `pipeline.json` com o resultado dele e publica a página de novo; se o smoke falhar, `finalizar` não roda e a página mantém o `smoke` como pendente.

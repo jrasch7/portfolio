@@ -4,8 +4,9 @@ import { check } from "../lib.mjs";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default async function smoke() {
-  const base = process.env.SITE_URL?.replace(/\/?$/, "/");
-  if (!base) return { skipped: "só roda depois do deploy (defina SITE_URL)", checks: [] };
+  // No CI a URL vem do job de deploy. Fora do CI usa o site público, para a execução local também conferir o que está no ar.
+  const base = (process.env.SITE_URL || (process.env.GITHUB_ACTIONS ? "" : "https://jrasch7.github.io/portfolio/")).replace(/\/?$/, "/");
+  if (base === "/") return { skipped: "sem URL do site publicado (SITE_URL)", checks: [] };
   const want = process.env.GITHUB_SHA;
   const get = async (path) => {
     const res = await fetch(base + path, { headers: { "cache-control": "no-cache" } });

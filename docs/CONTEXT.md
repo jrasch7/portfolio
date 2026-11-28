@@ -26,7 +26,7 @@ Produto completo (público, restrições, voz): [`../PRODUCT.md`](../PRODUCT.md)
 | Servidor local | `scripts/serve.mjs` (Node, sem dependências) |
 | Pipeline | Node ≥ 22: scripts em `scripts/pipeline/`; Playwright, axe, html-validate, Lighthouse CI como dependências de desenvolvimento |
 | CI/CD | GitHub Actions (`.github/workflows/`), deploy no GitHub Pages por artefato |
-| Hospedagem | GitHub Pages, hoje por branch (`main`, raiz); por artefato quando o Actions da conta funcionar |
+| Hospedagem | GitHub Pages por artefato (Source: GitHub Actions) |
 
 Não há backend, banco, API própria, cookie, rastreador nem requisição a terceiros. É decisão ([ADR 0004](adr/0004-site-estatico-sem-framework-nem-build.md)).
 
@@ -59,7 +59,7 @@ Não há backend, banco, API própria, cookie, rastreador nem requisição a ter
 | Galeria e foto | Estável; foto pessoal pendente ([`DEBT.md`](DEBT.md)) | [`modulos/galeria-e-foto.md`](modulos/galeria-e-foto.md) |
 | Tela da pipeline | Estável | [`modulos/tela-da-pipeline.md`](modulos/tela-da-pipeline.md) |
 | Paleta de comandos e navegação | Estável | [`modulos/paleta-e-navegacao.md`](modulos/paleta-e-navegacao.md) |
-| Pipeline de CI/CD | Código estável; **GitHub Actions da conta não executa** ([`DEBT.md`](DEBT.md)) | [`PIPELINE.md`](PIPELINE.md) |
+| Pipeline de CI/CD | Estável; roda no GitHub Actions e publica o site | [`PIPELINE.md`](PIPELINE.md) |
 | Sistema visual | Estável | [`modulos/sistema-visual.md`](modulos/sistema-visual.md) |
 
 ## Terminologia

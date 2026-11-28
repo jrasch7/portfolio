@@ -53,8 +53,8 @@ Exemplos ruins: `ajustes`, `fix`, `wip`, `update`.
 ## Merge e deploy
 
 - **Quem mergeia:** o dono autorizou agentes a mergear PR deste repositório quando o gate está verde (ver [`AGENTS.md`](../../AGENTS.md)). Mudança de regra, de pipeline ou de visual grande: avise o dono na resposta.
-- **Sem GitHub Actions funcionando** (ver [`../DEBT.md`](../DEBT.md)): o gate local é a única barreira. Rode `npm run pipeline`, cite o resultado no PR e não afirme CI verde.
-- **Deploy:** push na `main` → pipeline → job `deploy` (Pages por artefato) → job `smoke`. Detalhe em [`../PIPELINE.md`](../PIPELINE.md).
+- **Gate:** o GitHub Actions roda a pipeline no PR. Rode também `npm run pipeline` local antes de abrir e cite o resultado no PR; se o Actions ficar indisponível, o gate local é a única barreira e não se afirma CI verde.
+- **Deploy:** push na `main` → pipeline → job `deploy` (Pages por artefato) → job `smoke` → job `finalizar` (republica a página com o resultado do smoke). Detalhe em [`../PIPELINE.md`](../PIPELINE.md).
 - **Reverter:** `git revert <merge>` em branch nova e PR. Nunca reescrever histórico da `main`.
 
 ## Dependabot

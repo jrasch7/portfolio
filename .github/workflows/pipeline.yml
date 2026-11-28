@@ -280,3 +280,54 @@ jobs:
       - run: node scripts/pipeline/run.mjs smoke
         env:
           SITE_URL: ${{ needs.deploy.outputs.page_url }}
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: report-smoke
+          path: reports/smoke.json
+          retention-days: 7
+
+  finalizar:
+    name: 10. Republicar a página com o resultado do smoke
+    # O smoke só pode rodar depois que a página foi publicada, então o pacote do deploy não traz o resultado dele.
+    # Este job refaz o relatório com o resultado do smoke e publica de novo o MESMO artefato (só o pipeline.json muda).
+    needs: [deploy, smoke]
+    if: needs.smoke.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: site
+          path: _site
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: report-*
+          path: reports
+          merge-multiple: true
+      - name: Refazer o pipeline.json, agora com o smoke
+        run: node scripts/pipeline/report.mjs --site
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          name: github-pages-final
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        with:
+          artifact_name: github-pages-final

@@ -32,6 +32,8 @@ const EXACT = {
   "pipeline.json publicado e válido": "pipeline.json published and valid",
   "título entre 15 e 100 caracteres, sem ponto final": "title between 15 and 100 characters, no trailing period",
   "título sem WIP": "title without WIP",
+  "título do commit entre 15 e 100 caracteres, sem ponto final": "commit title between 15 and 100 characters, no trailing period",
+  "título do commit sem WIP": "commit title without WIP",
   "corpo com seção de validação (## Validação, ## Como validei ou ## Validation)": "body with a validation section (## Validação, ## Como validei or ## Validation)",
   "corpo explica a mudança (80+ caracteres)": "body explains the change (80+ characters)",
   "origem não é a main": "source branch is not main",
@@ -42,6 +44,7 @@ const EXACT = {
 
 const PATTERNS = [
   [/^cada imagem até (.+)$/, "each image up to $1"],
+  [/^commit com até (\d+) linhas \(sem lockfile e imagens\)$/, "commit up to $1 lines (excluding lockfile and images)"],
   [/^links relativos de (\d+) documentos apontam para arquivos que existem$/, "relative links in $1 documents point to existing files"],
   [/^imagens somam até (.+)$/, "images total up to $1"],
   [/^HTML\+JS\+CSS comprimidos até (.+)$/, "HTML+JS+CSS gzipped up to $1"],

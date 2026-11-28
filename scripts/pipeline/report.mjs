@@ -35,6 +35,8 @@ const stages = STAGES.map((s) => {
   const rep = load(s.id);
   if (rep) return { ...base, status: rep.status, durationMs: rep.durationMs, checks: rep.checks, metrics: rep.metrics, note: bilingualNote(rep.note) };
   if (s.selfEvident) {
+    const smokeRep = load("smoke");
+    if (!ci && smokeRep?.status === "passed") return { ...base, status: "passed", durationMs: null, checks: [], metrics: {}, note: { pt: "Publicado no GitHub Pages; confirmado pelo smoke contra o site no ar.", en: "Published on GitHub Pages; confirmed by the smoke test against the live site." } };
     if (shipsFromMain) return { ...base, status: "passed", durationMs: null, checks: [], metrics: {}, note: { pt: "Esta página é a prova: se você a está vendo, o deploy aconteceu.", en: "This page is the proof: if you are seeing it, the deploy happened." } };
     return { ...base, status: ci ? "skipped" : "pending", durationMs: null, checks: [], metrics: {}, note: ci ? { pt: "Deploy só acontece a partir da main.", en: "Deploy only happens from main." } : { pt: "Roda no GitHub Actions.", en: "Runs on GitHub Actions." } };
   }
