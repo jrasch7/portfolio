@@ -1,4 +1,4 @@
-// Etapa 9: fumaça pós-deploy. Confere o que o visitante realmente recebe do site publicado.
+// Etapa 9: conferência do site no ar, depois da publicação. Confere o que o visitante realmente recebe do site publicado.
 import { check } from "../lib.mjs";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

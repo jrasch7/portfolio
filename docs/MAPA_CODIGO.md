@@ -14,6 +14,7 @@ Cada seção é uma "folha" do registro técnico. A chave é a do título no `as
 | `#nivela` | `s1.h2` |
 | `#projetos` | `s2.h2` |
 | `#ia-dev` | `s3.h2` |
+| `#lab` | `lab.h2` |
 | `#pipeline` | `pl.h2` |
 | `#stack` | `s4.h2` |
 | `#contato` | `s5.h2` |
@@ -35,6 +36,7 @@ Um arquivo, um módulo por bloco (função autoexecutável), na ordem do arquivo
 | projetos | `projects` |
 | pipeline de IA no desenvolvimento | `pipeline` |
 | stack | `stack` |
+| bancada de IA | `lab` |
 | paleta de comandos | `palette` |
 | seção ativa no menu | `spy` |
 | galeria com ampliação | `gallery` |
@@ -43,7 +45,7 @@ Um arquivo, um módulo por bloco (função autoexecutável), na ordem do arquivo
 
 ## Textos e imagens
 
-- `assets/i18n.js`: 81 textos fixos do HTML em inglês (português fica no próprio HTML, em `data-i18n`).
+- `assets/i18n.js`: 89 textos fixos do HTML em inglês (português fica no próprio HTML, em `data-i18n`).
 - Textos de demos, projetos, pipeline e stack ficam em `assets/app.js`, com `tr(pt, en)`.
 - Imagens em `assets/img/` (WebP); fontes em `assets/fonts/` (hospedadas, OFL).
 
@@ -55,7 +57,10 @@ Arquivos em `assets/`:
 - `assets/style.css`
 - `assets/img/nivela-celular.webp`
 - `assets/img/nivela-dashboard.webp`
-- `assets/img/sulcore-demo.webp`
+- `assets/img/sulcore-ia-en.webp`
+- `assets/img/sulcore-ia-pt.webp`
+- `assets/img/sulcore-servicos-en.webp`
+- `assets/img/sulcore-servicos-pt.webp`
 - `assets/fonts/b612-mono-400-latin.woff2`
 - `assets/fonts/b612-mono-700-latin.woff2`
 - `assets/fonts/barlow-condensed-500-latin.woff2`
@@ -84,6 +89,8 @@ Infraestrutura: `run.mjs` (uma etapa), `all.mjs` (todas, local), `report.mjs` (j
 - página carrega com console limpo, sem violação de CSP e sem rolagem lateral
 - imagens: nenhuma quebrada
 - troca de idioma PT/EN muda o texto e fica salva
+- bancada de IA: alternar a rodada muda os números e as fichas dos produtos aparecem
+- SulCore: explica o que é e mostra as duas capturas
 - arquitetura: clicar num bloco mostra o detalhe
 - isolamento de tenant: sem RLS vaza, com RLS protege
 - Nivela IA: confirmação repetida não executa duas vezes
@@ -96,7 +103,7 @@ Infraestrutura: `run.mjs` (uma etapa), `all.mjs` (todas, local), `report.mjs` (j
 ## Workflows (`.github/workflows/`)
 
 - `codeql.yml` (CodeQL): `analyze` (Análise estática (…))
-- `pipeline.yml` (Pipeline): `pr-gate` (1. Gate do PR), `higiene` (2. Higiene do repositório), `estatico` (3. Análise estática), `build` (4. Build reproduzível), `testes` (5. Testes ponta a ponta), `desempenho` (6. Desempenho), `seguranca` (7. Segurança), `relatorio` (Relatório (pipeline.json)), `deploy` (8. Deploy (GitHub Pages)), `smoke` (9. Fumaça pós-deploy), `finalizar` (10. Republicar a página com o resultado do smoke)
+- `pipeline.yml` (Pipeline): `pr-gate` (1. Conferência do pull request), `higiene` (2. Varredura do repositório), `estatico` (3. Análise estática), `build` (4. Build reproduzível), `testes` (5. Testes ponta a ponta), `desempenho` (6. Desempenho), `seguranca` (7. Segurança), `relatorio` (Relatório (pipeline.json)), `deploy` (8. Publicação no GitHub Pages), `smoke` (9. Conferência do site no ar), `finalizar` (10. Republicar a página com o resultado da conferência)
 
 ## Documentação (`docs/`)
 

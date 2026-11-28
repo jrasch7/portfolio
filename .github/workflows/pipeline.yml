@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   pr-gate:
-    name: 1. Gate do PR
+    name: 1. Conferência do pull request
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -39,7 +39,7 @@ jobs:
           retention-days: 7
 
   higiene:
-    name: 2. Higiene do repositório
+    name: 2. Varredura do repositório
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -243,7 +243,7 @@ jobs:
           retention-days: 30
 
   deploy:
-    name: 8. Deploy (GitHub Pages)
+    name: 8. Publicação no GitHub Pages
     needs: [relatorio, testes, desempenho, seguranca]
     # Só da main. Exige Settings > Pages > Source: GitHub Actions. Para desligar o deploy sem apagar o job,
     # crie a variável de Actions PAGES_DEPLOY com o valor false.
@@ -266,7 +266,7 @@ jobs:
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
 
   smoke:
-    name: 9. Fumaça pós-deploy
+    name: 9. Conferência do site no ar
     needs: deploy
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -288,9 +288,9 @@ jobs:
           retention-days: 7
 
   finalizar:
-    name: 10. Republicar a página com o resultado do smoke
-    # O smoke só pode rodar depois que a página foi publicada, então o pacote do deploy não traz o resultado dele.
-    # Este job refaz o relatório com o resultado do smoke e publica de novo o MESMO artefato (só o pipeline.json muda).
+    name: 10. Republicar a página com o resultado da conferência
+    # A conferência do site no ar só pode rodar depois que a página foi publicada, então o pacote do deploy não traz o resultado dela.
+    # Este job refaz o relatório com o resultado da conferência e publica de novo o MESMO artefato (só o pipeline.json muda).
     needs: [deploy, smoke]
     if: needs.smoke.result == 'success'
     runs-on: ubuntu-latest

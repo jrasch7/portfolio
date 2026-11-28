@@ -16,7 +16,7 @@ Mundo visual: **registro técnico de manutenção**, o formulário de papel em q
 
 ## Composição
 
-- Cada seção é uma **folha**: título em condensada alta, caixa "Folha N de 9" no canto, linha dupla de separação.
+- Cada seção é uma **folha**: título em condensada alta, caixa "Folha N de 10" no canto, linha dupla de separação.
 - Campos impressos (rótulo vermelho pequeno acima do valor em azul) formam o cabeçalho e os dados; o `fieldset` com `legend` rotula a caixa do título.
 - Projetos são **ordens de serviço** em linhas largas de tamanhos diferentes, não cartões iguais.
 - Fotos são **anexos**: moldura de papel, fita nos cantos, legenda "Foto N".

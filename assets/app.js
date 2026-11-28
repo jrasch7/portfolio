@@ -31,12 +31,16 @@ const onLang = fn => { renderers.push(fn); fn(); };
 const IMG = {
   dash: { f: 'nivela-dashboard.webp', w: 1500, h: 1002 },
   cel:  { f: 'nivela-celular.webp', w: 588, h: 950 },
-  sul:  { f: 'sulcore-demo.webp', w: 759, h: 767 }
+  sulS: { f: 'sulcore-servicos-pt.webp', fEn: 'sulcore-servicos-en.webp', w: 1280, h: 1170 },
+  sulI: { f: 'sulcore-ia-pt.webp', fEn: 'sulcore-ia-en.webp', w: 1280, h: 853, hEn: 876 }
 };
+const imF = k => (LANG === 'en' && IMG[k].fEn) || IMG[k].f;
+const imH = k => (LANG === 'en' && IMG[k].hEn) || IMG[k].h;
 const imgAlt = k => ({
   dash: tr('Painel do Nivela no computador: faturamento do dia, ações recomendadas e agenda.', 'Nivela dashboard on desktop: daily revenue, recommended actions and schedule.'),
   cel: tr('Painel do Nivela no celular, com menu inferior.', 'Nivela dashboard on a phone, with a bottom menu.'),
-  sul: tr('Demonstração no site da SulCore: pedido em linguagem natural vira uma proposta para confirmar.', 'Demo on the SulCore site: a natural-language request becomes a proposal to confirm.')
+  sulS: tr('Seção “O que fazemos” do site da SulCore: sistemas sob medida, IA aplicada a processos, integrações e automação, presença digital e comercial.', '“What we do” section of the SulCore website: custom systems, AI applied to processes, integrations and automation, digital and commercial presence.'),
+  sulI: tr('Seção “IA aplicada” do site da SulCore: o fluxo pedido, proposta, validação, confirmação e execução, e as proteções que não dependem da IA obedecer.', '“Applied AI” section of the SulCore website: the request, proposal, validation, confirmation and execution flow, and the safeguards that do not rely on the AI behaving.')
 }[k]);
 
 function applyStatic() {
@@ -165,8 +169,8 @@ function toast(msg) {
     web:  { x: 24,  y: 40,  w: 200, h: 62, t: tr('Navegador', 'Browser'), s: 'Jinja2 · Bootstrap · JS',
       d: { h: tr('Core ERP no navegador', 'Core ERP in the browser'),
         p: tr('Interface do operador renderizada no servidor. JavaScript vanilla só onde precisa de interação.', 'Operator UI rendered on the server. Vanilla JavaScript only where interaction is needed.'),
-        l: tr(['Sem framework SPA: carrega rápido e funciona bem em celular.', 'Padrão de UI documentado: ícones sempre Font Awesome, alvos de toque de 44 px, nenhuma rolagem lateral.', 'Telas passam por gate visual com captura real em desktop e celular.'],
-              ['No SPA framework: loads fast and works well on phones.', 'Documented UI standard: icons always Font Awesome, 44 px touch targets, no sideways scrolling.', 'Screens go through a visual gate with real captures on desktop and phone.']) } },
+        l: tr(['Sem framework SPA: carrega rápido e funciona bem em celular.', 'Padrão de UI documentado: ícones sempre Font Awesome, alvos de toque de 44 px, nenhuma rolagem lateral.', 'Telas passam por conferência visual com captura real em desktop e celular.'],
+              ['No SPA framework: loads fast and works well on phones.', 'Documented UI standard: icons always Font Awesome, 44 px touch targets, no sideways scrolling.', 'Screens go through a mandatory visual check with real captures on desktop and phone.']) } },
     ext:  { x: 24,  y: 170, w: 200, h: 62, t: tr('Apps parceiros', 'Partner apps'), s: 'API + webhooks',
       d: { h: tr('Ecossistema por API', 'API ecosystem'),
         p: tr('Outros produtos conversam com o ERP por uma API versionada e por webhooks.', 'Other products talk to the ERP through a versioned API and webhooks.'),
@@ -388,19 +392,19 @@ function toast(msg) {
     { n: 'Nivela', img: 'dash', st: ['live', tr('em produção', 'in production')],
       d: tr('ERP SaaS multi-tenant para negócios de serviço: agenda, fila, financeiro, fiscal, assinaturas e a Nivela IA.', 'Multi-tenant SaaS ERP for service businesses: scheduling, queue, finance, fiscal, subscriptions and Nivela AI.'),
       tech: ['Python 3.12', 'Flask 3', 'SQLAlchemy 2', 'PostgreSQL + RLS', 'Redis/RQ', 'Stripe', 'Asaas', 'NFS-e'],
-      det: tr(['Monólito modular: blueprints finos, regra em services, 290+ services e 560+ rotas.', 'Multi-tenancy por linha com tenant_id e RLS no PostgreSQL.', 'Financeiro com motor de títulos e conciliação OFX/CSV auditável; correções de dinheiro cobertas por testes de regressão.', 'Fiscal por emissão direta (NFS-e Nacional), sem intermediário pago.', 'Qualidade medida: gate visual com capturas reais, auditoria de celular e testes para telas que piscam ao carregar.'],
-              ['Modular monolith: thin blueprints, rules in services, 290+ services and 560+ routes.', 'Row-level multi-tenancy with tenant_id and RLS in PostgreSQL.', 'Finance with a title-based engine and auditable OFX/CSV reconciliation; money fixes covered by regression tests.', 'Fiscal through direct issuance (national NFS-e), no paid middleman.', 'Measured quality: visual gate with real captures, phone audit and tests for screens that flicker while loading.']) },
+      det: tr(['Monólito modular: blueprints finos, regra em services, 290+ services e 560+ rotas.', 'Multi-tenancy por linha com tenant_id e RLS no PostgreSQL.', 'Financeiro com motor de títulos e conciliação OFX/CSV auditável; correções de dinheiro cobertas por testes de regressão.', 'Fiscal por emissão direta (NFS-e Nacional), sem intermediário pago.', 'Qualidade medida: conferência visual com capturas reais, auditoria de celular e testes para telas que piscam ao carregar.'],
+              ['Modular monolith: thin blueprints, rules in services, 290+ services and 560+ routes.', 'Row-level multi-tenancy with tenant_id and RLS in PostgreSQL.', 'Finance with a title-based engine and auditable OFX/CSV reconciliation; money fixes covered by regression tests.', 'Fiscal through direct issuance (national NFS-e), no paid middleman.', 'Measured quality: visual check with real captures, phone audit and tests for screens that flicker while loading.']) },
     { n: tr('Nivela IA', 'Nivela AI'), st: ['live', tr('dentro do Nivela', 'inside Nivela')],
       d: tr('Assistente que entende pedidos em linguagem natural e propõe ações. Nunca grava sozinha.', 'Assistant that understands natural-language requests and proposes actions. It never writes on its own.'),
       tech: ['Claude (Anthropic)', 'tool use', tr('idempotência', 'idempotency')],
       det: tr(['Três saídas possíveis: ação proposta validada, pergunta de esclarecimento ou recusa clara.', 'Confirmação explícita, revalidação no servidor, escopo de tenant e usuário, execução única.', 'Responde consultando o menu real, os guias e os dados do negócio por ferramentas, em vez de "de cabeça".', 'Avaliação de mudanças (prompt, modelo, ferramentas) antes de ir para staging.'],
               ['Three possible outcomes: a validated proposed action, a clarifying question or a clear refusal.', 'Explicit confirmation, server-side re-validation, tenant and user scope, single execution.', 'It answers by looking up the real menu, guides and business data through tools, not from memory.', 'Changes (prompt, model, tools) are evaluated before reaching staging.']) },
-    { n: 'SulCore', img: 'sul', st: ['live', tr('site aberto', 'open site')],
-      d: tr('Site da SulCore, feito para mostrar como se trabalha: exportação estática, CI forte e código aberto.', 'The SulCore website, built to show how the work is done: static export, strong CI and open source.'),
+    { n: 'SulCore', img: 'sulS', st: ['live', tr('empresa e site público', 'company and public site')],
+      d: tr('Empresa de desenvolvimento de software de Novo Hamburgo (RS), onde atuo como desenvolvedor ao lado de Theilor Pies. Faz sistemas sob medida, IA aplicada a processos, integrações (WhatsApp, pagamentos, nota fiscal) e presença digital. O Nivela é o produto que a equipe construiu e opera; o site é a vitrine do jeito de trabalhar.', 'Software development company in Novo Hamburgo (Brazil), where I work as a developer alongside Theilor Pies. It builds custom systems, AI applied to processes, integrations (WhatsApp, payments, tax invoicing) and digital presence. Nivela is the product the team built and runs; the website is a showcase of how the team works.'),
       tech: ['Next.js 16', 'TypeScript strict', 'Tailwind 4', 'Playwright', 'Vitest', 'GitHub Pages'],
-      det: tr(['Exportação 100% estática, sem servidor, sem banco, sem rastreio.', 'Rotas /pt/ e /en/ com dicionários tipados.', 'CodeQL, OpenSSF Scorecard, Lighthouse CI e testes de acessibilidade no pipeline.', 'ADRs numerados para cada decisão.'],
-              ['100% static export, no server, no database, no tracking.', '/pt/ and /en/ routes with typed dictionaries.', 'CodeQL, OpenSSF Scorecard, Lighthouse CI and accessibility tests in the pipeline.', 'Numbered ADRs for every decision.']),
-      link: ['https://github.com/sulcore/sulcore.github.io', tr('Ver o código', 'See the code')] }
+      det: tr(['Quatro frentes: sistemas sob medida, IA aplicada a processos, integrações e automação, presença digital e comercial.', 'Padrão de IA da empresa: a IA propõe, a pessoa confirma, o sistema executa, com proteções que não dependem de a IA obedecer.', 'Processo em sete etapas: decisão registrada, código com padrões, testes, conferência de cada pull request, homologação, validação visual e produção.', 'O site em si: exportação 100% estática, rotas /pt/ e /en/ com dicionários tipados, sem servidor, banco ou rastreio.', 'CodeQL, OpenSSF Scorecard, Lighthouse CI e testes de acessibilidade na pipeline; ADRs numerados para cada decisão.'],
+              ['Four lines of work: custom systems, AI applied to processes, integrations and automation, digital and commercial presence.', 'The company’s AI pattern: AI proposes, a person confirms, the system executes, with safeguards that do not rely on the AI behaving.', 'A seven-stage process: recorded decision, code with standards, tests, a check on every pull request, staging, visual validation and production.', 'The site itself: 100% static export, /pt/ and /en/ routes with typed dictionaries, no server, database or tracking.', 'CodeQL, OpenSSF Scorecard, Lighthouse CI and accessibility tests in the pipeline; numbered ADRs for every decision.']),
+      links: [['https://sulcore.github.io/pt/', tr('Ver o site', 'Visit the site')], ['https://github.com/sulcore/sulcore.github.io', tr('Ver o código', 'See the code')]] }
   ];
   const wrap = $('#cards');
   onLang(() => {
@@ -409,11 +413,11 @@ function toast(msg) {
     P().forEach((p, i) => {
       const c = el('article', { class: 'card' });
       const im = p.img ? IMG[p.img] : null;
-      c.innerHTML = `${im ? `<div class="thumb"><img src="assets/img/${im.f}" width="${im.w}" height="${im.h}" alt="${esc(imgAlt(p.img))}" loading="lazy" decoding="async"></div>` : ''}<header><h3>${esc(p.n)}</h3><span class="status ${p.st[0]}">${esc(p.st[1])}</span></header>
+      c.innerHTML = `${im ? `<div class="thumb"><img src="assets/img/${imF(p.img)}" width="${im.w}" height="${imH(p.img)}" alt="${esc(imgAlt(p.img))}" loading="lazy" decoding="async"></div>` : ''}<header><h3>${esc(p.n)}</h3><span class="status ${p.st[0]}">${esc(p.st[1])}</span></header>
         <p>${esc(p.d)}</p>
         <div>${p.tech.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
         <div class="more"><details${open[i] ? ' open' : ''}><summary>${tr('Por dentro', 'Under the hood')}</summary><ul>${p.det.map(x => `<li>${esc(x)}</li>`).join('')}</ul></details>
-        ${p.link ? `<div class="links"><a href="${p.link[0]}" rel="noopener" target="_blank">${esc(p.link[1])} →</a></div>` : ''}</div>`;
+        ${p.links ? `<div class="links">${p.links.map(l => `<a href="${l[0]}" rel="noopener" target="_blank">${esc(l[1])} →</a>`).join(' ')}</div>` : ''}</div>`;
       wrap.append(c);
     });
   });
@@ -437,11 +441,11 @@ function toast(msg) {
     { t: tr('Evidência, não resumo', 'Evidence, not summaries'), h: true,
       d: tr('Leio o diff de verdade, confiro adições e remoções e valido a afirmação contra o código. "Está pronto" dito por um agente nunca é o critério de aceite.', 'I read the real diff, check additions and removals, and validate claims against the code. An agent saying "it’s done" is never the acceptance criterion.'),
       l: tr(['Testes focados no que mudou, suíte maior quando cabe, compileall e git diff --check.', 'Tela: abrir no navegador, desktop e celular, com toque real.'], ['Focused tests on what changed, a broader suite when warranted, compileall and git diff --check.', 'UI: open it in the browser, desktop and phone, with real touch.']) },
-    { t: tr('Gate de qualidade', 'Quality gate'), h: false,
-      d: tr('PR passa por CI no runner próprio, gate visual e documentação atualizada no mesmo PR. Documento velho é entrega incompleta.', 'The PR goes through CI on a self-hosted runner, a visual gate and docs updated in the same PR. Outdated docs mean an unfinished delivery.'),
+    { t: tr('Conferência de qualidade', 'Quality check'), h: false,
+      d: tr('PR passa por CI no runner próprio, conferência visual e documentação atualizada no mesmo PR. Documento velho é entrega incompleta.', 'The PR goes through CI on a self-hosted runner, a visual check and docs updated in the same PR. Outdated docs mean an unfinished delivery.'),
       l: tr(['A própria IA do produto aprende a cada entrega: manual, habilidade e teste que falha se ficar para trás.'], ['The product’s own AI learns with every delivery: manual, skill and a test that fails if it falls behind.']) },
     { t: tr('Decisão humana', 'Human decision'), h: true,
-      d: tr('Merge, release e validação em produção são decisões deliberadas, seguidas de smoke test e monitoramento.', 'Merge, release and production validation are deliberate decisions, followed by smoke tests and monitoring.'),
+      d: tr('Merge, release e validação em produção são decisões deliberadas, seguidas de um teste rápido no ar e de monitoramento.', 'Merge, release and production validation are deliberate decisions, followed by a quick check on the live system and monitoring.'),
       l: tr(['Staging para main exige autorização explícita, sempre.'], ['Staging to main always requires explicit authorization.']) }
   ];
   const ol = $('#pipe'), dt = $('#pipe-detail');
@@ -500,6 +504,85 @@ function toast(msg) {
   });
 })();
 
+/* ---------- bancada de IA ---------- */
+(function lab() {
+  const ROUNDS = () => [
+    { k: 'r1', tab: tr('Rodada 1 · antes de corrigir', 'Round 1 · before the fix'),
+      h: tr('39 pedidos de balcão, uma vez cada', '39 counter requests, once each'),
+      rows: [['Opus 5.5', 74], ['Sonnet 5.5', 77], ['Haiku 5.5', 64]],
+      safe: tr('Seguro em 100% com os três: nenhum propôs cliente, profissional ou horário errado.', '100% safe with all three: none proposed the wrong customer, professional or time.'),
+      p: tr(['Nenhum modelo chegou perto do que eu esperava, e o mais caro não ganhou do intermediário. Isso é um sinal: quando o modelo maior não resolve, o problema costuma estar em outro lugar.', 'Abri as conversas caso a caso. Os erros se repetiam nos mesmos pedidos, qualquer que fosse o modelo.'],
+            ['No model came close to what I expected, and the most expensive one did not beat the middle one. That is a signal: when the bigger model does not help, the problem is usually elsewhere.', 'I opened the conversations case by case. The mistakes repeated on the same requests, whichever model ran.']) },
+    { k: 'r2', tab: tr('Rodada 2 · depois de corrigir', 'Round 2 · after the fix'),
+      h: tr('47 casos, 2 repetições cada: 94 pedidos por modelo', '47 cases, 2 repetitions each: 94 requests per model'),
+      rows: [['Sonnet 5.5', 100], ['Haiku 5.5', 100]],
+      safe: tr('Seguro em 100% de novo. Os dois acertaram 94 de 94. O Opus não foi repetido: já tinha saído do padrão.', '100% safe again. Both got 94 of 94. Opus was not rerun: it had already left the default.'),
+      p: tr(['O erro estava numa regra da minha instrução ("serviços parecidos: pergunte"), não no modelo. Corrigi a regra e acrescentei 8 casos de erro de digitação do usuário.', 'Com o mesmo acerto, escolhemos o modelo menor: cerca de 12 vezes mais barato que o Sonnet por ação. Sem a bancada, eu teria pagado mais caro para esconder um defeito meu.'],
+            ['The mistake was a rule in my instructions ("similar services: ask"), not the model. I fixed the rule and added 8 cases of user typos.', 'With the same accuracy, we picked the smaller model: about 12 times cheaper than Sonnet per action. Without the bench I would have paid more to hide my own defect.']) }
+  ];
+  const tabs = $('#bench-tabs'), out = $('#bench-out');
+  let cur = 1;
+  function draw() {
+    const R = ROUNDS(), r = R[cur];
+    tabs.innerHTML = '';
+    R.forEach((x, i) => {
+      const b = el('button', { class: 'chip', type: 'button', 'aria-pressed': i === cur ? 'true' : 'false' }, esc(x.tab));
+      b.addEventListener('click', () => { cur = i; draw(); });
+      tabs.append(b);
+    });
+    out.innerHTML = `<h3>${esc(r.h)}</h3>
+      <div class="bars" role="list">${r.rows.map(([n, v]) => `<div class="bar-row" role="listitem" aria-label="${esc(n)}: ${v}% ${tr('de acerto', 'accuracy')}"><span class="bar-n">${esc(n)}</span><span class="bar-track" aria-hidden="true"><span class="bar-fill" data-w="${v}"></span></span><span class="bar-v">${v}%</span></div>`).join('')}</div>
+      <p class="bar-cap">${esc(tr('Acerto: o desfecho foi um dos esperados.', 'Accuracy: the outcome was one of the expected ones.'))} ${esc(r.safe)}</p>
+      ${r.p.map(t => `<p>${esc(t)}</p>`).join('')}`;
+    $$('.bar-fill', out).forEach(e => e.style.setProperty('width', e.dataset.w + '%'));
+  }
+  const HOW = () => tr([
+    '47 pedidos de balcão (mais 26 casos difíceis em bateria à parte): datas relativas, apelido, erro de digitação, homônimos, horário ocupado ou no passado, dois pedidos juntos, conversa em duas partes.',
+    'Também testa o que a IA não deve fazer: pedido fora do escopo, dado sensível, pedido para revelar as instruções e instrução escondida no nome do cliente.',
+    'Roda pela entrada real do produto, com as mesmas ferramentas e a mesma validação do servidor, numa base de exemplo em memória. Para na proposta, como o cartão antes do Confirmar: nada é gravado.',
+    'Duas notas por caso: acerto (o desfecho esperado) e seguro (nenhuma proposta errada). Perguntar em vez de propor é seguro; propor o cliente ou o horário errado não é. Critério para liberar: seguro em 100%.',
+    'A própria bancada é testada: um modelo simulado que gabarita tira 100%; um que nunca propõe acerta só os casos de texto (38%) e fica 100% seguro; um que propõe sempre a mesma coisa cai para 16% de seguro. Falha da API vira tentativa sem nota, nunca nota zero.',
+    'Sem enganar com estatística: com 39 casos e uma repetição a margem do acerto é de cerca de ±16 pontos; com duas, cerca de ±11. Por isso a bancada permite repetir cada caso.',
+    'Trocar modelo ou esforço não exige deploy: a tela do fundador compara os modelos e recomenda o mais barato que passa.'
+  ], [
+    '47 counter requests (plus 26 hard cases in a separate battery): relative dates, nicknames, typos, namesakes, busy or past slots, two requests at once, a two-part conversation.',
+    'It also tests what the AI must not do: out-of-scope requests, sensitive data, requests to reveal the instructions and an instruction hidden in a customer name.',
+    'It runs through the product’s real entry point, with the same tools and server validation, on an in-memory sample database. It stops at the proposal, like the card before Confirm: nothing is written.',
+    'Two grades per case: accuracy (the expected outcome) and safe (no wrong proposal). Asking instead of proposing is safe; proposing the wrong customer or time is not. Release criterion: 100% safe.',
+    'The bench itself is tested: a simulated model that gives the answer key scores 100%; one that never proposes gets only the text cases (38%) and stays 100% safe; one that always proposes the same thing drops to 16% safe. An API failure becomes an ungraded attempt, never a zero.',
+    'No statistical sleight of hand: with 39 cases and one repetition the accuracy margin is about ±16 points; with two, about ±11. That is why the bench can repeat each case.',
+    'Changing model or effort needs no deploy: the founder screen compares the models and recommends the cheapest one that passes.'
+  ]);
+  const USES = () => [
+    { n: tr('Nivela IA: ações pela busca', 'Nivela AI: actions from search'),
+      d: tr('Entende pedidos como "agenda corte pro Carlos amanhã às 15h" e propõe a ação. Ferramentas só de leitura; o servidor valida de novo e executa uma única vez, depois da confirmação.', 'Understands requests like "book a haircut for Carlos tomorrow at 3pm" and proposes the action. Read-only tools; the server validates again and executes once, after confirmation.'),
+      t: ['tool use', tr('confirmação', 'confirmation'), tr('idempotência', 'idempotency'), tr('avaliação', 'evaluation')] },
+    { n: tr('Assistente de ajuda', 'Help assistant'),
+      d: tr('Responde "como faço X?" consultando o menu real de quem pergunta, os guias e os dados do negócio. Antes inventava caminhos de tela; hoje termina numa ferramenta cujos atalhos o servidor resolve. Tem modelo de reserva se o principal falhar.', 'Answers "how do I do X?" by looking up the asker’s real menu, the guides and the business data. It used to invent screen paths; now it ends in a tool whose shortcuts the server resolves. A fallback model takes over if the main one fails.'),
+      t: ['tool use', tr('cache de prompt', 'prompt caching'), tr('modelo de reserva', 'fallback model')] },
+    { n: tr('Rascunho de atendimento', 'Support draft'),
+      d: tr('Lê o pedido e a conversa e devolve um rascunho de resposta, um resumo interno, a categoria e a prioridade, em JSON de esquema fixo. Fica como sugestão: a equipe revisa e envia. A IA nunca envia nada.', 'Reads the request and the conversation and returns a reply draft, an internal summary, a category and a priority, as fixed-schema JSON. It stays a suggestion: the team reviews and sends. The AI never sends anything.'),
+      t: [tr('saída estruturada', 'structured output'), tr('humano no circuito', 'human in the loop')] },
+    { n: tr('Sugestão na implantação', 'Onboarding suggestion'),
+      d: tr('A pessoa descreve o negócio em uma frase e a IA sugere serviços e produtos. Uma chamada só, modelo mais barato, teto de usos por negócio. Se a IA falhar ou recusar, a sugestão vem de um modelo fixo: sempre há resposta. O texto digitado é tratado como dado, não como instrução.', 'The person describes the business in one sentence and the AI suggests services and products. A single call, cheapest model, a usage cap per business. If the AI fails or refuses, the suggestion comes from a fixed template: there is always an answer. The typed text is treated as data, not as instructions.'),
+      t: [tr('teto de custo', 'cost ceiling'), tr('resposta de reserva', 'fallback answer'), tr('prompt injection', 'prompt injection')] },
+    { n: tr('Textos da página do negócio', 'Business page copy'),
+      d: tr('Escreve a partir do que o dono respondeu e do cadastro. Sem resposta do dono, não escreve: inventaria diferencial. O servidor ainda tira emoji, exclamação e clichê, e o resultado entra como sugestão com auditoria.', 'Writes from what the owner answered and from the records. With no answer from the owner it does not write: it would invent a selling point. The server still strips emoji, exclamation marks and clichés, and the result enters as an audited suggestion.'),
+      t: [tr('auditoria', 'audit trail'), tr('pós-processamento', 'post-processing')] },
+    { n: tr('Custo e abuso sob controle', 'Cost and abuse under control'),
+      d: tr('Cota mensal por negócio, teto de custo calculado a partir do que o negócio pagou, pausa automática ao passar do teto e proteção contra o ciclo comprar recarga, usar e pedir estorno. A IA não pode dar prejuízo.', 'A monthly quota per business, a cost ceiling derived from what the business paid, an automatic pause past the ceiling and protection against the buy-top-up, use, refund cycle. The AI cannot run at a loss.'),
+      t: [tr('cota', 'quota'), tr('custo por negócio', 'per-business cost'), tr('antiabuso', 'anti-abuse')] },
+    { n: tr('A IA aprende a cada entrega', 'The AI learns with every delivery'),
+      d: tr('Mudou o que o cliente vê ou faz? O manual é atualizado e a Nivela IA recebe a habilidade nova, e o CI falha se o manual mudou sem chegar à IA. Ela não reescreve as próprias instruções em produção: anota o que faltou, e a entrega seguinte ensina, com teste.', 'Did something the customer sees or does change? The manual is updated and Nivela AI gets the new skill, and CI fails if a manual changed without reaching the AI. It does not rewrite its own instructions in production: it logs what was missing, and the next delivery teaches it, with a test.'),
+      t: [tr('manual → habilidade', 'manual → skill'), tr('teste no CI', 'CI test'), tr('lacuna registrada', 'gap logged')] }
+  ];
+  onLang(() => {
+    draw();
+    $('#lab-how').innerHTML = HOW().map(x => `<li>${esc(x)}</li>`).join('');
+    $('#lab-uses').innerHTML = USES().map(u => `<article class="use"><h4>${esc(u.n)}</h4><p>${esc(u.d)}</p><div>${u.t.map(x => `<span class="tag">${esc(x)}</span>`).join('')}</div></article>`).join('');
+  });
+})();
+
 /* ---------- paleta de comandos ---------- */
 (function palette() {
   const pal = $('#palette'), inp = $('#pal-input'), list = $('#pal-list');
@@ -512,6 +595,7 @@ function toast(msg) {
     [tr('Conversar com a Nivela IA (simulação)', 'Talk to Nivela AI (simulation)'), 'demo', tab('t-ia', 'nivela')],
     [tr('Ir para: Projetos', 'Go to: Projects'), tr('seção', 'section'), go('projetos')],
     [tr('Ir para: IA no desenvolvimento', 'Go to: AI in development'), tr('seção', 'section'), go('ia-dev')],
+    [tr('Ir para: Bancada de IA', 'Go to: AI bench'), tr('seção', 'section'), go('lab')],
     [tr('Ir para: Pipeline', 'Go to: Pipeline'), tr('seção', 'section'), go('pipeline')],
     [tr('Ir para: Stack', 'Go to: Stack'), tr('seção', 'section'), go('stack')],
     [tr('Ir para: Contato', 'Go to: Contact'), tr('seção', 'section'), go('contato')],
@@ -566,7 +650,7 @@ function toast(msg) {
   const io = new IntersectionObserver(es => es.forEach(x => {
     if (x.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + x.target.id));
   }), { rootMargin: '-40% 0px -55% 0px' });
-  ['galeria', 'nivela', 'projetos', 'ia-dev', 'pipeline', 'stack', 'contato'].forEach(id => io.observe(document.getElementById(id)));
+  ['galeria', 'nivela', 'projetos', 'ia-dev', 'lab', 'pipeline', 'stack', 'contato'].forEach(id => io.observe(document.getElementById(id)));
 })();
 
 /* ---------- galeria com ampliação ---------- */
@@ -575,11 +659,12 @@ function toast(msg) {
   const items = () => [
     { k: 'dash', kind: 'browser', s: 's8', t: tr('Nivela no computador', 'Nivela on desktop'), d: tr('Demonstração pública, dados fictícios', 'Public demo, fictional data') },
     { k: 'cel', kind: 'phone', s: 's4', t: tr('Nivela no celular', 'Nivela on phone'), d: tr('Mesma regra de negócio, tela pensada para o toque', 'Same business rules, screen designed for touch') },
-    { k: 'sul', kind: 'browser', s: 's12', t: tr('Site da SulCore', 'SulCore website'), d: tr('Demonstração com confirmação antes de gravar', 'Demo with confirmation before saving') }
+    { k: 'sulS', kind: 'browser', s: 's6', t: tr('SulCore: o que a empresa faz', 'SulCore: what the company does'), d: tr('Quatro frentes de trabalho, na página pública da empresa', 'Four lines of work, on the company’s public page') },
+    { k: 'sulI', kind: 'browser', s: 's6', t: tr('SulCore: como a IA entra no processo', 'SulCore: how AI enters the process'), d: tr('A IA propõe, a pessoa confirma, o sistema executa', 'AI proposes, a person confirms, the system executes') }
   ];
   function open(it) {
     const im = IMG[it.k];
-    body.innerHTML = `<img src="assets/img/${im.f}" width="${im.w}" height="${im.h}" alt="${esc(imgAlt(it.k))}">`;
+    body.innerHTML = `<img src="assets/img/${imF(it.k)}" width="${im.w}" height="${imH(it.k)}" alt="${esc(imgAlt(it.k))}">`;
     cap.textContent = `${it.t}. ${it.d}.`;
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
   }
@@ -588,7 +673,7 @@ function toast(msg) {
     items().forEach((it, n) => {
       const im = IMG[it.k];
       const f = el('figure', { class: 'shot ' + it.s });
-      f.innerHTML = `<button type="button" class="shot-btn" aria-label="${esc(tr('Ampliar: ', 'Enlarge: ') + it.t)}"><span class="frame ${it.kind}"><img src="assets/img/${im.f}" width="${im.w}" height="${im.h}" alt="${esc(imgAlt(it.k))}" loading="lazy" decoding="async"></span></button>
+      f.innerHTML = `<button type="button" class="shot-btn" aria-label="${esc(tr('Ampliar: ', 'Enlarge: ') + it.t)}"><span class="frame ${it.kind}"><img src="assets/img/${imF(it.k)}" width="${im.w}" height="${imH(it.k)}" alt="${esc(imgAlt(it.k))}" loading="lazy" decoding="async"></span></button>
         <figcaption><span class="fig-no">${tr('Foto', 'Photo')} ${n + 1}</span><b>${esc(it.t)}</b>${esc(it.d)}</figcaption>`;
       const btn = $('.shot-btn', f);
       btn.addEventListener('click', () => open(it));

@@ -5,7 +5,7 @@
 export const STAGES = [
   {
     id: "pr-gate",
-    name: { pt: "Gate do PR", en: "PR gate" },
+    name: { pt: "Conferência do pull request", en: "Pull request check" },
     needs: [],
     command: "npm run stage -- pr-gate",
     what: {
@@ -20,7 +20,7 @@ export const STAGES = [
   },
   {
     id: "higiene",
-    name: { pt: "Higiene do repositório", en: "Repository hygiene" },
+    name: { pt: "Varredura do repositório", en: "Repository scan" },
     needs: [],
     command: "npm run stage -- higiene",
     what: {
@@ -110,34 +110,34 @@ export const STAGES = [
   },
   {
     id: "deploy",
-    name: { pt: "Deploy", en: "Deploy" },
+    name: { pt: "Publicação no GitHub Pages", en: "Publish to GitHub Pages" },
     needs: ["testes", "desempenho", "seguranca"],
     command: "GitHub Actions: job deploy",
     what: {
-      pt: "Publica o artefato aprovado no GitHub Pages, só a partir da main. Esta tela entra no pacote publicado, então ela mesma é a prova: se você a vê, o deploy aconteceu.",
-      en: "Publishes the approved artifact to GitHub Pages, from main only. This screen ships inside the package, so it is its own proof: if you can see it, the deploy happened.",
+      pt: "Publica o artefato aprovado no GitHub Pages, só a partir da main. Esta tela entra no pacote publicado, então ela mesma é a prova: se você a vê, a publicação aconteceu.",
+      en: "Publishes the approved artifact to GitHub Pages, from main only. This screen ships inside the package, so it is its own proof: if you can see it, the publish happened.",
     },
     why: {
-      pt: "Deploy só depois de tudo verde, sempre do mesmo artefato testado, sem build novo no meio do caminho.",
-      en: "Deploy only after everything is green, always from the same tested artifact, with no new build in between.",
+      pt: "Publicação só depois de tudo verde, sempre do mesmo artefato testado, sem build novo no meio do caminho.",
+      en: "Publishing only after everything is green, always from the same tested artifact, with no new build in between.",
     },
     inspired: { pt: "deploy.yml do SulCore (ambiente protegido)", en: "SulCore's deploy.yml (protected environment)" },
     selfEvident: true,
   },
   {
     id: "smoke",
-    name: { pt: "Fumaça pós-deploy", en: "Post-deploy smoke" },
+    name: { pt: "Conferência do site no ar", en: "Live site check" },
     needs: ["deploy"],
     command: "npm run stage -- smoke",
     what: {
-      pt: "Depois da publicação, confere o site no ar: responde 200, todos os arquivos carregam e a versão publicada é a do commit. Como roda depois do deploy, um job final republica a página com o resultado.",
-      en: "After publishing, checks the live site: it answers 200, every file loads and the published version is the commit's. Since it runs after deploy, a final job republishes the page with its result.",
+      pt: "Depois que o site é publicado, confere o site no ar: responde (código 200), todos os arquivos carregam e a versão publicada é a do commit. Como roda depois do deploy, um job final republica a página com o resultado.",
+      en: "After publishing, checks the live site: it answers (status 200), every file loads and the published version is the commit's. Since it runs after deploy, a final job republishes the page with its result.",
     },
     why: {
-      pt: "Deploy que terminou não é deploy que funciona. Esta etapa confere o que o visitante realmente recebe.",
-      en: "A finished deploy is not a working deploy. This stage checks what a visitor actually receives.",
+      pt: "Publicação que terminou não é publicação que funciona. Esta etapa confere o que o visitante realmente recebe.",
+      en: "A finished publish is not a working publish. This stage checks what a visitor actually receives.",
     },
-    inspired: { pt: "smoke-pos-deploy.yml do Nivela", en: "Nivela's smoke-pos-deploy.yml" },
+    inspired: { pt: "smoke-pos-deploy.yml do Nivela (teste rápido depois da publicação)", en: "Nivela's smoke-pos-deploy.yml (a quick check after publishing)" },
     afterPublish: true,
   },
 ];

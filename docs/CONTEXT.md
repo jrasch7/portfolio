@@ -45,7 +45,7 @@ Não há backend, banco, API própria, cookie, rastreador nem requisição a ter
 | Projeto | Relação |
 |---|---|
 | **Nivela** (`jrasch7/nivela_app`, privado) | Fonte dos números e do conteúdo técnico das demos. O portfólio **não** lê esse repositório em execução: os números são contados à mão (ou por script) e escritos no HTML com a data. Capturas vêm da demonstração pública do site do Nivela. |
-| **SulCore** (`sulcore/sulcore.github.io`, público) | Referência de pipeline (ações fixadas por SHA, Lighthouse CI, e2e) e uma das capturas. Aparece como projeto. |
+| **SulCore** (`sulcore/sulcore.github.io`, público) | Empresa de software de Novo Hamburgo em que o João é desenvolvedor com Theilor Pies (nomes já públicos no site da empresa). Referência de pipeline (ações fixadas por SHA, Lighthouse CI, e2e) e fonte de duas capturas. Aparece como projeto, com explicação do que a empresa faz. |
 | **Nivela Pay** | **Fora do portfólio** enquanto não estiver em produção. |
 
 ## Estado dos módulos
@@ -55,7 +55,7 @@ Não há backend, banco, API própria, cookie, rastreador nem requisição a ter
 | Idioma e textos | Estável | [`modulos/idioma-e-textos.md`](modulos/idioma-e-textos.md) |
 | Topo: anotações e totais | Estável | [`modulos/heroi-e-totais.md`](modulos/heroi-e-totais.md) |
 | Demos do Nivela (arquitetura, tenant, IA) | Estável | [`modulos/demos-nivela.md`](modulos/demos-nivela.md) |
-| Projetos, IA no desenvolvimento, stack | Estável | [`modulos/projetos-ia-dev-stack.md`](modulos/projetos-ia-dev-stack.md) |
+| Projetos, IA no desenvolvimento, bancada de IA, stack | Estável | [`modulos/projetos-ia-dev-stack.md`](modulos/projetos-ia-dev-stack.md) |
 | Galeria e foto | Estável; foto pessoal pendente ([`DEBT.md`](DEBT.md)) | [`modulos/galeria-e-foto.md`](modulos/galeria-e-foto.md) |
 | Tela da pipeline | Estável | [`modulos/tela-da-pipeline.md`](modulos/tela-da-pipeline.md) |
 | Paleta de comandos e navegação | Estável | [`modulos/paleta-e-navegacao.md`](modulos/paleta-e-navegacao.md) |
@@ -64,7 +64,7 @@ Não há backend, banco, API própria, cookie, rastreador nem requisição a ter
 
 ## Terminologia
 
-- **Folha**: cada seção da página, no estilo de um registro técnico (`Folha N de 9`).
+- **Folha**: cada seção da página, no estilo de um registro técnico (`Folha N de 10`).
 - **Registro técnico**: o mundo visual do site (formulário em papel, tinta, carimbo).
 - **Etapa**: uma verificação da pipeline (`higiene`, `estatico`, `build`, `testes`, `desempenho`, `seguranca`, `deploy`, `smoke`, `pr-gate`).
 - **Relatório**: o `pipeline.json` gerado pela pipeline e lido pela tela da pipeline.

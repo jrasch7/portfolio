@@ -5,7 +5,7 @@ Resumo operacional de [`../../DESIGN.md`](../../DESIGN.md) (a identidade) para q
 ## Princípios
 
 1. **O artefato lidera.** A primeira tela é o próprio registro técnico, não um cartaz sobre ele.
-2. **Cada folha é um formulário.** Cabeçalho com título e "Folha N de 9", campos impressos, entradas à caneta, carimbo para resultado.
+2. **Cada folha é um formulário.** Cabeçalho com título e "Folha N de 10", campos impressos, entradas à caneta, carimbo para resultado.
 3. **Três tintas.** Preto (estrutura), vermelho de formulário (rótulo, carimbo, alerta), azul de caneta (preenchido). Não introduza cor nova.
 4. **Dado é mono, impresso é condensado.** B612 Mono para o que é dado ou entrada; Barlow Condensed para título, rótulo, texto corrido e botão; Caveat só na assinatura e numa anotação.
 5. **Caixas retas.** Sem cantos arredondados em cartões e botões; borda de 1,5 px em tinta. Alvos de toque ≥ 44 px.

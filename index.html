@@ -28,6 +28,7 @@
     <a href="#nivela" data-i18n="nav.nivela">Nivela por dentro</a>
     <a href="#projetos" data-i18n="nav.projects">Projetos</a>
     <a href="#ia-dev" data-i18n="nav.iadev">IA no desenvolvimento</a>
+    <a href="#lab" data-i18n="nav.lab">Bancada de IA</a>
     <a href="#pipeline" data-i18n="nav.pipeline">Pipeline</a>
     <a href="#stack" data-i18n="nav.stack">Stack</a>
     <a href="#contato" data-i18n="nav.contact">Contato</a>
@@ -44,7 +45,7 @@
   <div class="wrap">
     <div class="form-bar">
       <p class="form-title" data-i18n="hero.form">Registro técnico de trabalho</p>
-      <p class="sheet-no" data-i18n="sheet.1">Folha 1 de 9</p>
+      <p class="sheet-no" data-i18n="sheet.1">Folha 1 de 10</p>
     </div>
 
     <dl class="fields">
@@ -86,7 +87,7 @@
   <div class="wrap">
     <div class="sheet-head">
       <h2 data-i18n="about.h2">Transformo a rotina de um negócio em software confiável.</h2>
-      <p class="sheet-no" data-i18n="sheet.2">Folha 2 de 9</p>
+      <p class="sheet-no" data-i18n="sheet.2">Folha 2 de 10</p>
     </div>
     <div class="about">
       <figure class="portrait" id="portrait">
@@ -108,7 +109,7 @@
   <div class="wrap">
     <div class="sheet-head">
       <h2 data-i18n="gal.h2">O Nivela e a SulCore, em telas reais.</h2>
-      <p class="sheet-no" data-i18n="sheet.3">Folha 3 de 9</p>
+      <p class="sheet-no" data-i18n="sheet.3">Folha 3 de 10</p>
     </div>
     <p class="sub" data-i18n="gal.sub">Anexos: capturas da demonstração pública do Nivela e do site da SulCore. Clique para ampliar.</p>
     <div class="gallery" id="gallery"></div>
@@ -125,7 +126,7 @@
   <div class="wrap">
     <div class="sheet-head">
       <h2 data-i18n="s1.h2">Clique, teste, quebre. A parte técnica do Nivela, sem PDF.</h2>
-      <p class="sheet-no" data-i18n="sheet.4">Folha 4 de 9</p>
+      <p class="sheet-no" data-i18n="sheet.4">Folha 4 de 10</p>
     </div>
     <p class="sub" data-i18n="s1.sub">Três peças que definem o produto: como o sistema é dividido, como um cliente nunca enxerga o dado do outro e como a IA ajuda sem agir sozinha. As demos são didáticas e usam dados fictícios.</p>
 
@@ -179,7 +180,7 @@
   <div class="wrap">
     <div class="sheet-head">
       <h2 data-i18n="s2.h2">O que está no ar e como cada coisa é feita.</h2>
-      <p class="sheet-no" data-i18n="sheet.5">Folha 5 de 9</p>
+      <p class="sheet-no" data-i18n="sheet.5">Folha 5 de 10</p>
     </div>
     <div class="cards" id="cards"></div>
   </div>
@@ -189,7 +190,7 @@
   <div class="wrap">
     <div class="sheet-head">
       <h2 data-i18n="s3.h2">Agentes de IA trabalham rápido. Quem decide sou eu.</h2>
-      <p class="sheet-no" data-i18n="sheet.6">Folha 6 de 9</p>
+      <p class="sheet-no" data-i18n="sheet.6">Folha 6 de 10</p>
     </div>
     <p class="sub" data-i18n="s3.sub">Uso agentes para investigar, planejar, implementar e revisar, dentro de um processo desenhado para que velocidade não vire risco. Clique em cada etapa.</p>
     <ol class="pipe" id="pipe"></ol>
@@ -197,11 +198,28 @@
   </div>
 </section>
 
+<section class="sec sheet" id="lab">
+  <div class="wrap">
+    <div class="sheet-head">
+      <h2 data-i18n="lab.h2">Bancada de IA: eu meço antes de confiar.</h2>
+      <p class="sheet-no" data-i18n="sheet.7">Folha 7 de 10</p>
+    </div>
+    <p class="sub" data-i18n="lab.sub">A Nivela IA não foi liberada por impressão. Montei uma bancada que roda pedidos reais de balcão pela mesma entrada do produto e dá nota. Abaixo está o que ela encontrou, inclusive onde eu estava errado.</p>
+    <div class="chips" id="bench-tabs" role="group" data-i18n-label="lab.tabs" aria-label="Rodada da avaliação"></div>
+    <div class="detail wide bench" id="bench-out" aria-live="polite"></div>
+    <h3 class="lab-h" data-i18n="lab.how.h">Como a bancada funciona</h3>
+    <ul class="lab-how" id="lab-how"></ul>
+    <h3 class="lab-h" data-i18n="lab.use.h">A mesma ideia, aplicada nos produtos</h3>
+    <div class="lab-uses" id="lab-uses"></div>
+    <p class="fine" data-i18n="lab.fine">Números da avaliação de 4 de novembro de 2026, medidos na bancada do Nivela. O custo aparece só em proporção: valores e margens do produto não são públicos.</p>
+  </div>
+</section>
+
 <section class="sec sheet" id="pipeline">
   <div class="wrap">
     <div class="sheet-head">
       <h2 data-i18n="pl.h2">Um site simples, com uma pipeline de verdade.</h2>
-      <p class="sheet-no" data-i18n="sheet.7">Folha 7 de 9</p>
+      <p class="sheet-no" data-i18n="sheet.8">Folha 8 de 10</p>
     </div>
     <p class="sub" data-i18n="pl.sub">Este site não precisaria de CI/CD. Tem, de propósito, para mostrar as técnicas: etapas em grafo, um relatório por etapa, o artefato testado é o mesmo que vai ao ar, orçamento de desempenho e CSP estrita. Os dados abaixo vêm do relatório gerado pela própria pipeline.</p>
     <div class="pl-head" id="pl-head"></div>
@@ -215,7 +233,7 @@
   <div class="wrap">
     <div class="sheet-head">
       <h2 data-i18n="s4.h2">Ferramentas que uso de verdade, por área.</h2>
-      <p class="sheet-no" data-i18n="sheet.8">Folha 8 de 9</p>
+      <p class="sheet-no" data-i18n="sheet.9">Folha 9 de 10</p>
     </div>
     <div class="chips" id="stack-filter" role="group" data-i18n-label="stack.aria" aria-label="Filtrar por área"></div>
     <ul class="stack" id="stack-list"></ul>
@@ -227,7 +245,7 @@
   <div class="wrap">
     <div class="sheet-head">
       <h2 data-i18n="s5.h2">Certificado de liberação: vamos conversar sobre o seu sistema?</h2>
-      <p class="sheet-no" data-i18n="sheet.9">Folha 9 de 9</p>
+      <p class="sheet-no" data-i18n="sheet.10">Folha 10 de 10</p>
     </div>
     <div class="release">
       <p class="sub" data-i18n="s5.sub">Trabalho com produto e engenharia de ponta a ponta: do problema operacional ao deploy. Se o que você viu nas folhas anteriores é o tipo de trabalho que a sua equipe precisa, este é o campo de assinatura.</p>

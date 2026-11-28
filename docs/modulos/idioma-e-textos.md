@@ -24,4 +24,4 @@
 - Chave com HTML (ex.: `hero.h1` tem `<br>` e `<em>`): vale `innerHTML`; escreva texto confiável, nunca de entrada do usuário.
 - O terminal do topo só digita na primeira renderização; ao trocar de idioma ele mostra o texto pronto.
 - Caracteres fora do subconjunto latino das fontes (`≥`, `→` em alguns casos) caem na fonte do sistema. É esperado.
-- Número de "Folha N de 9" mora nas chaves `sheet.1` a `sheet.9`: se criar ou remover uma folha, renumere.
+- Número de "Folha N de 10" mora nas chaves `sheet.1` a `sheet.10`: se criar ou remover uma folha, renumere.

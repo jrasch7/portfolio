@@ -374,3 +374,30 @@ td.empty{text-align:center;color:var(--ink-3);padding:24px}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+
+/* ---------- bancada de IA ---------- */
+.links{display:flex;flex-wrap:wrap;gap:6px 22px}
+.bench{margin-top:0;min-height:0}
+.bench h3{margin-bottom:12px}
+.bars{display:grid;gap:10px;margin:6px 0 12px}
+.bar-row{display:grid;grid-template-columns:7.5rem minmax(0,1fr) 3.4rem;align-items:center;gap:12px;font:400 .9rem var(--entry)}
+.bar-n{color:var(--ink)}
+.bar-track{display:block;height:22px;border:1.5px solid var(--ink);background:var(--paper)}
+.bar-fill{display:block;height:100%;width:0;background:var(--pen);transition:width .5s ease}
+.bar-v{font-weight:700;text-align:right;color:var(--ink)}
+.bar-cap{font:400 .84rem/1.55 var(--entry);color:var(--ink-2)}
+.lab-h{margin:38px 0 10px}
+.lab-how{margin:0;padding:0;list-style:none;display:grid;gap:8px;max-width:88ch}
+.lab-how li{position:relative;padding-left:22px;color:var(--ink-2)}
+.lab-how li::before{content:"";position:absolute;left:0;top:.72em;width:12px;border-top:2px solid var(--form)}
+.lab-uses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:6px}
+.use{display:flex;flex-direction:column;gap:10px;padding:18px 20px;border:1.5px solid var(--ink)}
+.use h4{font:700 1.45rem var(--display);text-transform:uppercase;letter-spacing:.04em}
+.use p{margin:0;color:var(--ink-2)}
+.use div{margin-top:auto}
+@media (prefers-reduced-motion:reduce){.bar-fill{transition:none}}
+@media (max-width:760px){.lab-uses{grid-template-columns:1fr}.bar-row{grid-template-columns:5.6rem minmax(0,1fr) 3rem;gap:8px}}
+#bench-tabs{margin-top:22px}
+.use h4{margin:0}
+.use:last-child:nth-child(odd){grid-column:1/-1}
+@media (max-width:760px){.use:last-child:nth-child(odd){grid-column:auto}}
